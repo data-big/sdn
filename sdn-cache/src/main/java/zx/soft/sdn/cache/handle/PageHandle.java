@@ -28,6 +28,7 @@ public class PageHandle {
 
 	/**
 	 * 输入流获转换成Map
+	 * @param inputStream 输入流
 	 * @return 成功返回Map ( title：网页标题 content：网页内容 )，失败返回null
 	 */
 	public static Map<String, String> parseMap(InputStream inputStream) {
