@@ -1,0 +1,133 @@
+package zx.soft.sdn.api.model;
+
+import java.util.Date;
+
+/**
+ * VPN卡信息模型
+ * 
+ * @author xuran
+ *
+ */
+public class VPNCard {
+
+	/**主键**/
+	private String id;
+	/**真实号**/
+	private String realNumber;
+	/**业务IP**/
+	private String bizIP;
+	/**停用IP**/
+	private String stopIP;
+	/**特殊IP**/
+	private String specialIP;
+	/**偏移后业务IP**/
+	private String offsetBizIP;
+	/**偏移后停机IP**/
+	private String offsetStopIP;
+	/**偏移后特殊IP**/
+	private String offsetSpecialIP;
+	/**是否有效：0（有效）1（无效）**/
+	private Integer invalid;
+	/**入库时间：格式2016-01-01 00:00:00**/
+	private Date insertDate;
+
+	public VPNCard() {
+		super();
+	}
+
+	public VPNCard(String id, String realNumber, String bizIP, String stopIP, String specialIP, String offsetBizIP,
+			String offsetStopIP, String offsetSpecialIP, Integer invalid, Date insertDate) {
+		super();
+		this.id = id;
+		this.realNumber = realNumber;
+		this.bizIP = bizIP;
+		this.stopIP = stopIP;
+		this.specialIP = specialIP;
+		this.offsetBizIP = offsetBizIP;
+		this.offsetStopIP = offsetStopIP;
+		this.offsetSpecialIP = offsetSpecialIP;
+		this.invalid = invalid;
+		this.insertDate = insertDate;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getRealNumber() {
+		return realNumber;
+	}
+
+	public void setRealNumber(String realNumber) {
+		this.realNumber = realNumber;
+	}
+
+	public String getBizIP() {
+		return bizIP;
+	}
+
+	public void setBizIP(String bizIP) {
+		this.bizIP = bizIP;
+	}
+
+	public String getStopIP() {
+		return stopIP;
+	}
+
+	public void setStopIP(String stopIP) {
+		this.stopIP = stopIP;
+	}
+
+	public String getSpecialIP() {
+		return specialIP;
+	}
+
+	public void setSpecialIP(String specialIP) {
+		this.specialIP = specialIP;
+	}
+
+	public String getOffsetBizIP() {
+		return offsetBizIP;
+	}
+
+	public void setOffsetBizIP(String offsetBizIP) {
+		this.offsetBizIP = offsetBizIP;
+	}
+
+	public String getOffsetStopIP() {
+		return offsetStopIP;
+	}
+
+	public void setOffsetStopIP(String offsetStopIP) {
+		this.offsetStopIP = offsetStopIP;
+	}
+
+	public String getOffsetSpecialIP() {
+		return offsetSpecialIP;
+	}
+
+	public void setOffsetSpecialIP(String offsetSpecialIP) {
+		this.offsetSpecialIP = offsetSpecialIP;
+	}
+
+	public Integer getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(Integer invalid) {
+		this.invalid = invalid;
+	}
+
+	public Date getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+
+}

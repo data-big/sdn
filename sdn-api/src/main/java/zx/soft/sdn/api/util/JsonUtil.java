@@ -1,4 +1,4 @@
-package zx.soft.sdn.cache.util;
+package zx.soft.sdn.api.util;
 
 import java.io.IOException;
 
@@ -53,5 +53,4 @@ public class JsonUtil {
 		}
 		return t;
 	}
-
 }
