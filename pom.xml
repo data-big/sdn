@@ -277,17 +277,23 @@
 	</build>
 	<!-- 中央仓库 -->
 	<repositories>
+		<!-- 英国镜像 -->
+		<repository>
+			<id>uk.maven.org</id>
+			<name>UK Central</name>
+			<url>http://uk.maven.org/maven2</url>
+		</repository>
 		<!-- 公司仓库 -->
-		<!--<repository>
+		<!-- <repository>
 			<id>zxsoft-public</id>
 			<name>Nexus Release Repository</name>
 			<url>http://192.168.3.23:18081/nexus/content/groups/public/</url>
-		</repository>-->
+		</repository>  -->
 		<!-- OSChina仓库 -->
-		<repository>
+		<!-- <repository>
 			<id>CN</id>
 			<name>OSChina Central</name>
 			<url>http://maven.oschina.net/content/groups/public/</url>
-		</repository>
+		</repository>  -->
 	</repositories>
 </project>

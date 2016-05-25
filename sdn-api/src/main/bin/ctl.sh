@@ -28,7 +28,7 @@ for jar in "$PROJECT_DIR/lib"/*.jar; do
 done
 echo CLASSPATH=$CLASSPATH
 
-JVMARGS="${JVMARGS} -Dproject_dir=${PROJECT_DIR} -Djava.net.preferIPv4Stack=true"
+JVMARGS="${JVMARGS} -Dproject_dir=${PROJECT_DIR} -Djava.net.preferIPv4Stack=true -Dorg.eclipse.jetty.util.URI.charset=UTF-8"
 echo JVMARGS=$JVMARGS
 
 usage() {

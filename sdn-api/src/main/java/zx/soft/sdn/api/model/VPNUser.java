@@ -1,7 +1,5 @@
 package zx.soft.sdn.api.model;
 
-import java.util.Date;
-
 /**
  * VPN用户信息模型
  * 
@@ -31,15 +29,17 @@ public class VPNUser {
 	/**使用人证件号码**/
 	private String userIDNumber;
 	/**开户时间**/
-	private Date registerDate;
+	private String registerDate;
 	/**销户时间**/
-	private Date cancelDate;
+	private String cancelDate;
 	/**开户代理商**/
 	private String registerAgent;
 	/**变更类型：1.实名信息变更 2.IP地址变更 3.销户**/
 	private Integer modifyType;
 	/**变更时间**/
-	private Date modifyDate;
+	private String modifyDate;
+	/**是否有效：0（有效）1（无效）**/
+	private Integer invalid;
 
 	public VPNUser() {
 		super();
@@ -47,7 +47,8 @@ public class VPNUser {
 
 	public VPNUser(String id, String realNumber, String sponsorNumber, String sponsorName, Integer sponsorIDType,
 			String sponsorIDNumber, String userNumber, String userName, Integer userIDType, String userIDNumber,
-			Date registerDate, Date cancelDate, String registerAgent, Integer modifyType, Date modifyDate) {
+			String registerDate, String cancelDate, String registerAgent, Integer modifyType, String modifyDate,
+			Integer invalid) {
 		super();
 		this.id = id;
 		this.realNumber = realNumber;
@@ -64,6 +65,7 @@ public class VPNUser {
 		this.registerAgent = registerAgent;
 		this.modifyType = modifyType;
 		this.modifyDate = modifyDate;
+		this.invalid = invalid;
 	}
 
 	public String getId() {
@@ -146,19 +148,19 @@ public class VPNUser {
 		this.userIDNumber = userIDNumber;
 	}
 
-	public Date getRegisterDate() {
+	public String getRegisterDate() {
 		return registerDate;
 	}
 
-	public void setRegisterDate(Date registerDate) {
+	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
 	}
 
-	public Date getCancelDate() {
+	public String getCancelDate() {
 		return cancelDate;
 	}
 
-	public void setCancelDate(Date cancelDate) {
+	public void setCancelDate(String cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 
@@ -178,13 +180,20 @@ public class VPNUser {
 		this.modifyType = modifyType;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
+	public Integer getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(Integer invalid) {
+		this.invalid = invalid;
+	}
 
 }

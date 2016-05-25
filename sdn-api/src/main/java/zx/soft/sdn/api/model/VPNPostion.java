@@ -1,7 +1,5 @@
 package zx.soft.sdn.api.model;
 
-import java.util.Date;
-
 /**
  * VPN用户地理位置信息模型
  * 
@@ -19,19 +17,22 @@ public class VPNPostion {
 	/**基站LAC信息：参考数据25840**/
 	private String lac;
 	/**时间：格式2016-01-01 00:00:00**/
-	private Date time;
+	private String time;
+	/**基站位置信息**/
+	private Location location;
 
 	public VPNPostion() {
 		super();
 	}
 
-	public VPNPostion(String id, String realNumber, String sac, String lac, Date time) {
+	public VPNPostion(String id, String realNumber, String sac, String lac, String time, Location location) {
 		super();
 		this.id = id;
 		this.realNumber = realNumber;
 		this.sac = sac;
 		this.lac = lac;
 		this.time = time;
+		this.location = location;
 	}
 
 	public String getId() {
@@ -66,12 +67,20 @@ public class VPNPostion {
 		this.lac = lac;
 	}
 
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 }

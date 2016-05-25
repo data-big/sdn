@@ -26,9 +26,7 @@ public class Page {
 	/**总页数**/
 	private int totalPage;
 	/**查询条件**/
-	private Map<String, String> params;
-	/**数组查询条件**/
-	private Map<String, List<String>> paramLists;
+	private Map<String, Object> param;
 	/**Action URL地址**/
 	private String searchUrl;
 	/**可以显示的页号(分隔符"|"，总页数变更时更新)  **/
@@ -44,8 +42,7 @@ public class Page {
 		pageSize = 10;
 		totalRecord = 0;
 		totalPage = 0;
-		params = Maps.newHashMap();
-		paramLists = Maps.newHashMap();
+		param = Maps.newHashMap();
 		searchUrl = "";
 		pageNoDisp = "";
 	}
@@ -55,13 +52,15 @@ public class Page {
 	 * @param pageNo 当前页码
 	 * @param pageSize 每页行数
 	 * @param url Action URL
+	 * @param param 查询参数
 	 * @return Page对象
 	 */
-	public static Page newBuilder(int pageNo, int pageSize, String url) {
+	public static Page newBuilder(int pageNo, int pageSize, String url, Map<String, Object> param) {
 		Page page = new Page();
 		page.setPageNo(pageNo);
 		page.setPageSize(pageSize);
 		page.setSearchUrl(url);
+		page.setParam(param);
 		return page;
 	}
 
@@ -69,26 +68,11 @@ public class Page {
 	 * 查询条件转Json
 	 * @return Json字符串
 	 */
-	public String getParaJson() {
+	public String getParamJson() {
 		Map<String, Object> map = Maps.newHashMap();
-		for (String key : params.keySet()) {
-			if (params.get(key) != null) {
-				map.put(key, params.get(key));
-			}
-		}
-		return JsonUtil.parseString(map);
-	}
-
-	/** 
-	 * 数组查询条件转JSON 
-	 * @return Json字符串
-	 */
-	public String getParaListJson() {
-		Map<String, Object> map = Maps.newHashMap();
-		for (String key : paramLists.keySet()) {
-			List<String> lists = paramLists.get(key);
-			if (lists != null && lists.size() > 0) {
-				map.put(key, lists);
+		for (String key : param.keySet()) {
+			if (param.get(key) != null) {
+				map.put(key, param.get(key));
 			}
 		}
 		return JsonUtil.parseString(map);
@@ -181,20 +165,12 @@ public class Page {
 		this.totalPage = totalPage;
 	}
 
-	public Map<String, String> getParams() {
-		return params;
+	public Map<String, Object> getParam() {
+		return param;
 	}
 
-	public void setParams(Map<String, String> params) {
-		this.params = params;
-	}
-
-	public Map<String, List<String>> getParamLists() {
-		return paramLists;
-	}
-
-	public void setParamLists(Map<String, List<String>> paramLists) {
-		this.paramLists = paramLists;
+	public void setParam(Map<String, Object> param) {
+		this.param = param;
 	}
 
 	public String getSearchUrl() {

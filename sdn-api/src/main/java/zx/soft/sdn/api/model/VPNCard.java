@@ -1,7 +1,5 @@
 package zx.soft.sdn.api.model;
 
-import java.util.Date;
-
 /**
  * VPN卡信息模型
  * 
@@ -29,14 +27,14 @@ public class VPNCard {
 	/**是否有效：0（有效）1（无效）**/
 	private Integer invalid;
 	/**入库时间：格式2016-01-01 00:00:00**/
-	private Date insertDate;
+	private String insertDate;
 
 	public VPNCard() {
 		super();
 	}
 
 	public VPNCard(String id, String realNumber, String bizIP, String stopIP, String specialIP, String offsetBizIP,
-			String offsetStopIP, String offsetSpecialIP, Integer invalid, Date insertDate) {
+			String offsetStopIP, String offsetSpecialIP, Integer invalid, String insertDate) {
 		super();
 		this.id = id;
 		this.realNumber = realNumber;
@@ -122,11 +120,11 @@ public class VPNCard {
 		this.invalid = invalid;
 	}
 
-	public Date getInsertDate() {
+	public String getInsertDate() {
 		return insertDate;
 	}
 
-	public void setInsertDate(Date insertDate) {
+	public void setInsertDate(String insertDate) {
 		this.insertDate = insertDate;
 	}
 

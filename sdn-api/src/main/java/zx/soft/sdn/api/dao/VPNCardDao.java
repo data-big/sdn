@@ -3,8 +3,10 @@ package zx.soft.sdn.api.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
 import zx.soft.sdn.api.model.VPNCard;
 
@@ -17,25 +19,49 @@ import zx.soft.sdn.api.model.VPNCard;
 public interface VPNCardDao {
 
 	/**
+	 * 添加VPN卡信息
+	 * @param vpnCard VPN卡信息
+	 * @return 成功或失败
+	 */
+	@Insert(value = "INSERT INTO vpn_card(id,realNumber,bizIP,stopIP,specialIP,offsetBizIP,offsetStopIP,offsetSpecialIP,invalid,insertDate) VALUES(#{id},#{realNumber},#{bizIP},#{stopIP},#{specialIP},#{offsetBizIP},#{offsetStopIP},#{offsetSpecialIP},#{invalid},#{insertDate})")
+	public boolean insertVPNCard(VPNCard vpnCard);
+
+	/**
+	 * 根据用户真实号更新VPN卡信息为失效
+	 * @param realNumber 用户真实号
+	 * @return 成功或失败
+	 */
+	@Update(value = "UPDATE vpn_card SET invalid=1 WHERE realNumber=#{realNumber} AND invalid=0")
+	public boolean updateVPNCardToInvalid(String realNumber);
+
+	/**
+	 * 根据业务IP查询VPN卡用户真实号
+	 * @param bizIP 业务IP地址
+	 * @return 用户真实号
+	 */
+	@Select(value = "SELECT realNumber FROM vpn_card where bizIP=#{bizIP} AND invalid=0")
+	public String getRealNumber(String bizIP);
+
+	/**
 	 * 根据用户真实号查询VPN卡信息
 	 * @param realNumber 用户真实号
-	 * @return VPNCard对象
+	 * @return VPNCard信息
 	 */
-	@Select(value = "SELECT * FROM vpn_card where realNumber=#{realNumber}")
+	@Select(value = "SELECT * FROM vpn_card where realNumber=#{realNumber} AND invalid=0")
 	public VPNCard getByRealNumber(String realNumber);
 
 	/**
 	 * 根据一组用户真实号查询VPN卡信息
 	 * @param realNumbers 用户真实号1,2,3,4,5
-	 * @return VPNCard集合
+	 * @return VPNCard信息集合
 	 */
-	@Select(value = "SELECT * FROM vpn_card where realNumber in (#{realNumbers}) ORDER BY insertDate")
-	public List<VPNCard> getListByRealNumbers(String realNumbers);
+	@Select(value = "SELECT * FROM vpn_card where realNumber in (${_parameter}) AND invalid=0 ORDER BY insertDate")
+	public List<VPNCard> getByRealNumbers(String realNumbers);
 
 	/**
 	 * 根据参数分页查询VPN卡信息集合
 	 * @param param 查询参数
-	 * @return VPNCard集合
+	 * @return VPNCard信息集合
 	 */
 	@SelectProvider(type = VPNCardDaoProvider.class, method = "getListSQL")
 	public List<VPNCard> getList(Map<String, Object> param);
@@ -62,8 +88,14 @@ public interface VPNCardDao {
 				for (String key : param.keySet()) {
 					//排除分页参数
 					if (!("page".equals(key))) {
-						sql.append(" and ").append(key).append(" like ").append("'%")
-								.append(param.get(key).toString().replace("'", "")).append("%'");
+						//如果是整型字段
+						if ("invalid".equals(key)) {
+							sql.append(" and ").append(key).append("=").append("#{").append(key).append("}");
+						} else {
+							sql.append(" and ").append(key).append(" like ").append("'%")
+									.append(param.get(key).toString().replace("'", "")).append("%'");
+						}
+
 					}
 				}
 			}
