@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
@@ -32,7 +33,7 @@ public interface VPNCardDao {
 	 * @return 成功或失败
 	 */
 	@Update(value = "UPDATE vpn_card SET invalid=1 WHERE realNumber=#{realNumber} AND invalid=0")
-	public boolean updateVPNCardToInvalid(String realNumber);
+	public boolean updateVPNCardToInvalid(@Param("realNumber") String realNumber);
 
 	/**
 	 * 根据业务IP查询VPN卡用户真实号
@@ -40,7 +41,7 @@ public interface VPNCardDao {
 	 * @return 用户真实号
 	 */
 	@Select(value = "SELECT realNumber FROM vpn_card where bizIP=#{bizIP} AND invalid=0")
-	public String getRealNumber(String bizIP);
+	public String getRealNumber(@Param("bizIP") String bizIP);
 
 	/**
 	 * 根据用户真实号查询VPN卡信息
@@ -48,7 +49,7 @@ public interface VPNCardDao {
 	 * @return VPNCard信息
 	 */
 	@Select(value = "SELECT * FROM vpn_card where realNumber=#{realNumber} AND invalid=0")
-	public VPNCard getByRealNumber(String realNumber);
+	public VPNCard getByRealNumber(@Param("realNumber") String realNumber);
 
 	/**
 	 * 根据一组用户真实号查询VPN卡信息

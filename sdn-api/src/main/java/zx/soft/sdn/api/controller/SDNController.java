@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import zx.soft.sdn.api.common.HandResult;
 import zx.soft.sdn.api.common.Page;
 import zx.soft.sdn.api.common.SystemConstant;
-import zx.soft.sdn.api.model.Address;
-import zx.soft.sdn.api.model.Location;
 import zx.soft.sdn.api.model.VPNCard;
 import zx.soft.sdn.api.model.VPNPostion;
 import zx.soft.sdn.api.model.VPNUser;
+import zx.soft.sdn.api.service.LocationService;
 import zx.soft.sdn.api.service.VPNCardService;
 import zx.soft.sdn.api.service.VPNUserService;
 import zx.soft.sdn.api.util.ConvertUtil;
@@ -51,6 +50,11 @@ public class SDNController {
 	 */
 	@Autowired
 	private VPNUserService vpnUserService;
+	/**
+	 * 注入基站位置信息业务层接口实现
+	 */
+	@Autowired
+	private LocationService locationService;
 
 	/**
 	 * 添加VPN卡信息
@@ -78,8 +82,8 @@ public class SDNController {
 	 * @param bizIP 业务IP地址
 	 * @return 用户真实号
 	 */
-	@RequestMapping(value = "/vpncard/realnumber", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getRealNumber(@RequestBody String bizIP) {
+	@RequestMapping(value = "/vpncard/realnumber/{bizIP:.+}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getRealNumber(@PathVariable(value = "bizIP") String bizIP) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("realNumber", vpnCardService.getRealNumber(bizIP));
 		return result;
@@ -131,7 +135,7 @@ public class SDNController {
 	 * @param vpnCardJson 查询条件
 	 * @return VPN卡信息集合和分页信息Json数据
 	 */
-	@RequestMapping(value = "/vpncards/{pageNo}/{pageSize}/{vpnCardJson}", method = RequestMethod.GET)
+	@RequestMapping(value = "/vpncards/{pageNo}/{pageSize}/{vpnCardJson:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNCards(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "pageSize") int pageSize, @PathVariable(value = "vpnCardJson") String vpnCardJson) {
 		Map<String, Object> param = ConvertUtil.parseMap(JsonUtil.parseBean(vpnCardJson, VPNCard.class));
@@ -211,7 +215,7 @@ public class SDNController {
 	 * @param vpnUserJson 查询条件
 	 * @return VPN用户信息集合和分页信息Json数据
 	 */
-	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}/{vpnUserJson}", method = RequestMethod.GET)
+	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}/{vpnUserJson:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNUsers(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "pageSize") int pageSize, @PathVariable(value = "vpnUserJson") String vpnUSerJson) {
 		Map<String, Object> param = ConvertUtil.parseMap(JsonUtil.parseBean(vpnUSerJson, VPNUser.class));
@@ -233,23 +237,31 @@ public class SDNController {
 	public @ResponseBody List<VPNPostion> getVPNPostion(@PathVariable(value = "realNumber") String realNumber,
 			@PathVariable(value = "start") String start, @PathVariable(value = "end") String end) {
 		List<VPNPostion> list = new ArrayList<VPNPostion>();
-		for (int i = 0; i < 100; i++) {
-			Location location = new Location();
-			location.setAddressDescription("江苏省苏州市吴中区波特兰小街维亭镇荷花广场波特兰小街东");
-			location.setLongitude("120.72" + 592 + i);
-			location.setLatitude("31.29" + (687 + (i / 2)));
-			location.setAccuracy("1000");
-			Address address = new Address();
-			address.setRegion("江苏省");
-			address.setCounty("吴中区");
-			address.setStreet("维亭镇");
-			address.setStreet_number("荷花广场");
-			address.setCity("苏州市");
-			address.setCountry("中国");
-			location.setAddress(address);
-			list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789",
-					DateUtil.simpleFormat.format(new Date()), location));
-		}
+		//		String[] a = new String[] { "117.274978637695", "117.274726867676", "117.262344360352", "117.249740600586",
+		//				"117.265182495117", "117.240791320801", "117.275520324707", "117.270179748535", "117.275619506836",
+		//				"117.288383483887" };
+		//		String[] b = new String[] { "31.7736549377441", "31.8399982452393", "31.8351783752441", "31.8633556365967",
+		//				"31.7807579040527", "31.8382968902588", "31.7728710174561", "31.8847351074219", "31.7760105133057",
+		//				"31.8542327880859" };
+		//		for (int i = 0; i < 10; i++) {
+		//			Location location = new Location();
+		//			location.setAddressDescription("江苏省苏州市吴中区波特兰小街维亭镇荷花广场波特兰小街东");
+		//			location.setLongitude(a[i]);
+		//			location.setLatitude(b[i]);
+		//			location.setAccuracy("1000");
+		//			Address address = new Address();
+		//			address.setRegion("江苏省");
+		//			address.setCounty("吴中区");
+		//			address.setStreet("维亭镇");
+		//			address.setStreet_number("荷花广场");
+		//			address.setCity("苏州市");
+		//			address.setCountry("中国");
+		//			location.setAddress(address);
+		//			list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789",
+		//					DateUtil.simpleFormat.format(new Date()), location));
+		//		}
+		list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789", DateUtil.simpleFormat.format(new Date()),
+				locationService.getLocation("34567", "56789")));
 		return list;
 	}
 
@@ -285,4 +297,5 @@ public class SDNController {
 		result.put("region", regionList);
 		return result;
 	}
+
 }

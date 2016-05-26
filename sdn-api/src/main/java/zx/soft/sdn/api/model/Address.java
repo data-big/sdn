@@ -1,26 +1,50 @@
 package zx.soft.sdn.api.model;
 
+/**
+ * 地址信息模型
+ * 
+ * @author xuran
+ *
+ */
 public class Address {
 
-	private String region;
-	private String county;
-	private String street;
-	private String street_number;
-	private String city;
+	/**主键**/
+	private String id;
+	/**国**/
 	private String country;
+	/**省**/
+	private String region;
+	/**市**/
+	private String city;
+	/**县**/
+	private String county;
+	/**街**/
+	private String street;
+	/**街道号**/
+	private String street_number;
 
 	public Address() {
 		super();
 	}
 
-	public Address(String region, String county, String street, String street_number, String city, String country) {
+	public Address(String id, String country, String region, String city, String county, String street,
+			String street_number) {
 		super();
+		this.id = id;
+		this.country = country;
 		this.region = region;
+		this.city = city;
 		this.county = county;
 		this.street = street;
 		this.street_number = street_number;
-		this.city = city;
-		this.country = country;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getRegion() {

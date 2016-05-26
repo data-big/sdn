@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.jxpath.JXPathNotFoundException;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -42,7 +41,7 @@ public class PageInterceptor implements Interceptor {
 		String originalSql = boundSql.getSql().trim();
 		Object parameterObject = boundSql.getParameterObject();
 		//Page对象获取，“信使”到达拦截器！  
-		Page page = searchPageWithXpath(boundSql.getParameterObject(), ".", "page", "*/page");
+		Page page = searchPageWithXpath(boundSql.getParameterObject(), "page");
 		//如果分页参数存在，进行分页处理。
 		if (page != null) {
 			String countSql = getCountSql(originalSql);
@@ -83,7 +82,7 @@ public class PageInterceptor implements Interceptor {
 		for (String xpath : xpaths) {
 			try {
 				result = context.selectSingleNode(xpath);
-			} catch (JXPathNotFoundException e) {
+			} catch (Exception e) {
 				continue;
 			}
 			if (result instanceof Page) {
@@ -167,4 +166,5 @@ public class PageInterceptor implements Interceptor {
 	@Override
 	public void setProperties(Properties arg0) {
 	}
+
 }

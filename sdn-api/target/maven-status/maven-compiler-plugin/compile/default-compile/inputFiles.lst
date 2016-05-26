@@ -4,14 +4,17 @@
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/common/SystemConstant.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/common/HandResult.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/util/ConfigUtil.java
+/home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/service/impl/LocationServiceImpl.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/controller/SDNController.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/model/VPNCard.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/model/Location.java
+/home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/common/MybatisSessionFactory.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/common/Page.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/util/ConvertUtil.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/service/VPNUserService.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/util/IDUtil.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/common/ControllerAspect.java
+/home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/dao/LocationDao.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/driver/ProgramDriver.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/model/VPNUser.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/util/DateUtil.java
@@ -22,6 +25,7 @@
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/service/impl/VPNCardServiceImpl.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/util/JsonUtil.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/model/Address.java
+/home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/service/LocationService.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/service/impl/VPNUserServiceImpl.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/dao/VPNUserDao.java
 /home/xuran/Works/eclipse-works/sdn/sdn-api/src/main/java/zx/soft/sdn/api/model/VPNPostion.java
