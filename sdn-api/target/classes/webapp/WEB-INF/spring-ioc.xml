@@ -14,9 +14,9 @@
 	</bean>
 
 	<!-- 注入SpringMVC控制器切面 -->
-	<bean id="controllerAspect" class="zx.soft.sdn.api.common.ControllerAspect"></bean>
+	<bean id="controllerAspect" class="zx.soft.sdn.api.component.ControllerAspect"></bean>
 
 	<!-- 注入自定义Jackson对象转换器 -->
-	<bean id="customObjectMapper" class="zx.soft.sdn.api.common.CustomObjectMapper" />
+	<bean id="customObjectMapper" class="zx.soft.sdn.api.component.CustomObjectMapper" />
 
 </beans>

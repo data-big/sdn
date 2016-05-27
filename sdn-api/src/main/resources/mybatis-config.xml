@@ -7,6 +7,6 @@
 </settings>
 <plugins>
 	<!-- 分页功能拦截器 -->
-   <plugin interceptor="zx.soft.sdn.api.common.PageInterceptor"></plugin>
+   <plugin interceptor="zx.soft.sdn.api.component.PageInterceptor"></plugin>
 </plugins>
 </configuration>

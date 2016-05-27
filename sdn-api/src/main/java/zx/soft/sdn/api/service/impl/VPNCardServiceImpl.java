@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import zx.soft.sdn.api.dao.VPNCardDao;
 import zx.soft.sdn.api.model.VPNCard;
 import zx.soft.sdn.api.service.VPNCardService;
-import zx.soft.sdn.api.util.ExceptionUtil;
+import zx.soft.sdn.util.ExceptionUtil;
+import zx.soft.sdn.util.JsonUtil;
 
 /**
  * VPN卡信息业务层接口实现
@@ -51,6 +52,7 @@ public class VPNCardServiceImpl implements VPNCardService {
 			//抛出异常交给Spring事务管理。
 			throw e;
 		}
+		logger.info("****VPNCard信息 : {} 添加成功****", JsonUtil.parseString(vpnCard));
 	}
 
 	@Override

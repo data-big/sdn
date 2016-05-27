@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 进程驱动器，用于管理运行不同进程的
+ * 进程驱动器，用于管理运行不同进程
  * 
  * @author wanggang
  *

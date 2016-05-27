@@ -3,7 +3,7 @@ package zx.soft.sdn.api.service.impl;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import zx.soft.sdn.api.common.MybatisSessionFactory;
+import zx.soft.sdn.api.component.MybatisSessionFactory;
 import zx.soft.sdn.api.dao.LocationDao;
 import zx.soft.sdn.api.model.Location;
 import zx.soft.sdn.api.service.LocationService;

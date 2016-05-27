@@ -14,6 +14,12 @@
 	<packaging>jar</packaging>
 	<!-- 引入依赖 -->
 	<dependencies>
+		<!-- 自定义工具包 -->
+		<dependency>
+			<groupId>zx.soft</groupId>
+			<artifactId>sdn-util</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<!-- Json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -56,8 +62,8 @@
 		</dependency>
 		<!-- Jsoup -->
 		<dependency>
-				<groupId>org.jsoup</groupId>
-				<artifactId>jsoup</artifactId>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
 		</dependency>
 		<!-- Junit -->
 		<dependency>

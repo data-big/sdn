@@ -15,7 +15,7 @@ public interface VPNUserService {
 
 	/***
 	 * 添加VPN用户信息
-	 * VPN用户信息过期机制：
+	 * VPN用户信息过期机制
 	 * 先更新数据库中与当前用户真实号一致的所有VPN用户信息为过期
 	 * 然后再添加当前VPN用户信息
 	 */

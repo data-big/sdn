@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- 模块标识 -->
 	<groupId>zx.soft</groupId>
@@ -9,9 +9,10 @@
 	<name>sdn</name>
 	<!-- 子模块 -->
 	<modules>
+	    <module>sdn-util</module>
 		<module>sdn-cache</module>
 		<module>sdn-api</module>
-	</modules>
+  </modules>
 	<!-- 设置依赖版本号 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

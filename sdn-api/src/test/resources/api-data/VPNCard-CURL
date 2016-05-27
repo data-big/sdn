@@ -1,0 +1,2 @@
+#添加VPN卡信息接口#
+curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://localhost:8900/sdn/vpncard --data '{"realNumber":"13912345678","bizIP":"192.168.1.1","stopIP":"192.168.1.2","specialIP":"192.168.1.3","offsetBizIP":"192.168.1.4","offsetStopIP":"192.168.1.5","offsetSpecialIP":"192.168.1.6","insertDate":"2016-05-25 16:55:50.0"}'

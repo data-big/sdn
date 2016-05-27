@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import zx.soft.sdn.api.dao.VPNUserDao;
 import zx.soft.sdn.api.model.VPNUser;
 import zx.soft.sdn.api.service.VPNUserService;
-import zx.soft.sdn.api.util.ExceptionUtil;
+import zx.soft.sdn.util.ExceptionUtil;
+import zx.soft.sdn.util.JsonUtil;
 
 /**
  * VPN用户信息业务层接口实现
@@ -51,6 +52,7 @@ public class VPNUserServiceImpl implements VPNUserService {
 			//抛出异常交给Spring事务管理。
 			throw e;
 		}
+		logger.info("****VPNUser信息 : {} 添加成功****", JsonUtil.parseString(vpnUser));
 	}
 
 	@Override
@@ -67,6 +69,5 @@ public class VPNUserServiceImpl implements VPNUserService {
 	public List<VPNUser> getList(Map<String, Object> param) {
 		return vpnUserDao.getList(param);
 	}
-
 
 }

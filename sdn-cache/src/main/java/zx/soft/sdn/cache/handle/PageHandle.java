@@ -10,8 +10,8 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import zx.soft.sdn.cache.util.ExceptionUtil;
-import zx.soft.sdn.cache.util.JsoupUtil;
+import zx.soft.sdn.util.ExceptionUtil;
+import zx.soft.sdn.util.JsoupUtil;
 
 /**
  * 网页文件解析处理类
@@ -61,5 +61,4 @@ public class PageHandle {
 			return null;
 		}
 	}
-
 }
