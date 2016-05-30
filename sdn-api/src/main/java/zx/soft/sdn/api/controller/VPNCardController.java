@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import zx.soft.sdn.api.component.HandResult;
+import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.component.Page;
 import zx.soft.sdn.api.component.SystemConstant;
 import zx.soft.sdn.api.model.VPNCard;
@@ -45,18 +45,18 @@ public class VPNCardController {
 	 */
 	@RequestMapping(value = "/vpncard", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody HandResult postVPNCard(@RequestBody VPNCard vpnCard) {
+	public @ResponseBody HandleResult postVPNCard(@RequestBody VPNCard vpnCard) {
 		vpnCard.setId(IDUtil.generateUniqueID());
 		vpnCard.setInvalid(0);
-		boolean serviceHandResult = false;
+		boolean serviceHandleResult = false;
 		try {
 			vpnCardService.updateInsert(vpnCard);
-			serviceHandResult = true;
+			serviceHandleResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return serviceHandResult ? new HandResult(0, vpnCard.getId())
-				: new HandResult(1, "add realNumber=" + vpnCard.getRealNumber() + " 's VPNCard is fail");
+		return serviceHandleResult ? new HandleResult(0, vpnCard.getId())
+				: new HandleResult(1, "add realNumber=" + vpnCard.getRealNumber() + " 's VPNCard is fail");
 	}
 
 	/**

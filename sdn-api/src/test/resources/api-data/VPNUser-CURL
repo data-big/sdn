@@ -1,2 +1,6 @@
 #添加VPN用户信息接口#
 curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://localhost:8900/sdn/vpnuser --data '{"realNumber":"13912345678","sponsorNumber":"13500001111","sponsorName":"张三","sponsorIDType":1,"sponsorIDNumber":"342622199900001111","userNumber":"13522223333","userName":"李四","userIDType":1,"userIDNumber":"342622198800001111","registerDate":"2016-05-19 09:49:36.0","cancelDate":"2016-05-26 09:49:43.0","registerAgent":"1","modifyType":1,"modifyDate":"2016-05-19 09:49:57.0"}'
+响应信息
+{"errorCode":0,"errorMessage":""}
+errorCode：0表示处理成功，其它数字标识处理失败。
+errorMessage：一般未处理成功后的数据库主键ID信息。

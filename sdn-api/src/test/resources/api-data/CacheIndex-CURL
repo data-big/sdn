@@ -1,0 +1,6 @@
+索引信息缓存接口
+curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://localhost:8900/sdn/cache/index --data '{"id":"1","username":null,"identity_id":null,"phone_num":null,"timestamp":null,"src_ip":null,"des_ip":null,"src_port":null,"des_port":null,"protocol_type":null,"header":null,"url":null,"flow_type":null,"resource_type":null,"domain_name":null,"size":null,"content":null,"title":null,"iccid":null}'
+响应信息
+{"errorCode":0,"errorMessage":""}
+errorCode：0表示处理成功，其它数字标识处理失败。
+errorMessage：一般未处理成功后的数据库主键ID信息。

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import zx.soft.sdn.api.component.HandResult;
+import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.component.Page;
 import zx.soft.sdn.api.component.SystemConstant;
 import zx.soft.sdn.api.model.VPNUser;
@@ -45,18 +45,18 @@ public class VPNUserController {
 	 */
 	@RequestMapping(value = "/vpnuser", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody HandResult postVPNUser(@RequestBody VPNUser vpnUser) {
+	public @ResponseBody HandleResult postVPNUser(@RequestBody VPNUser vpnUser) {
 		vpnUser.setId(IDUtil.generateUniqueID());
 		vpnUser.setInvalid(0);
-		boolean serviceHandResult = false;
+		boolean serviceHandleResult = false;
 		try {
 			vpnUserService.updateInsert(vpnUser);
-			serviceHandResult = true;
+			serviceHandleResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return serviceHandResult ? new HandResult(0, vpnUser.getId())
-				: new HandResult(1, "add realNumber=" + vpnUser.getRealNumber() + " 's VPNUser is fail");
+		return serviceHandleResult ? new HandleResult(0, vpnUser.getId())
+				: new HandleResult(1, "add realNumber=" + vpnUser.getRealNumber() + " 's VPNUser is fail");
 	}
 
 	/**
