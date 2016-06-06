@@ -68,7 +68,7 @@ public class HttpClientUtil {
 				while ((length = reader.read(buff)) != -1) {
 					result.append(new String(buff, 0, length));
 				}
-				logger.info("response : [ url : {} data : {} ]", url, requestData);
+				logger.info("response : [ url : {} data : {} ]", url, result.toString());
 			} else {
 				result.append("fail");
 				logger.error("Exception : {}", response.getStatusLine().getStatusCode());

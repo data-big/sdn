@@ -18,6 +18,7 @@
 				<include>mybatis-config.xml</include>
 				<include>redis.properties</include>
 				<include>basestation-mybatis-config.xml</include>
+				<include>opentsdb.properties</include>
 			</includes>
 			<outputDirectory>/conf</outputDirectory>
 			<filtered>true</filtered>

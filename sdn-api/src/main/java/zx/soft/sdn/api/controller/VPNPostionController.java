@@ -1,21 +1,24 @@
 package zx.soft.sdn.api.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import zx.soft.sdn.api.model.VPNPostion;
+import zx.soft.sdn.api.component.HandleResult;
+import zx.soft.sdn.api.domain.VPNPostion;
 import zx.soft.sdn.api.service.LocationService;
-import zx.soft.sdn.util.DateUtil;
+import zx.soft.sdn.api.service.VPNPostionService;
 
 /**
  * VPN用户地理位置信息控制器
@@ -32,6 +35,25 @@ public class VPNPostionController {
 	@Autowired
 	private LocationService locationService;
 
+	/**
+	 * 注入VPN用户地理位置信息业务层接口实现
+	 */
+	@Autowired
+	private VPNPostionService vpnPostionService;
+
+	/**
+	 * 添加VPN用户地理位置信息
+	 * @param vpnPostion VPN用户地理位置信息
+	 * @return 处理结果
+	 */
+	@RequestMapping(value = "/vpnpostion", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public @ResponseBody HandleResult postVPNPostion(@RequestBody VPNPostion vpnPostion) {
+		boolean serviceHandleResult = vpnPostionService.putVPNPostion(vpnPostion);
+		return serviceHandleResult ? new HandleResult(0, vpnPostion.getRealNumber())
+				: new HandleResult(1, vpnPostion.getRealNumber());
+	}
+
 	/**################测试接口
 	 * 根据真实号和时间区间查询用户地理位置信息
 	 * @param vpnCard
@@ -40,7 +62,7 @@ public class VPNPostionController {
 	@RequestMapping(value = "/vpnpostion/{realNumber}/{start}/{end}", method = RequestMethod.GET)
 	public @ResponseBody List<VPNPostion> getVPNPostion(@PathVariable(value = "realNumber") String realNumber,
 			@PathVariable(value = "start") String start, @PathVariable(value = "end") String end) {
-		List<VPNPostion> list = new ArrayList<VPNPostion>();
+		//		List<VPNPostion> list = new ArrayList<VPNPostion>();
 		//		String[] a = new String[] { "117.274978637695", "117.274726867676", "117.262344360352", "117.249740600586",
 		//				"117.265182495117", "117.240791320801", "117.275520324707", "117.270179748535", "117.275619506836",
 		//				"117.288383483887" };
@@ -64,9 +86,10 @@ public class VPNPostionController {
 		//			list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789",
 		//					DateUtil.simpleFormat.format(new Date()), location));
 		//		}
-		list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789", DateUtil.simpleFormat.format(new Date()),
-				locationService.getLocation("34567", "56789")));
-		return list;
+		//		list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789", DateUtil.simpleFormat.format(new Date()),
+		//				locationService.getLocation("34567", "56789")));
+
+		return vpnPostionService.queryVPNPostions(realNumber, start, end);
 	}
 
 	/**################测试接口

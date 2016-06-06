@@ -1,7 +1,7 @@
 package zx.soft.sdn.api.domain;
 
 /**
- * 索引信息模型
+ * ES索引信息模型
  * 
  * @author xuran
  *

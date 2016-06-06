@@ -41,6 +41,6 @@
 	<!-- Mapper接口扫描 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<property name="basePackage" value="zx.soft.sdn.api.dao" />
+		<property name="basePackage" value="zx.soft.sdn.api.dao"/>
 	</bean>
 </beans>
