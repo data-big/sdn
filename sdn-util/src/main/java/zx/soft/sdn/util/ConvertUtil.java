@@ -60,7 +60,7 @@ public class ConvertUtil {
 	 * 替换SQL IN字符串中的分隔符
 	 * @param string SQL IN字符串
 	 * @param split 分隔符
-	 * @return 标准SQL IN 字符串：'1','2','3','4','5'  如果是非法SQL IN字符串则返回：'-1'
+	 * @return 标准SQL IN 字符串 '1','2','3','4','5'  如果是非法SQL IN字符串则返回 '-1'
 	 */
 	public static String replaceSQLINSplit(String string, String split) {
 		//如果满足正则表达式，格式为(1split2或1)的合法字符串。

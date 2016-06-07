@@ -62,7 +62,7 @@ public class VPNCardController {
 	/**
 	 * 根据业务IP查询用户真实号
 	 * @param bizIP 业务IP地址
-	 * @return 用户真实号
+	 * @return {"realNumber":value} 用户真实号 
 	 */
 	@RequestMapping(value = "/vpncard/realnumber/{bizIP:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getRealNumber(@PathVariable(value = "bizIP") String bizIP) {
@@ -74,7 +74,7 @@ public class VPNCardController {
 	/**
 	 * 根据真实号查询VPN卡信息
 	 * @param realNumber
-	 * @return VPN卡信息Json数据
+	 * @return VPN卡信息
 	 */
 	@RequestMapping(value = "/vpncard/{realNumber}", method = RequestMethod.GET)
 	public @ResponseBody VPNCard getVPNCard(@PathVariable(value = "realNumber") String realNumber) {
@@ -84,7 +84,7 @@ public class VPNCardController {
 	/**
 	 * 根据一组真实号查询VPN卡信息
 	 * @param realNumbers 用户真实号连接字符串 1&2&3&4&5
-	 * @return VPN卡信息Json数据集合
+	 * @return VPN卡信息集合
 	 */
 	@RequestMapping(value = "/vpncards/{realNumbers}", method = RequestMethod.GET)
 	public @ResponseBody List<VPNCard> getVPNCards(@PathVariable(value = "realNumbers") String realNumbers) {
@@ -96,7 +96,7 @@ public class VPNCardController {
 	 * @param pageNo 页码
 	 * @param pageSize 页行
 	 * @param vpnCard 查询条件
-	 * @return VPN卡信息集合和分页信息Json数据
+	 * @return VPN卡信息集合和分页信息
 	 */
 	@RequestMapping(value = "/vpncards/{pageNo}/{pageSize}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNCards(@PathVariable(value = "pageNo") int pageNo,
@@ -115,7 +115,7 @@ public class VPNCardController {
 	 * @param pageNo 页码
 	 * @param pageSize 页行
 	 * @param vpnCardJson 查询条件
-	 * @return VPN卡信息集合和分页信息Json数据
+	 * @return VPN卡信息集合和分页信息
 	 */
 	@RequestMapping(value = "/vpncards/{pageNo}/{pageSize}/{vpnCardJson:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNCards(@PathVariable(value = "pageNo") int pageNo,

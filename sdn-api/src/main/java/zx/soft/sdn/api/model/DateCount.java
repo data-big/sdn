@@ -7,7 +7,7 @@ package zx.soft.sdn.api.model;
  *
  */
 public class DateCount {
-	/**日期（格式：2016-01-01）**/
+	/**日期 yyyy-MM-dd**/
 	private String Date;
 	/**总量**/
 	private Integer total;

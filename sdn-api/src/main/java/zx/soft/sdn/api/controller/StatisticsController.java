@@ -30,8 +30,8 @@ public class StatisticsController {
 
 	/**
 	 * 根据时间分组并按照时间区间统计每日VPN用户总量和增量
-	 * @param start 开始时间（2016-01-01）
-	 * @param end 结束时间（2016-01-01）
+	 * @param start 开始时间 yyyy-MM-dd
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
 	@RequestMapping(value = "/statistics/vpnuser/{start}/{end}", method = RequestMethod.GET)
@@ -42,8 +42,8 @@ public class StatisticsController {
 
 	/**
 	 * 根据用户证件类型分组并按照时间区间统计VPN用户总量
-	 * @param start 开始时间（2016-01-01）
-	 * @param end 结束时间（2016-01-01）
+	 * @param start 开始时间 yyyy-MM-dd
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
 	@RequestMapping(value = "/statistics/vpnuser/idtype/{start}/{end}", method = RequestMethod.GET)
@@ -54,8 +54,8 @@ public class StatisticsController {
 
 	/**
 	 * 根据时间分组并按照时间区间统计每日VPN卡总量和增量
-	 * @param start 开始时间（2016-01-01）
-	 * @param end 结束时间（2016-01-01）
+	 * @param start 开始时间 yyyy-MM-dd
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
 	@RequestMapping(value = "/statistics/vpncard/{start}/{end}", method = RequestMethod.GET)

@@ -1,7 +1,6 @@
 package zx.soft.sdn.api.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,11 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import zx.soft.sdn.api.component.HandleResult;
-import zx.soft.sdn.api.component.SystemConstant;
 import zx.soft.sdn.api.domain.Index;
-import zx.soft.sdn.util.ExceptionUtil;
-import zx.soft.sdn.util.JsonUtil;
-import zx.soft.sdn.util.RedisUtil;
+import zx.soft.sdn.api.service.CacheService;
 
 /**
  * 信息缓存控制器
@@ -27,36 +23,24 @@ import zx.soft.sdn.util.RedisUtil;
 public class CacheController {
 
 	/**
-	 * 日志
+	 * 注入信息缓存业务层接口实现
 	 */
-	private static Logger logger = LoggerFactory.getLogger(CacheController.class);
+	@Autowired
+	private CacheService cacheService;
 
 	/**
 	 * 索引信息缓存
 	 * @param index 索引数据
-	 * @return HandleResult 处理结果
+	 * @return 处理结果
 	 */
 	@RequestMapping(value = "/cache/index", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody HandleResult cacheIndex(@RequestBody Index index) {
-		//写入Redis
-		boolean handleResult = false;
-		try {
-			handleResult = RedisUtil.getInstance().sadd(SystemConstant.CACHE_KEY, JsonUtil.parseString(index)) == 1
-					? true : false;
-			if (handleResult) {
-				logger.info("****ID : {} 的上网信息缓存成功****", index.getId());
-				return new HandleResult(0, index.getId());
-			} else {
-				logger.error("Exception : [ ID : {} 的上网信息缓存失败 ]", index.getId());
-				return new HandleResult(1, index.getId());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("Exception : [ ID : {} 的上网信息缓存失败 ] {}", index.getId(), ExceptionUtil.exceptionToString(e));
+		if (cacheService.cacheIndex(index)) {
+			return new HandleResult(0, index.getId());
+		} else {
 			return new HandleResult(1, index.getId());
 		}
-
 	}
 
 }

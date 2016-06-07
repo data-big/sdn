@@ -24,9 +24,9 @@ public class VPNCard {
 	private String offsetStopIP;
 	/**偏移后特殊IP**/
 	private String offsetSpecialIP;
-	/**是否有效：0（有效）1（无效）**/
+	/**是否有效 0 有效 1无效**/
 	private Integer invalid;
-	/**入库时间：格式2016-01-01 00:00:00**/
+	/**入库时间 yyyy-MM-dd HH:mm:ss**/
 	private String insertDate;
 
 	public VPNCard() {

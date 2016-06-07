@@ -62,7 +62,7 @@ public class VPNUserController {
 	/**
 	 * 根据真实号查询VPN用户信息
 	 * @param realNumber
-	 * @return VPN用户信息Json数据
+	 * @return VPN用户信息
 	 */
 	@RequestMapping(value = "/vpnuser/{realNumber}", method = RequestMethod.GET)
 	public @ResponseBody VPNUser getVPNUser(@PathVariable(value = "realNumber") String realNumber) {
@@ -72,7 +72,7 @@ public class VPNUserController {
 	/**
 	 * 根据一组真实号查询VPN用户信息
 	 * @param realNumbers 用户真实号连接字符串 1&2&3&4&5
-	 * @return VPN用户信息Json数据集合
+	 * @return VPN用户信息集合
 	 */
 	@RequestMapping(value = "/vpnusers/{realNumbers}", method = RequestMethod.GET)
 	public @ResponseBody List<VPNUser> getVPNUsers(@PathVariable(value = "realNumbers") String realNumbers) {
@@ -84,7 +84,7 @@ public class VPNUserController {
 	 * @param pageNo 页码
 	 * @param pageSize 页行
 	 * @param vpnUser 查询条件
-	 * @return VPN用户信息集合和分页信息Json数据
+	 * @return VPN用户信息集合和分页信息
 	 */
 	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNUsers(@PathVariable(value = "pageNo") int pageNo,
@@ -103,7 +103,7 @@ public class VPNUserController {
 	 * @param pageNo 页码
 	 * @param pageSize 页行
 	 * @param vpnUserJson 查询条件
-	 * @return VPN用户信息集合和分页信息Json数据
+	 * @return  VPN用户信息集合和分页信息
 	 */
 	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}/{vpnUserJson:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNUsers(@PathVariable(value = "pageNo") int pageNo,

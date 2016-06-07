@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.domain.VPNPostion;
-import zx.soft.sdn.api.service.LocationService;
 import zx.soft.sdn.api.service.VPNPostionService;
 
 /**
@@ -28,12 +27,6 @@ import zx.soft.sdn.api.service.VPNPostionService;
  */
 @Controller
 public class VPNPostionController {
-
-	/**
-	 * 注入基站位置信息业务层接口实现
-	 */
-	@Autowired
-	private LocationService locationService;
 
 	/**
 	 * 注入VPN用户地理位置信息业务层接口实现
@@ -49,19 +42,21 @@ public class VPNPostionController {
 	@RequestMapping(value = "/vpnpostion", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody HandleResult postVPNPostion(@RequestBody VPNPostion vpnPostion) {
-		boolean serviceHandleResult = vpnPostionService.putVPNPostion(vpnPostion);
-		return serviceHandleResult ? new HandleResult(0, vpnPostion.getRealNumber())
+		return vpnPostionService.putVPNPostion(vpnPostion) ? new HandleResult(0, vpnPostion.getRealNumber())
 				: new HandleResult(1, vpnPostion.getRealNumber());
 	}
 
-	/**################测试接口
+	/**
 	 * 根据真实号和时间区间查询用户地理位置信息
-	 * @param vpnCard
-	 * @return VPNCard Json数据
+	 * @param realNumber 用户真实号
+	 * @param start 开始时间 yyyy-MM-dd HH:mm:ss
+	 * @param end 结束时间
+	 * @return VPN用户地理位置信息集合
 	 */
 	@RequestMapping(value = "/vpnpostion/{realNumber}/{start}/{end}", method = RequestMethod.GET)
 	public @ResponseBody List<VPNPostion> getVPNPostion(@PathVariable(value = "realNumber") String realNumber,
 			@PathVariable(value = "start") String start, @PathVariable(value = "end") String end) {
+		//////////////////////////////////////////////////////////////////////测试数据上线删除
 		//		List<VPNPostion> list = new ArrayList<VPNPostion>();
 		//		String[] a = new String[] { "117.274978637695", "117.274726867676", "117.262344360352", "117.249740600586",
 		//				"117.265182495117", "117.240791320801", "117.275520324707", "117.270179748535", "117.275619506836",
@@ -86,8 +81,7 @@ public class VPNPostionController {
 		//			list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789",
 		//					DateUtil.simpleFormat.format(new Date()), location));
 		//		}
-		//		list.add(new VPNPostion("vpnpostion", realNumber, "34567", "56789", DateUtil.simpleFormat.format(new Date()),
-		//				locationService.getLocation("34567", "56789")));
+		//////////////////////////////////////////////////////////////////////测试数据上线删除
 
 		return vpnPostionService.queryVPNPostions(realNumber, start, end);
 	}

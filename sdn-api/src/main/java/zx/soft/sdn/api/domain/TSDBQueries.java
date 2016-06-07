@@ -8,7 +8,7 @@ package zx.soft.sdn.api.domain;
  */
 public class TSDBQueries {
 
-	/**聚合条件：min,sum,max,avg**/
+	/**聚合条件 min,sum,max,avg**/
 	private String aggregator;
 	/**指标名称**/
 	private String metric;

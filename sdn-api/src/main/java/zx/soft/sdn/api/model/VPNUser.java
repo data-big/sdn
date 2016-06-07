@@ -34,11 +34,11 @@ public class VPNUser {
 	private String cancelDate;
 	/**开户代理商**/
 	private String registerAgent;
-	/**变更类型：1.实名信息变更 2.IP地址变更 3.销户**/
+	/**变更类型 1 实名信息变更 2 IP地址变更 3 销户**/
 	private Integer modifyType;
 	/**变更时间**/
 	private String modifyDate;
-	/**是否有效：0（有效）1（无效）**/
+	/**是否有效 0 有效 1 无效**/
 	private Integer invalid;
 
 	public VPNUser() {

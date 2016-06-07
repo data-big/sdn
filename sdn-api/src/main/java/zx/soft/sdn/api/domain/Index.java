@@ -1,7 +1,7 @@
 package zx.soft.sdn.api.domain;
 
 /**
- * ES索引信息模型
+ * 索引信息模型
  * 
  * @author xuran
  *
@@ -20,15 +20,15 @@ public class Index {
 	private String ICCID;
 	/**时间：yyyy-MM-dd HH:mm:ss**/
 	private String timestamp;
-	/**五元组信息：源IP**/
+	/**五元组信息 源IP**/
 	private String src_ip;
-	/**五元组信息：目的IP**/
+	/**五元组信息 目的IP**/
 	private String des_ip;
-	/**五元组信息：源端口**/
+	/**五元组信息 源端口**/
 	private String src_port;
-	/**五元组信息：目的端口**/
+	/**五元组信息 目的端口**/
 	private String des_port;
-	/**五元组信息：协议类型**/
+	/**五元组信息 协议类型**/
 	private String protocol_type;
 	/**头信息**/
 	private String header;

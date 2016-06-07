@@ -31,21 +31,21 @@ public interface VPNCardService {
 	/**
 	 * 根据用户真实号查询VPN卡信息
 	 * @param realNumber 用户真实号
-	 * @return VPN卡信息
+	 * @return VPNCard VPN卡信息
 	 */
 	public VPNCard getByRealNumber(String realNumber);
 
 	/**
 	 * 根据一组用户真实号查询VPN卡信息
 	 * @param realNumbers 用户真实号连接字符串 1,2,3,4,5
-	 * @return VPN卡信息集合
+	 * @return  VPN卡信息集合
 	 */
 	public List<VPNCard> getByRealNumbers(String realNumbers);
 
 	/**
 	 * 根据参数分页查询VPN卡信息集合
 	 * @param param 查询参数
-	 * @return VPN卡信息集合
+	 * @return  VPN卡信息集合
 	 */
 	public List<VPNCard> getList(Map<String, Object> param);
 

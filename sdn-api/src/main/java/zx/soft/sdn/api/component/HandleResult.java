@@ -8,7 +8,7 @@ package zx.soft.sdn.api.component;
  */
 public class HandleResult {
 
-	/**错误码：0（处理成功 ）其它数字（处理异常）**/
+	/**错误码 0 成功 其它 异常**/
 	private final int errorCode;
 	/**错误信息**/
 	private final String errorMessage;

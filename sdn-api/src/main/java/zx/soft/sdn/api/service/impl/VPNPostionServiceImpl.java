@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import zx.soft.sdn.api.component.MybatisSessionFactory;
 import zx.soft.sdn.api.component.SystemConstant;
+import zx.soft.sdn.api.dao.LocationDao;
 import zx.soft.sdn.api.dao.VPNPostionDao;
 import zx.soft.sdn.api.domain.TSDBPutRequest;
 import zx.soft.sdn.api.domain.TSDBPutResponse;
@@ -19,6 +22,7 @@ import zx.soft.sdn.api.domain.TSDBQueryRequest;
 import zx.soft.sdn.api.domain.TSDBQueryResponse;
 import zx.soft.sdn.api.domain.TSDBTags;
 import zx.soft.sdn.api.domain.VPNPostion;
+import zx.soft.sdn.api.model.Location;
 import zx.soft.sdn.api.service.VPNPostionService;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.ExceptionUtil;
@@ -129,27 +133,39 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 			return new ArrayList<VPNPostion>();
 		}
 		//4.解析持久层处理结果
-		//判断返回值是否合法
+		//如果持久层查询成功，则进行数据解析。
 		if (null != daoHandleResult) {
+			//最终处理结果
 			List<VPNPostion> handResult = new ArrayList<VPNPostion>();
 			//遍历处理结果
 			for (TSDBQueryResponse tsdbQueryResponse : daoHandleResult) {
-				//获取查询结果
-				TSDBTags tsdbTags = tsdbQueryResponse.getTags();
 				//获取时间戳集合
 				Map<Long, Integer> dps = tsdbQueryResponse.getDps();
-				for (Long timestamp : dps.keySet()) {
-					//数据过滤
-					//如果查询结果不为空，并且时间戳合法。
-					if (null != tsdbTags && 0 != timestamp) {
+				//获取查询结果
+				TSDBTags tsdbTags = tsdbQueryResponse.getTags();
+				//如果时间戳集合和查询结果不为空，则继续解析数据。
+				if (null != dps && null != tsdbTags) {
+					//解析数据
+					for (Long timestamp : dps.keySet()) {
+						//获取VPN用户地理位置信息
 						VPNPostion vpnPostion = new VPNPostion();
 						vpnPostion.setRealNumber(tsdbTags.getRealNumber());
 						vpnPostion.setSac(tsdbTags.getSac());
 						vpnPostion.setLac(tsdbTags.getLac());
-						//时间戳精确到毫秒级
-						timestamp = Long.valueOf(timestamp.toString() + "000");
 						//时间戳转换为yyyy-MM-dd HH:mm:ss日期格式
+						timestamp = Long.valueOf(timestamp.toString() + "000");
 						vpnPostion.setTime(DateUtil.simpleFormat.format(new Date(timestamp)));
+						//获取基站精确位置信息
+						Location location = null;
+						try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
+							location = sqlSession.getMapper(LocationDao.class).getLocation(vpnPostion.getSac(),
+									vpnPostion.getLac());
+						} catch (Exception e) {
+							e.printStackTrace();
+							logger.error("Exception : VPN用户[ realNumber={} ]的精确位置信息获取失败 {}", realNumber);
+						}
+						vpnPostion.setLocation(location);
+						//写入处理结果
 						handResult.add(vpnPostion);
 					}
 				}

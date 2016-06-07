@@ -8,9 +8,9 @@ package zx.soft.sdn.api.domain;
  */
 public class TSDBQueryRequest {
 
-	/**时间戳：起始时间**/
+	/**时间戳 起始时间**/
 	private Long start;
-	/**时间戳：结束时间**/
+	/**时间戳 结束时间**/
 	private Long end;
 	/**查询参数**/
 	private TSDBQueries[] queries;
