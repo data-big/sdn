@@ -10,8 +10,10 @@ public class DateCount {
 	/**日期 yyyy-MM-dd**/
 	private String Date;
 	/**总量**/
+	@SuppressWarnings("unused")
 	private Integer total;
 	/**增量**/
+	@SuppressWarnings("unused")
 	private Integer increment;
 	/**转换JSON总量增量封装**/
 	private Count count = new Count();
