@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheServer {
 
-	private static final Logger logger = LoggerFactory.getLogger(CacheServer.class);
+	private static Logger logger = LoggerFactory.getLogger(CacheServer.class);
 
 	/**
 	 * 主函数

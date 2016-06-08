@@ -2,7 +2,7 @@ package zx.soft.sdn.api.service;
 
 import java.util.List;
 
-import zx.soft.sdn.api.domain.VPNPostion;
+import zx.soft.sdn.model.VPNPostion;
 
 /**
  * VPN用户地理位置信息业务层接口

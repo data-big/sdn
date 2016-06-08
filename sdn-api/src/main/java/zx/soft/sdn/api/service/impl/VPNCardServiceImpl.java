@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zx.soft.sdn.api.dao.VPNCardDao;
-import zx.soft.sdn.api.model.VPNCard;
 import zx.soft.sdn.api.service.VPNCardService;
+import zx.soft.sdn.model.VPNCard;
 import zx.soft.sdn.util.ExceptionUtil;
 import zx.soft.sdn.util.JsonUtil;
 

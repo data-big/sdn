@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import zx.soft.sdn.api.model.DateCount;
-import zx.soft.sdn.api.model.TypeCount;
+import zx.soft.sdn.model.DateCount;
+import zx.soft.sdn.model.TypeCount;
 
 /**
  * 数据统计持久层接口

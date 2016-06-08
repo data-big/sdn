@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-import zx.soft.sdn.api.model.VPNUser;
+import zx.soft.sdn.model.VPNUser;
 
 /**
  * VPN用户信息持久层接口

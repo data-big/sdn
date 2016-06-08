@@ -14,7 +14,13 @@
 	<packaging>jar</packaging>
 	<!-- 引入依赖 -->
 	<dependencies>
-		<!-- 自定义工具包 -->
+		<!-- model -->
+		<dependency>
+			<groupId>zx.soft</groupId>
+			<artifactId>sdn-model</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- util -->
 		<dependency>
 			<groupId>zx.soft</groupId>
 			<artifactId>sdn-util</artifactId>

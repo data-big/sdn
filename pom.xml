@@ -9,10 +9,12 @@
 	<name>sdn</name>
 	<!-- 子模块 -->
 	<modules>
-	    <module>sdn-util</module>
+		<module>sdn-util</module>
+		<module>sdn-model</module>
 		<module>sdn-cache</module>
 		<module>sdn-api</module>
-  </modules>
+		<module>sdn-etl</module>
+	</modules>
 	<!-- 设置依赖版本号 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

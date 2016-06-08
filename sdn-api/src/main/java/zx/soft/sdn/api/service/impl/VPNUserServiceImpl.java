@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zx.soft.sdn.api.dao.VPNUserDao;
-import zx.soft.sdn.api.model.VPNUser;
 import zx.soft.sdn.api.service.VPNUserService;
+import zx.soft.sdn.model.VPNUser;
 import zx.soft.sdn.util.ExceptionUtil;
 import zx.soft.sdn.util.JsonUtil;
 

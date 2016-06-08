@@ -13,8 +13,11 @@ CREATE TABLE `vpn_card` (
   `offsetSpecialIP` varchar(16) NOT NULL COMMENT '偏移后特殊IP',
   `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   `insertDate` datetime NOT NULL COMMENT '入库时间：2016-01-01 00:00:00',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `vpn_card_realNumber_index` (`realNumber`) USING BTREE COMMENT '用户真实号索引',
+  KEY `vpn_card_invalid_index` (`invalid`) USING BTREE COMMENT '失效状态索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- VPN用户信息表
@@ -36,11 +39,15 @@ CREATE TABLE `vpn_user` (
   `registerAgent` varchar(64) DEFAULT NULL COMMENT '开户代理商',
   `modifyType` tinyint(2) NOT NULL COMMENT '变更类型：1.实名信息变更 2.IP地址变更 3.销户',
   `modifyDate` datetime NOT NULL COMMENT '变更时间：2016-01-01 00:00:00',
-  PRIMARY KEY (`id`)
+  `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
+  PRIMARY KEY (`id`),
+  KEY `vpn_user_realNumber_index` (`realNumber`) USING BTREE COMMENT '用户真实号索引',
+  KEY `vpn_user_invalid_index` (`invalid`) USING BTREE COMMENT '失效状态索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
  
 -- ----------------------------
--- VPN用户地理位置信息表（该表仅做字段参考，存储采用Hbase和OpenTSDB）
+-- VPN用户地理位置信息表（该表仅做字段参考，存储采用OpenTSDB）
 -- ----------------------------
 DROP TABLE IF EXISTS `vpn_position`;
 CREATE TABLE `vpn_position` (

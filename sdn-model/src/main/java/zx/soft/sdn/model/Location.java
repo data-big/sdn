@@ -1,4 +1,4 @@
-package zx.soft.sdn.api.model;
+package zx.soft.sdn.model;
 
 /**
  * 基站位置信息模型

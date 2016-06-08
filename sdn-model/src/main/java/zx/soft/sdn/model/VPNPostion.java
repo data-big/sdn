@@ -1,6 +1,4 @@
-package zx.soft.sdn.api.domain;
-
-import zx.soft.sdn.api.model.Location;
+package zx.soft.sdn.model;
 
 /**
  * VPN用户地理位置信息模型

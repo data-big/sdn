@@ -1,0 +1,6 @@
+添加VPN用户地理位置信息
+curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://localhost:8900/sdn/vpnpostion --data '{"realNumber":"13088888888","sac":"123","lac":"456","time":"2016-06-07 10:34:06"}'
+响应信息
+{"errorCode":0,"errorMessage":""}
+errorCode：0表示处理成功，其它数字标识处理失败。
+errorMessage：一般未处理成功后的数据库主键ID信息。

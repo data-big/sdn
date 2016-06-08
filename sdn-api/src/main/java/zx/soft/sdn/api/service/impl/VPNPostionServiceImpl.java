@@ -21,9 +21,9 @@ import zx.soft.sdn.api.domain.TSDBQueries;
 import zx.soft.sdn.api.domain.TSDBQueryRequest;
 import zx.soft.sdn.api.domain.TSDBQueryResponse;
 import zx.soft.sdn.api.domain.TSDBTags;
-import zx.soft.sdn.api.domain.VPNPostion;
-import zx.soft.sdn.api.model.Location;
 import zx.soft.sdn.api.service.VPNPostionService;
+import zx.soft.sdn.model.Location;
+import zx.soft.sdn.model.VPNPostion;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.ExceptionUtil;
 
@@ -136,7 +136,7 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 		//如果持久层查询成功，则进行数据解析。
 		if (null != daoHandleResult) {
 			//最终处理结果
-			List<VPNPostion> handResult = new ArrayList<VPNPostion>();
+			List<VPNPostion> handleResult = new ArrayList<VPNPostion>();
 			//遍历处理结果
 			for (TSDBQueryResponse tsdbQueryResponse : daoHandleResult) {
 				//获取时间戳集合
@@ -166,11 +166,11 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 						}
 						vpnPostion.setLocation(location);
 						//写入处理结果
-						handResult.add(vpnPostion);
+						handleResult.add(vpnPostion);
 					}
 				}
 			}
-			return handResult;
+			return handleResult;
 		} else {
 			logger.error("Exception : VPN用户[ realNumber={} ]的地理位置信息查询失败 {}", realNumber);
 			return new ArrayList<VPNPostion>();

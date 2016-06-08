@@ -2,8 +2,8 @@ package zx.soft.sdn.api.service;
 
 import java.util.List;
 
-import zx.soft.sdn.api.model.DateCount;
-import zx.soft.sdn.api.model.TypeCount;
+import zx.soft.sdn.model.DateCount;
+import zx.soft.sdn.model.TypeCount;
 
 /**
  * 数据统计业务层接口

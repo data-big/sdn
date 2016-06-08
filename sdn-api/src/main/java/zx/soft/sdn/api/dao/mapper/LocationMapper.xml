@@ -5,7 +5,7 @@
 <select id="getLocation" parameterType="String" resultMap="LocationResultMap">
 SELECT * FROM location WHERE sac=#{sac} AND lac=#{lac}
 </select>
-<resultMap type="zx.soft.sdn.api.model.Location" id="LocationResultMap">
+<resultMap type="zx.soft.sdn.model.Location" id="LocationResultMap">
 <association property="address" column="addressId" select="getAddress"/>
 </resultMap>
 </mapper>

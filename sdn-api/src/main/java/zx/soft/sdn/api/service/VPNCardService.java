@@ -3,7 +3,7 @@ package zx.soft.sdn.api.service;
 import java.util.List;
 import java.util.Map;
 
-import zx.soft.sdn.api.model.VPNCard;
+import zx.soft.sdn.model.VPNCard;
 
 /**
  * VPN卡信息业务层接口

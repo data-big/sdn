@@ -18,7 +18,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class JettyServer {
 
-	private static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
+	private static Logger logger = LoggerFactory.getLogger(JettyServer.class);
 
 	// 默认端口
 	private static final int PORT = 8888;

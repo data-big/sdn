@@ -3,8 +3,8 @@ package zx.soft.sdn.api.dao;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import zx.soft.sdn.api.model.Address;
-import zx.soft.sdn.api.model.Location;
+import zx.soft.sdn.model.Address;
+import zx.soft.sdn.model.Location;
 
 /**
  * 基站位置信息持久层接口

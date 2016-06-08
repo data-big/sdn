@@ -1,4 +1,4 @@
-package zx.soft.sdn.api.model;
+package zx.soft.sdn.model;
 
 /**
  * VPN用户信息模型
