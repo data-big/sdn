@@ -79,4 +79,13 @@ public class FileUtil {
 		return file.renameTo(new File(targetDirectory + file.getName()));
 	}
 
+	/**
+	 * 获取文件所在目录
+	 * @param file 文件
+	 * @return 文件目录
+	 */
+	public static String getFileDirectory(File file) {
+		return file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("/")) + "/";
+	}
+
 }

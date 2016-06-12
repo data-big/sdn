@@ -50,7 +50,7 @@ public class VPNCardController {
 		vpnCard.setInvalid(0);
 		boolean serviceHandleResult = false;
 		try {
-			vpnCardService.updateInsert(vpnCard);
+			vpnCardService.save(vpnCard);
 			serviceHandleResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();

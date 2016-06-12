@@ -19,7 +19,7 @@ public interface VPNCardService {
 	 * 先更新数据库中与当前用户真实号一致的所有VPN卡信息为过期
 	 * 然后再添加当前VPN卡信息
 	 */
-	public void updateInsert(VPNCard vpnCard);
+	public void save(VPNCard vpnCard);
 
 	/**
 	 * 根据业务IP查询VPN卡用户真实号

@@ -17,6 +17,9 @@ public class DateUtil {
 	/**日期格式2016-01-01 00:00:00**/
 	public static DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
+	/**日期格式2016-01-01**/
+	public static DateFormat yyyyMMddFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
 	/**
 	 * 日期后推
 	 * @param date 待处理日期

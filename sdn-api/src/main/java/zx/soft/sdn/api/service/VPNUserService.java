@@ -19,7 +19,7 @@ public interface VPNUserService {
 	 * 先更新数据库中与当前用户真实号一致的所有VPN用户信息为过期
 	 * 然后再添加当前VPN用户信息
 	 */
-	public void updateInsert(VPNUser vpnUser);
+	public void save(VPNUser vpnUser);
 
 	/**
 	 * 根据用户真实号查询VPN用户信息

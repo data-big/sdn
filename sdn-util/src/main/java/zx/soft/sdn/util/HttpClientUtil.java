@@ -60,7 +60,7 @@ public class HttpClientUtil {
 			httpPost.setEntity(myEntity);
 			logger.info("request : [ url : {} data : {} ]", url, requestData);
 			HttpResponse response = httpClient.execute(httpPost);
-			if (response.getStatusLine().getStatusCode() == 200) {
+			if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
 				HttpEntity resEntity = response.getEntity();
 				InputStreamReader reader = new InputStreamReader(resEntity.getContent(), "UTF-8");
 				char[] buff = new char[1024];
@@ -117,7 +117,7 @@ public class HttpClientUtil {
 			httpGet.setConfig(requestConfig);
 			logger.info("request : [ url : {} ]", url);
 			HttpResponse response = httpClient.execute(httpGet);
-			if (response.getStatusLine().getStatusCode() == 200) {
+			if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
 				HttpEntity resEntity = response.getEntity();
 				InputStreamReader reader = new InputStreamReader(resEntity.getContent(), "UTF-8");
 				char[] buff = new char[1024];

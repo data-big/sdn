@@ -8,6 +8,8 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import zx.soft.sdn.etl.component.Business;
+import zx.soft.sdn.etl.handle.ETLHandle;
 import zx.soft.sdn.util.DateUtil;
 
 /**
@@ -46,6 +48,7 @@ public class VPNCardETLServer {
 		Timer timer = new Timer();
 		//安排指定的任务在指定的时间开始进行重复的固定延迟执行。  
 		timer.schedule(new ETLTask(), date, PERIOD_DAY);
+		logger.info("VPNUserETLServer is runing ...............");
 	}
 
 	/**
@@ -57,7 +60,8 @@ public class VPNCardETLServer {
 	static class ETLTask extends TimerTask {
 		@Override
 		public void run() {
-			logger.info("run......................");
+			ETLHandle etlHandle = new ETLHandle();
+			etlHandle.work(Business.VPNCARD);
 		}
 	}
 }
