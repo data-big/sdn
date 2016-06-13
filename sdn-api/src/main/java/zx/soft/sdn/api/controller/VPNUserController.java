@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.component.Page;
 import zx.soft.sdn.api.component.SystemConstant;
+import zx.soft.sdn.api.domain.VPNUserVO;
 import zx.soft.sdn.api.service.VPNUserService;
 import zx.soft.sdn.model.VPNUser;
 import zx.soft.sdn.util.ConvertUtil;
@@ -80,17 +81,17 @@ public class VPNUserController {
 	}
 
 	/**
-	 * 分页并支持模糊查询VPN用户信息列表
+	 * 分页并支持模糊查询，时间区间查询VPN用户信息列表
 	 * @param pageNo 页码
 	 * @param pageSize 页行
-	 * @param vpnUser 查询条件
+	 * @param VPNUserVO 查询条件
 	 * @return VPN用户信息集合和分页信息
 	 */
 	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNUsers(@PathVariable(value = "pageNo") int pageNo,
-			@PathVariable(value = "pageSize") int pageSize, VPNUser vpnUser) {
-		Map<String, Object> param = ConvertUtil.parseMap(vpnUser);
-		Page page = Page.newBuilder(pageNo, pageSize, "/sdn/vpnusers", ConvertUtil.parseMap(vpnUser));
+			@PathVariable(value = "pageSize") int pageSize, VPNUserVO vpnUserVO) {
+		Map<String, Object> param = ConvertUtil.parseMap(vpnUserVO);
+		Page page = Page.newBuilder(pageNo, pageSize, "/sdn/vpnusers", ConvertUtil.parseMap(vpnUserVO));
 		param.put(SystemConstant.PAGE, page);
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(SystemConstant.DATA, vpnUserService.getList(param));
@@ -99,18 +100,19 @@ public class VPNUserController {
 	}
 
 	/**
-	 * 分页并支持模糊查询VPN用户信息列表
+	 * 分页并支持模糊查询，时间区间查询VPN用户信息列表
 	 * @param pageNo 页码
 	 * @param pageSize 页行
-	 * @param vpnUserJson 查询条件
+	 * @param vpnUserVOJson 查询条件
 	 * @return  VPN用户信息集合和分页信息
 	 */
-	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}/{vpnUserJson:.+}", method = RequestMethod.GET)
+	@RequestMapping(value = "/vpnusers/{pageNo}/{pageSize}/{vpnUserVOJson:.+}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getVPNUsers(@PathVariable(value = "pageNo") int pageNo,
-			@PathVariable(value = "pageSize") int pageSize, @PathVariable(value = "vpnUserJson") String vpnUSerJson) {
-		Map<String, Object> param = ConvertUtil.parseMap(JsonUtil.parseBean(vpnUSerJson, VPNUser.class));
+			@PathVariable(value = "pageSize") int pageSize,
+			@PathVariable(value = "vpnUserVOJson") String vpnUserVOJson) {
+		Map<String, Object> param = ConvertUtil.parseMap(JsonUtil.parseBean(vpnUserVOJson, VPNUserVO.class));
 		Page page = Page.newBuilder(pageNo, pageSize, "/sdn/vpnusers",
-				ConvertUtil.parseMap(JsonUtil.parseBean(vpnUSerJson, VPNUser.class)));
+				ConvertUtil.parseMap(JsonUtil.parseBean(vpnUserVOJson, VPNUserVO.class)));
 		param.put(SystemConstant.PAGE, page);
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(SystemConstant.DATA, vpnUserService.getList(param));

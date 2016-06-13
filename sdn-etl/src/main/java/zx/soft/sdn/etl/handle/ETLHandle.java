@@ -185,7 +185,7 @@ public class ETLHandle {
 	 */
 	private void vpnPostionHandle(File[] fileArray) {
 		//存储接口
-		String saveAPI = config.getProperty("mysql.vpnpostion.add.api");
+		String saveAPI = config.getProperty("opentsdb.vpnpostion.add.api");
 		//遍历文件
 		for (File file : fileArray) {
 			//读取文件
@@ -197,6 +197,7 @@ public class ETLHandle {
 					String[] data = lineText.split(",");
 					VPNPostion vpnPostion = new VPNPostion();
 					vpnPostion.setRealNumber(data[0]);
+					vpnPostion.setBizIP(data[1]);
 					vpnPostion.setSac(data[2]);
 					vpnPostion.setLac(data[3]);
 					vpnPostion.setTime(data[4]);

@@ -10,6 +10,8 @@ public class VPNPostion {
 
 	/**真实号**/
 	private String realNumber;
+	/**业务IP**/
+	private String bizIP;
 	/**基站SAC信息或CELLID信息 参考数据34162**/
 	private String sac;
 	/**基站LAC信息 参考数据25840**/
@@ -29,6 +31,14 @@ public class VPNPostion {
 
 	public void setRealNumber(String realNumber) {
 		this.realNumber = realNumber;
+	}
+
+	public String getBizIP() {
+		return bizIP;
+	}
+
+	public void setBizIP(String bizIP) {
+		this.bizIP = bizIP;
 	}
 
 	public String getSac() {

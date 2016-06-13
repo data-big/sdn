@@ -10,6 +10,8 @@ public class TSDBTags {
 
 	/**VPN用户真是号**/
 	private String realNumber;
+	/**业务IP**/
+	private String bizIP;
 	/**VPN用户地理位置基站SAC信息**/
 	private String sac;
 	/**VPN用户地理位置基站LAC信息**/
@@ -32,6 +34,14 @@ public class TSDBTags {
 
 	public void setRealNumber(String realNumber) {
 		this.realNumber = realNumber;
+	}
+
+	public String getBizIP() {
+		return bizIP;
+	}
+
+	public void setBizIP(String bizIP) {
+		this.bizIP = bizIP;
 	}
 
 	public String getSac() {

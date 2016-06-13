@@ -66,6 +66,7 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 		//4.设置标签
 		TSDBTags tags = new TSDBTags();
 		tags.setRealNumber(vpnPostion.getRealNumber());
+		tags.setBizIP(vpnPostion.getBizIP());
 		tags.setSac(vpnPostion.getSac());
 		tags.setLac(vpnPostion.getLac());
 		tsdbPutRequest.setTags(tags);
@@ -117,6 +118,7 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 		//设置标签
 		TSDBTags tags = new TSDBTags();
 		tags.setRealNumber(realNumber);
+		tags.setBizIP("*");
 		tags.setSac("*");
 		tags.setLac("*");
 		tsdbQueries.setTags(tags);
@@ -150,6 +152,7 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 						//获取VPN用户地理位置信息
 						VPNPostion vpnPostion = new VPNPostion();
 						vpnPostion.setRealNumber(tsdbTags.getRealNumber());
+						vpnPostion.setBizIP(tsdbTags.getBizIP());
 						vpnPostion.setSac(tsdbTags.getSac());
 						vpnPostion.setLac(tsdbTags.getLac());
 						//时间戳转换为yyyy-MM-dd HH:mm:ss日期格式

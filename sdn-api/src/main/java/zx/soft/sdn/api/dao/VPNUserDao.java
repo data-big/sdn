@@ -81,10 +81,16 @@ public interface VPNUserDao {
 				for (String key : param.keySet()) {
 					//排除分页参数
 					if (!("page".equals(key))) {
-						//如果是整型字段
+						//如果是整型字段，作精确查询。
 						if ("sponsorIDType".equals(key) || "userIDType".equals(key) || "modifyType".equals(key)
 								|| "invalid".equals(key)) {
 							sql.append(" and ").append(key).append("=").append("#{").append(key).append("}");
+						} else if ("startTime".equals(key)) {//开始时间
+							sql.append(" and ").append("registerDate").append(">=").append("#{").append(key)
+									.append("}");
+						} else if ("endTime".equals(key)) {//结束时间
+							sql.append(" and ").append("registerDate").append("<=").append("#{").append(key)
+									.append("}");
 						} else {
 							sql.append(" and ").append(key).append(" like ").append("'%")
 									.append(param.get(key).toString().replace("'", "")).append("%'");
