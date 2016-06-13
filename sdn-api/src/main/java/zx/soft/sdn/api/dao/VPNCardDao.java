@@ -32,7 +32,7 @@ public interface VPNCardDao {
 	 * @param realNumber 用户真实号
 	 * @return 成功或失败
 	 */
-	@Update(value = "UPDATE vpn_card SET invalid=1 WHERE realNumber=#{realNumber} AND invalid=0")
+	@Update(value = "UPDATE vpn_card SET invalid=1 WHERE id IN (SELECT id FROM (SELECT id FROM vpn_card WHERE realNumber=#{realNumber} AND invalid=0) AS T)")
 	public boolean updateVPNCardToInvalid(@Param("realNumber") String realNumber);
 
 	/**
