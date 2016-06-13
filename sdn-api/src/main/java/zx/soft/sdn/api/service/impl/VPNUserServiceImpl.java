@@ -35,7 +35,7 @@ public class VPNUserServiceImpl implements VPNUserService {
 	private VPNUserDao vpnUserDao;
 
 	@Override
-	public void save(VPNUser vpnUser) {
+	public void batchUpdateInsert(VPNUser vpnUser) {
 		try {
 			vpnUserDao.updateVPNUserToInvalid(vpnUser.getRealNumber());
 		} catch (Exception e) {

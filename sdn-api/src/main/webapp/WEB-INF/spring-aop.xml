@@ -16,7 +16,9 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" read-only="true" />
-			<tx:method name="save*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
+			<!-- MYSQL采用InnoDB引擎模式时，如果操作表中设置了索引，多线程批量更新该表，并且更新条件为索引条件时，会引发索引行级锁和表级锁的死锁问题。-->
+			<!-- 解决该问题除了替换索引条件为主键条件外，还需要降低事务的隔离级别为READ_COMMITTED -->
+			<tx:method name="batchUpdate*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />

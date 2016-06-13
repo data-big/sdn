@@ -35,7 +35,7 @@ public class VPNCardServiceImpl implements VPNCardService {
 	private VPNCardDao vpnCardDao;
 
 	@Override
-	public void save(VPNCard vpnCard) {
+	public void batchUpdateInsert(VPNCard vpnCard) {
 		try {
 			vpnCardDao.updateVPNCardToInvalid(vpnCard.getRealNumber());
 		} catch (Exception e) {

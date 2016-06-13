@@ -50,7 +50,7 @@ public class VPNUserController {
 		vpnUser.setInvalid(0);
 		boolean serviceHandleResult = false;
 		try {
-			vpnUserService.save(vpnUser);
+			vpnUserService.batchUpdateInsert(vpnUser);
 			serviceHandleResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
