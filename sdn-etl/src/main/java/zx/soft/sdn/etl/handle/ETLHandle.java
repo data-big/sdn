@@ -119,7 +119,8 @@ public class ETLHandle {
 							vpnCard.getInsertDate());
 				}
 				//文件转移
-				FileUtil.move(file, FileUtil.getFileDirectory(file) + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
+				FileUtil.move(file,
+						FileUtil.getFileDirectory(file) + "finish/" + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
 				logger.info("****VPN卡数据文件{}处理成功****", file.getName());
 			} catch (Exception e) {
 				logger.error("Exception : {}VPN卡数据文件处理失败", file.getName());
@@ -169,7 +170,8 @@ public class ETLHandle {
 							vpnUser.getRegisterDate());
 				}
 				//文件转移
-				FileUtil.move(file, FileUtil.getFileDirectory(file) + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
+				FileUtil.move(file,
+						FileUtil.getFileDirectory(file) + "finish/" + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
 				logger.info("****VPN用户数据文件{}处理成功****", file.getName());
 			} catch (Exception e) {
 				logger.error("Exception : {}VPN用户数据文件处理失败", file.getName());
@@ -210,7 +212,8 @@ public class ETLHandle {
 							vpnPostion.getTime());
 				}
 				//文件转移
-				FileUtil.move(file, FileUtil.getFileDirectory(file) + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
+				FileUtil.move(file,
+						FileUtil.getFileDirectory(file) + "finish/" + DateUtil.yyyyMMddFormat.format(new Date()) + "/");
 				logger.info("****VPN用户地理位置数据文件{}处理成功****", file.getName());
 			} catch (Exception e) {
 				logger.error("Exception : {} VPN用户地理位置数据文件处理失败", file.getName());
