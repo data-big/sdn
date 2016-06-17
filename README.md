@@ -17,13 +17,24 @@
 
 ### 项目框架
 
-`sdn`: jar和插件依赖工程
+`sdn`: 主工程
 
-`sdn-api`: 接口服务工程
+`sdn-api`: 接口服务模块
 
-`sdn-cache`: 缓存服务工程
+`sdn-cache`:缓存服务模块
 
+`sdn-etl`:基础数据采集服务模块
+
+`sdn-model`:数据模型模块
+
+`sdn-util`:工具模块
 
 ## 项目架构
 
-1. Redis： 用于缓存网页信息
+1. 接口服务：采用SpringMVC+Spring+Mybatis框架
+
+2. MYSQL：存储VPN卡数据和VPN用户数据
+
+3. OpenTSDB：存储VPN用户上网地理位置数据
+
+4. Redis： 缓存VPN用户上网记录数据，供ElasticSearch建索引。
