@@ -1,176 +1,356 @@
-====VPN卡信息接口====
-
 1.根据用用户真实号查询VPN卡信息
-GET：http://192.168.6.10:8900/sdn/vpncard/{realNumber}
-例子：http://192.168.6.10:8900/sdn/vpncard/13912345678
-{realNumber}：用户真实号
-Response:
+接口：http://192.168.6.10:8900/sdn/vpncard/{realNumber}
+类型：GET
+参数：{realNumber}：用户真实号
+请求：http://192.168.6.10:8900/sdn/vpncard/13900000001
+响应：
 {
 
-    "id": "1",
-    "realNumber": "13912345678",
-    "bizIP": "192.168.1.2",
-    "stopIP": "192.168.1.3",
-    "specialIP": "192.168.1.4",
-    "offsetBizIP": "192.168.1.5",
-    "offsetStopIP": "192.168.1.6",
-    "offsetSpecialIP": "192.168.1.7",
-    "invalid": ​0,
-    "insertDate": "2016-05-18T15:39:13.000Z"
+    "id": "d6f1d0f2dce8e2e9d446d348c03fb2b9",
+    "realNumber": "13900000001",
+    "bizIP": "192.168.0.1",
+    "stopIP": "192.168.0.2",
+    "specialIP": "192.168.0.3",
+    "offsetBizIP": "192.168.0.4",
+    "offsetStopIP": "192.168.0.5",
+    "offsetSpecialIP": "192.168.0.6",
+    "invalid": 0,
+    "insertDate": "2016-06-08 15:00:00.0"
 
 }
 
-
 2.根据一组用用户真实号查询VPN卡信息
-GET：http://192.168.6.10:8900/sdn/vpncards/{realNumbers}
-例子：http://192.168.6.10:8900/sdn/vpncards/13912345678&13900000000
-{realNumbers}：13612345678&13800000000&13988888888&
-Response:
+接口：http://192.168.6.10:8900/sdn/vpncards/{realNumbers}
+类型：GET
+参数：{realNumbers}：13900000001&13900000002&13900000003
+请求：http://192.168.6.10:8900/sdn/vpncards/13900000001&13900000002&13900000003
+响应：
 [
 
-{
-
-    "id": "1",
-    "realNumber": "13912345678",
-    "bizIP": "192.168.1.2",
-    "stopIP": "192.168.1.3",
-    "specialIP": "192.168.1.4",
-    "offsetBizIP": "192.168.1.5",
-    "offsetStopIP": "192.168.1.6",
-    "offsetSpecialIP": "192.168.1.7",
-    "invalid": ​0,
-    "insertDate": "2016-05-18T15:39:13.000Z"
-
-},
-
     {
-        "id": "2",
-        "realNumber": "13900000000",
-        "bizIP": "192.168.1.2",
-        "stopIP": "192.168.1.3",
-        "specialIP": "192.168.1.4",
-        "offsetBizIP": "192.168.1.5",
-        "offsetStopIP": "192.168.1.6",
-        "offsetSpecialIP": "192.168.1.7",
-        "invalid": ​0,
-        "insertDate": "2016-05-18T15:39:13.000Z"
+        "id": "87928d0cbe51721245a46f2827416af3",
+        "realNumber": "13900000002",
+        "bizIP": "192.168.0.7",
+        "stopIP": "192.168.0.8",
+        "specialIP": "192.168.0.9",
+        "offsetBizIP": "192.168.0.10",
+        "offsetStopIP": "192.168.0.11",
+        "offsetSpecialIP": "192.168.0.12",
+        "invalid": 0,
+        "insertDate": "2016-06-08 15:00:00.0"
+    },
+    {
+        "id": "d6f1d0f2dce8e2e9d446d348c03fb2b9",
+        "realNumber": "13900000001",
+        "bizIP": "192.168.0.1",
+        "stopIP": "192.168.0.2",
+        "specialIP": "192.168.0.3",
+        "offsetBizIP": "192.168.0.4",
+        "offsetStopIP": "192.168.0.5",
+        "offsetSpecialIP": "192.168.0.6",
+        "invalid": 0,
+        "insertDate": "2016-06-08 15:00:00.0"
+    },
+    {
+        "id": "d7a211925df65e4d791469c713c9a8bd",
+        "realNumber": "13900000003",
+        "bizIP": "192.168.0.13",
+        "stopIP": "192.168.0.14",
+        "specialIP": "192.168.0.15",
+        "offsetBizIP": "192.168.0.16",
+        "offsetStopIP": "192.168.0.17",
+        "offsetSpecialIP": "192.168.0.18",
+        "invalid": 0,
+        "insertDate": "2016-06-08 15:00:00.0"
     }
 
 ]
 
-
 3.分页查询VPN卡信息列表
-GET：http://192.168.6.10:8900/sdn/vpncards/{pageNo}/{pageSize}
-例子：http://192.168.6.10:8900/sdn/vpncards/1/2
-{pageNo}：页码
-{pageSize}：页容量
-Response：
+接口：http://192.168.6.10:8900/sdn/vpncards/{pageNo}/{pageSize}
+类型：GET
+参数：{pageNo}：页码{pageSize}：页容量
+例子：http://192.168.6.10:8900/sdn/vpncards/1/10
+响应：
 {
 
-    "data": 
-
-[
-
-{
-
-    "id": "1",
-    "realNumber": "13912345678",
-    "bizIP": "192.168.1.2",
-    "stopIP": "192.168.1.3",
-    "specialIP": "192.168.1.4",
-    "offsetBizIP": "192.168.1.5",
-    "offsetStopIP": "192.168.1.6",
-    "offsetSpecialIP": "192.168.1.7",
-    "invalid": ​0,
-    "insertDate": "2016-05-18T15:39:13.000Z"
-
-},
-
-    {
-        "id": "2",
-        "realNumber": "13900000000",
-        "bizIP": "192.168.1.2",
-        "stopIP": "192.168.1.3",
-        "specialIP": "192.168.1.4",
-        "offsetBizIP": "192.168.1.5",
-        "offsetStopIP": "192.168.1.6",
-        "offsetSpecialIP": "192.168.1.7",
-        "invalid": ​0,
-        "insertDate": "2016-05-18T15:39:13.000Z"
-    }
-
-],
-"page": 
-
-    {
-        "pageNo": ​1,
-        "pageSize": ​2,
-        "totalRecord": ​2,
-        "totalPage": ​1,
-        "params": { },
-        "paramLists": { },
+    "data": [
+        {
+            "id": "1",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-18 15:39:13.0"
+        },
+        {
+            "id": "2",
+            "realNumber": "13088888888",
+            "bizIP": "192.168.1.7",
+            "stopIP": "192.168.1.8",
+            "specialIP": "192.168.1.9",
+            "offsetBizIP": "192.168.1.10",
+            "offsetStopIP": "192.168.1.11",
+            "offsetSpecialIP": "192.168.1.12",
+            "invalid": 0,
+            "insertDate": "2016-05-19 15:39:13.0"
+        },
+        {
+            "id": "3",
+            "realNumber": "13911111111",
+            "bizIP": "192.168.1.13",
+            "stopIP": "192.168.1.14",
+            "specialIP": "192.168.1.15",
+            "offsetBizIP": "192.168.1.16",
+            "offsetStopIP": "192.168.1.17",
+            "offsetSpecialIP": "192.168.1.18",
+            "invalid": 0,
+            "insertDate": "2016-05-20 15:39:13.0"
+        },
+        {
+            "id": "4",
+            "realNumber": "13922222222",
+            "bizIP": "192.168.1.19",
+            "stopIP": "192.168.1.20",
+            "specialIP": "192.168.1.21",
+            "offsetBizIP": "192.168.1.22",
+            "offsetStopIP": "192.168.1.23",
+            "offsetSpecialIP": "192.168.1.24",
+            "invalid": 0,
+            "insertDate": "2016-05-21 15:39:13.0"
+        },
+        {
+            "id": "5",
+            "realNumber": "13933333333",
+            "bizIP": "192.168.1.25",
+            "stopIP": "192.168.1.26",
+            "specialIP": "192.168.1.27",
+            "offsetBizIP": "192.168.1.28",
+            "offsetStopIP": "192.168.1.29",
+            "offsetSpecialIP": "192.168.1.30",
+            "invalid": 0,
+            "insertDate": "2016-05-22 15:39:13.0"
+        },
+        {
+            "id": "6",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-23 15:39:13.0"
+        },
+        {
+            "id": "a2525a876a2dcb0c748ea46c4d16a564",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-25 16:49:41.0"
+        },
+        {
+            "id": "8afc646d2c74af7b49529e2af631576a",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-25 16:50:04.0"
+        },
+        {
+            "id": "e2123c41f03165525d8352ab5b17f863",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-25 16:55:50.0"
+        },
+        {
+            "id": "dcd0c0eeee552b09a638b32809ad5bc9",
+            "realNumber": "13912345678",
+            "bizIP": "192.168.1.1",
+            "stopIP": "192.168.1.2",
+            "specialIP": "192.168.1.3",
+            "offsetBizIP": "192.168.1.4",
+            "offsetStopIP": "192.168.1.5",
+            "offsetSpecialIP": "192.168.1.6",
+            "invalid": 1,
+            "insertDate": "2016-05-25 16:55:50.0"
+        }
+    ],
+    "page": {
+        "pageNo": 1,
+        "pageSize": 10,
+        "totalRecord": 188,
+        "totalPage": 19,
+        "param": { },
         "searchUrl": "/sdn/vpncards",
-        "pageNoDisp": "1",
-        "paraJson": "{}",
-        "paraListJson": "{}"
+        "pageNoDisp": "1|2|3|4|5|6|7|8|0|18|19",
+        "paramJson": "{}"
     }
 
 }
 
-4.分页模糊查询VPN卡信息列表
+4.分页模糊查询并支持按时间区间查询VPN卡信息列表
 GET：http://192.168.6.10:8900/sdn/vpncards/{pageNo}/{pageSize}/{vpncardJson}
-例子：http://192.168.6.10:8900/sdn/vpncards/1/2/{"realNumber":1}
+例子：http://192.168.6.10:8900/sdn/vpncards/1/10/ {"startTime":"2016-06-08","endTime":"2016-06-09"}
 {pageNo}：页码
 {pageSize}：页容量
-Response：
+响应：
 {
 
-    "data": 
-
-[
-
-{
-
-    "id": "1",
-    "realNumber": "13912345678",
-    "bizIP": "192.168.1.2",
-    "stopIP": "192.168.1.3",
-    "specialIP": "192.168.1.4",
-    "offsetBizIP": "192.168.1.5",
-    "offsetStopIP": "192.168.1.6",
-    "offsetSpecialIP": "192.168.1.7",
-    "invalid": ​0,
-    "insertDate": "2016-05-18T15:39:13.000Z"
-
-},
-
-    {
-        "id": "2",
-        "realNumber": "13900000000",
-        "bizIP": "192.168.1.2",
-        "stopIP": "192.168.1.3",
-        "specialIP": "192.168.1.4",
-        "offsetBizIP": "192.168.1.5",
-        "offsetStopIP": "192.168.1.6",
-        "offsetSpecialIP": "192.168.1.7",
-        "invalid": ​0,
-        "insertDate": "2016-05-18T15:39:13.000Z"
-    }
-
-],
-"page": 
-
-    {
-        "pageNo": ​1,
-        "pageSize": ​2,
-        "totalRecord": ​2,
-        "totalPage": ​1,
-        "params": { },
-        "paramLists": { },
+    "data": [
+        {
+            "id": "c12dddfa0fd3755d5486272ae8bd4a45",
+            "realNumber": "13900000075",
+            "bizIP": "192.168.0.380",
+            "stopIP": "192.168.0.381",
+            "specialIP": "192.168.0.382",
+            "offsetBizIP": "192.168.0.383",
+            "offsetStopIP": "192.168.0.384",
+            "offsetSpecialIP": "192.168.0.385",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "ac036917345b5654bc9a6ee4d36a11f2",
+            "realNumber": "13900000009",
+            "bizIP": "192.168.0.49",
+            "stopIP": "192.168.0.50",
+            "specialIP": "192.168.0.51",
+            "offsetBizIP": "192.168.0.52",
+            "offsetStopIP": "192.168.0.53",
+            "offsetSpecialIP": "192.168.0.54",
+            "invalid": 1,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "ab78be8a992b729ab6eb96049678771c",
+            "realNumber": "13900000037",
+            "bizIP": "192.168.0.190",
+            "stopIP": "192.168.0.191",
+            "specialIP": "192.168.0.192",
+            "offsetBizIP": "192.168.0.193",
+            "offsetStopIP": "192.168.0.194",
+            "offsetSpecialIP": "192.168.0.195",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "aa7c6a1a8d1da95a0607c9c50e63cae4",
+            "realNumber": "13900000002",
+            "bizIP": "192.168.0.7",
+            "stopIP": "192.168.0.8",
+            "specialIP": "192.168.0.9",
+            "offsetBizIP": "192.168.0.10",
+            "offsetStopIP": "192.168.0.11",
+            "offsetSpecialIP": "192.168.0.12",
+            "invalid": 1,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "a84febdcfd0102e84fa24c2e9d88e93b",
+            "realNumber": "13900000002",
+            "bizIP": "192.168.0.7",
+            "stopIP": "192.168.0.8",
+            "specialIP": "192.168.0.9",
+            "offsetBizIP": "192.168.0.10",
+            "offsetStopIP": "192.168.0.11",
+            "offsetSpecialIP": "192.168.0.12",
+            "invalid": 1,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "a729776a91321a40f0c726c79055e282",
+            "realNumber": "13900000034",
+            "bizIP": "192.168.0.175",
+            "stopIP": "192.168.0.176",
+            "specialIP": "192.168.0.177",
+            "offsetBizIP": "192.168.0.178",
+            "offsetStopIP": "192.168.0.179",
+            "offsetSpecialIP": "192.168.0.180",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "a4295f583388303a80262ff6a6e314e5",
+            "realNumber": "13900000036",
+            "bizIP": "192.168.0.185",
+            "stopIP": "192.168.0.186",
+            "specialIP": "192.168.0.187",
+            "offsetBizIP": "192.168.0.188",
+            "offsetStopIP": "192.168.0.189",
+            "offsetSpecialIP": "192.168.0.190",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "a312ad6a7cad3ecc08eabed27f5cc91c",
+            "realNumber": "13900000024",
+            "bizIP": "192.168.0.125",
+            "stopIP": "192.168.0.126",
+            "specialIP": "192.168.0.127",
+            "offsetBizIP": "192.168.0.128",
+            "offsetStopIP": "192.168.0.129",
+            "offsetSpecialIP": "192.168.0.130",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "a1c3f1b955ac6d0c54b7c4c91456d482",
+            "realNumber": "13900000047",
+            "bizIP": "192.168.0.240",
+            "stopIP": "192.168.0.241",
+            "specialIP": "192.168.0.242",
+            "offsetBizIP": "192.168.0.243",
+            "offsetStopIP": "192.168.0.244",
+            "offsetSpecialIP": "192.168.0.245",
+            "invalid": 0,
+            "insertDate": "2016-06-08 15:00:00.0"
+        },
+        {
+            "id": "adad6ad8f1b5760e195bc9ea95e4daa3",
+            "realNumber": "13900000007",
+            "bizIP": "192.168.0.37",
+            "stopIP": "192.168.0.38",
+            "specialIP": "192.168.0.39",
+            "offsetBizIP": "192.168.0.40",
+            "offsetStopIP": "192.168.0.41",
+            "offsetSpecialIP": "192.168.0.42",
+            "invalid": 1,
+            "insertDate": "2016-06-08 15:00:00.0"
+        }
+    ],
+    "page": {
+        "pageNo": 1,
+        "pageSize": 10,
+        "totalRecord": 172,
+        "totalPage": 18,
+        "param": {
+            "startTime": "2016-06-08",
+            "endTime": "2016-06-09"
+        },
         "searchUrl": "/sdn/vpncards",
-        "pageNoDisp": "1",
-        "paraJson": "{}",
-        "paraListJson": "{}"
+        "pageNoDisp": "1|2|3|4|5|6|7|8|0|17|18",
+        "paramJson": "{\"startTime\":\"2016-06-08\",\"endTime\":\"2016-06-09\"}"
     }
 
 }

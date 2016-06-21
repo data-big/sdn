@@ -19,7 +19,7 @@ public class VPNPostion {
 	/**时间 yyyy-MM-dd HH:mm:ss**/
 	private String time;
 	/**基站位置信息**/
-	private Location location;
+	private BaseStation baseStation;
 
 	public VPNPostion() {
 		super();
@@ -65,12 +65,12 @@ public class VPNPostion {
 		this.time = time;
 	}
 
-	public Location getLocation() {
-		return location;
+	public BaseStation getBaseStation() {
+		return baseStation;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setBaseStation(BaseStation baseStation) {
+		this.baseStation = baseStation;
 	}
 
 }

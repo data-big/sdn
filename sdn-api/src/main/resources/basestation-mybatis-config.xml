@@ -29,6 +29,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="zx/soft/sdn/api/dao/mapper/LocationMapper.xml" />
+		<mapper resource="zx/soft/sdn/api/dao/mapper/BaseStationMapper.xml"/>
 	</mappers>
 </configuration>

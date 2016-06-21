@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import zx.soft.sdn.api.component.MybatisSessionFactory;
 import zx.soft.sdn.api.component.SystemConstant;
-import zx.soft.sdn.api.dao.LocationDao;
+import zx.soft.sdn.api.dao.BaseStationDao;
 import zx.soft.sdn.api.dao.VPNPostionDao;
 import zx.soft.sdn.api.domain.TSDBPutRequest;
 import zx.soft.sdn.api.domain.TSDBPutResponse;
@@ -22,7 +22,7 @@ import zx.soft.sdn.api.domain.TSDBQueryRequest;
 import zx.soft.sdn.api.domain.TSDBQueryResponse;
 import zx.soft.sdn.api.domain.TSDBTags;
 import zx.soft.sdn.api.service.VPNPostionService;
-import zx.soft.sdn.model.Location;
+import zx.soft.sdn.model.BaseStation;
 import zx.soft.sdn.model.VPNPostion;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.ExceptionUtil;
@@ -159,15 +159,20 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 						timestamp = Long.valueOf(timestamp.toString() + "000");
 						vpnPostion.setTime(DateUtil.simpleFormat.format(new Date(timestamp)));
 						//获取基站精确位置信息
-						Location location = null;
+						BaseStation baseStation = null;
 						try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
-							location = sqlSession.getMapper(LocationDao.class).getLocation(vpnPostion.getSac(),
+							baseStation = sqlSession.getMapper(BaseStationDao.class).getBySacAndLAC(vpnPostion.getSac(),
 									vpnPostion.getLac());
+							//如果SAC+LAC组合查询无数据，则选择CELL+LAC组合查询。****特宽业务要求****
+							if (null == baseStation) {
+								baseStation = sqlSession.getMapper(BaseStationDao.class)
+										.getByCellAndLAC(vpnPostion.getSac(), vpnPostion.getLac());
+							}
 						} catch (Exception e) {
 							e.printStackTrace();
 							logger.error("Exception : VPN用户[ realNumber={} ]的精确位置信息获取失败 {}", realNumber);
 						}
-						vpnPostion.setLocation(location);
+						vpnPostion.setBaseStation(baseStation);
 						//写入处理结果
 						handleResult.add(vpnPostion);
 					}
