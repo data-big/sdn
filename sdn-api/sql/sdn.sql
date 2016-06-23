@@ -53,10 +53,9 @@ DROP TABLE IF EXISTS `vpn_position`;
 CREATE TABLE `vpn_position` (
   `id` varchar(32) NOT NULL COMMENT '主键',
   `realNumber` bigint(12) NOT NULL COMMENT '真实号',
+  `bizIP` varchar(16) NOT NULL COMMENT '业务IP：192.168.0.1',
   `sac` varchar(16) NOT NULL COMMENT '基站SAC信息或CELLID信息：参考数据34162',
   `lac` varchar(16) NOT NULL COMMENT '基站LAC信息：参考数据25840',
   `time` datetime NOT NULL COMMENT '时间：2016-01-01 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-

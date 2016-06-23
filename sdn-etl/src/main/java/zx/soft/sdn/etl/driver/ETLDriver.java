@@ -20,8 +20,11 @@ public class ETLDriver {
 		int exitCode = -1;
 		ProgramDriver pgd = new ProgramDriver();
 		try {
+			//每天凌晨两点执行
 			pgd.addClass("vpnCardETLServer", VPNCardETLServer.class, "VPN卡数据采集转换程序");
+			//每天凌晨两点执行
 			pgd.addClass("vpnUserETLServer", VPNUserETLServer.class, "VPN用户数据采集转换程序");
+			//一小时执行一次
 			pgd.addClass("vpnPostionETLServer", VPNPostionETLServer.class, "VPN地理位置数据采集转换程序");
 			pgd.driver(args);
 			// Success

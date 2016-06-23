@@ -1,6 +1,10 @@
 添加VPN用户地理位置信息
-curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://localhost:8900/sdn/vpnpostion --data '{"realNumber":"13088888888","sac":"123","lac":"456","time":"2016-06-07 10:34:06"}'
-响应信息
-{"errorCode":0,"errorMessage":""}
+接口：http://192.168.6.10:8900/sdn/vpnpostion
+类型：POST
+数据类型：Json
+CURL请求示例：
+curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://192.168.6.10:8900/sdn/vpnpostion --data '{"realNumber":"13912345678","bizIP":"192.168.8.1","sac":"29432","lac":"21760","time":"2016-06-20 10:34:06"}'
+响应：
+{"errorCode":0,"errorMessage":"13912345678"}
 errorCode：0表示处理成功，其它数字标识处理失败。
 errorMessage：一般未处理成功后的数据库主键ID信息。
