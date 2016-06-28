@@ -1,4 +1,11 @@
-1.根据用用户真实号查询VPN卡信息
+##接口服务启动命令
+```
+sdn-api/bin/ctl.sh start jettyServer&
+默认端口：8900
+```
+##接口文档
+###1.根据用用户真实号查询VPN卡信息
+```
 接口：http://192.168.6.10:8900/sdn/vpncard/{realNumber}
 类型：GET
 参数：{realNumber}：用户真实号
@@ -18,8 +25,9 @@
     "insertDate": "2016-06-08 15:00:00.0"
 
 }
-
-2.根据一组用用户真实号查询VPN卡信息
+```
+###2.根据一组用用户真实号查询VPN卡信息
+```
 接口：http://192.168.6.10:8900/sdn/vpncards/{realNumbers}
 类型：GET
 参数：{realNumbers}：13900000001&13900000002&13900000003
@@ -65,8 +73,9 @@
     }
 
 ]
-
-3.分页查询VPN卡信息列表
+```
+###3.分页查询VPN卡信息列表
+```
 接口：http://192.168.6.10:8900/sdn/vpncards/{pageNo}/{pageSize}
 类型：GET
 参数：{pageNo}：页码，{pageSize}：页容量
@@ -112,8 +121,9 @@
     }
 
 }
-
-4.分页模糊查询并支持按时间区间查询VPN卡信息列表
+```
+###4.分页模糊查询并支持按时间区间查询VPN卡信息列表
+```
 接口：http://192.168.6.10:8900/sdn/vpncards/{pageNo}/{pageSize}/{vpncardJson}
 类型：GET
 参数：{pageNo}：页码，{pageSize}：页容量，startTime：insertDate开始时间，endTime：insertDate结束时间
@@ -162,8 +172,9 @@
     }
 
 }
-
-5.根据用用户真实号查询VPN用户信息
+```
+###5.根据用用户真实号查询VPN用户信息
+```
 接口：http://192.168.6.10:8900/sdn/vpnuser/{realNumber}
 类型：GET
 参数：{realNumber}：用户真实号
@@ -189,8 +200,9 @@
     "invalid": 0
 
 }
-
-6.根据一组用用户真实号查询VPN用户信息
+```
+###6.根据一组用用户真实号查询VPN用户信息
+```
 接口：http://192.168.6.10:8900/sdn/vpnusers/{realNumbers}
 类型：GET
 参数：{realNumbers}：13900000001&13900000002&13900000003
@@ -254,8 +266,9 @@
     }
 
 ]
-
-7.分页查询VPN用户信息列表
+```
+###7.分页查询VPN用户信息列表
+```
 接口：http://192.168.6.10:8900/sdn/vpnusers/{pageNo}/{pageSize}
 类型：GET
 参数：{pageNo}：页码，{pageSize}：页容量
@@ -313,8 +326,9 @@
     }
 
 }
-
-8.分页模糊查询并支持按时间区间查询VPN用户信息列表
+```
+###8.分页模糊查询并支持按时间区间查询VPN用户信息列表
+```
 接口：http://192.168.6.10:8900/sdn/vpnusers/{pageNo}/{pageSize}/{vpncardJson}
 类型：GET
 参数：{pageNo}：页码，{pageSize}：页容量，startTime：registerDate开始时间，endTime：registerDate结束时间
@@ -375,8 +389,9 @@
     }
 
 }
-
-9.添加VPN用户地理位置信息
+```
+###9.添加VPN用户地理位置信息
+```
 接口：http://192.168.6.10:8900/sdn/vpnpostion
 类型：POST
 数据类型：Json
@@ -386,8 +401,9 @@ curl -X POST --header 'Content-Type:application/json' --header 'Accept:applicati
 {"errorCode":0,"errorMessage":"13912345678"}
 errorCode：0表示处理成功，其它数字标识处理失败。
 errorMessage：一般未处理成功后的数据库主键ID信息。
-
-10.根据用户真实号和时间区间查询VPN用户地理位置信息接口
+```
+###10.根据用户真实号和时间区间查询VPN用户地理位置信息接口
+```
 接口：http://192.168.6.10:8900/sdn/vpnpostion/{realNumuber}/{start}/{end}
 类型：GET
 参数：{realNumuber}：用户真实号，{start}：开始时间，{end}：结束时间
@@ -445,8 +461,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     }
 
 ]
-
-11.根据时间分组并按照时间区间统计每日VPN用户总量和增量
+```
+###11.根据时间分组并按照时间区间统计每日VPN用户总量和增量
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnuser/{start}/{end}
 类型：GET
 参数：{start}开始时间（yyyy-MM-dd），{end}结束时间（yyyy-MM-dd）
@@ -470,8 +487,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     }
 
 ]
-
-12.根据用户证件类型分组并按照时间区间统计VPN用户总量
+```
+###12.根据用户证件类型分组并按照时间区间统计VPN用户总量
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnuser/idtype/{start}/{end}
 类型：GET
 参数：{start}开始时间（yyyy-MM-dd），{end}结束时间（yyyy-MM-dd）
@@ -485,8 +503,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     }
 
 ]
-
-13.根据时间分组并按照时间区间统计每日VPN卡总量和增量
+```
+###13.根据时间分组并按照时间区间统计每日VPN卡总量和增量
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpncard/{start}/{end}
 类型:GET
 参数：{start}开始时间（yyyy-MM-dd），{end}结束时间（yyyy-MM-dd）
@@ -510,8 +529,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     }
 
 ]
-
-14.根据VPN卡状态分组统计VPN卡总量
+```
+###14.根据VPN卡状态分组统计VPN卡总量
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpncard/status
 类型:GET
 例子：http://192.168.6.10:8900/sdn/statistics/vpncard/status
@@ -528,8 +548,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     }
 
 ]
-
-15.全国上网用户分布接口
+```
+###15.全国上网用户分布接口
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnpostion/{start}/{end}
 类型：GET
 参数：{start}：开始时间，{end}：结束时间
@@ -559,8 +580,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     "maxCount": 24000
 
 }
-
-16.省范围查询上网用户分布接口
+```
+###16.省范围查询上网用户分布接口
+```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnpostion/{region}/{start}/{end}
 类型：GET
 参数：{region}：省份名称，{start}：开始时间，{end}：结束时间
@@ -598,8 +620,9 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
     "max": 568
 
 }
-
-17.VPN卡信息存入MYSQL接口
+```
+###17.VPN卡信息存入MYSQL接口
+```
 接口：http://192.168.6.10:8900/sdn/vpncard
 类型：POST
 数据类型：Json
@@ -609,8 +632,9 @@ curl -X POST --header 'Content-Type:application/json' --header 'Accept:applicati
 {"errorCode":0,"errorMessage":"12345678"}
 errorCode：0表示处理成功，其它数字标识处理失败。
 errorMessage：一般未处理成功后的数据库主键ID信息。
-
-18.VPN用户信息存入MYSQL接口
+```
+###18.VPN用户信息存入MYSQL接口
+```
 接口：http://192.168.6.10:8900/sdn/vpnuser
 类型：POST
 数据类型：Json
@@ -620,30 +644,34 @@ curl -X POST --header 'Content-Type:application/json' --header 'Accept:applicati
 {"errorCode":0,"errorMessage":"12345678"}
 errorCode：0表示处理成功，其它数字标识处理失败。
 errorMessage：一般未处理成功后的数据库主键ID信息。
-
-19.根据VPN卡业务IP查询用户真实号接口
+```
+###19.根据VPN卡业务IP查询用户真实号接口
+```
 接口：http://192.168.6.10:8900/sdn/vpncard/realnumber/{bizIP}
 类型：GET
 参数：{bizIP} ：业务IP地址
 例子：http://192.168.6.10:8900/sdn/vpncard/realnumber/192.168.8.1
 响应：{"realNumber": "13912345678"}
-
-20.根据用户真实号查询VPN卡信息接口
+```
+###20.根据用户真实号查询VPN卡信息接口
+```
 接口：http://192.168.6.10:8900/sdn/vpncard/{realNumber}
 类型：GET
 参数：{realNumber} ：用户真实号
 例子：http://192.168.6.10:8900/sdn/vpncard/13912345678
 响应：{"id":"6e6e3bfddd5a00b010f8ddd9f47ee694","realNumber":"13912345678","bizIP":"192.168.8.1","stopIP":"192.168.8.2","specialIP":"192.168.8.3","offsetBizIP":"192.168.8.4","offsetStopIP":"192.168.8.5","offsetSpecialIP":"192.168.8.6","invalid":0,"insertDate":"2016-05-25 16:55:50.0"}
-
-21.根据用户真实号查询VPN用户信息接口
+```
+###21.根据用户真实号查询VPN用户信息接口
+```
 接口：http://192.168.6.10:8900/sdn/vpnuser/{realNumber}
 类型：GET
 参数：{realNumber} ：用户真实号
 例子：http://192.168.6.10:8900/sdn/vpnuser/13912345678
 响应：
 {"id":"267c55434b31cd4f12f911915086a056","realNumber":"13912345678","sponsorNumber":"13500001111","sponsorName":"张三","sponsorIDType":1,"sponsorIDNumber":"342622199900001111","userNumber":"13522223333","userName":"李四","userIDType":1,"userIDNumber":"342622198800001111","registerDate":"2016-05-19 09:49:36.0","cancelDate":"2016-05-26 09:49:43.0","registerAgent":"1","modifyType":1,"modifyDate":"2016-05-19 09:49:57.0","invalid":0}
-
-22.上网记录索引信息缓存Redis接口
+```
+###22.上网记录索引信息缓存Redis接口
+```
 接口：http://192.168.6.10:8900/sdn/cache/index
 类型：POST
 数据类型：Json
@@ -653,19 +681,24 @@ curl -X POST --header 'Content-Type:application/json' --header 'Accept:applicati
 {"errorCode":0,"errorMessage":"1"}
 errorCode：0表示处理成功，其它数字标识处理失败。
 errorMessage：一般未处理成功后的数据库主键ID信息。
-
-MySQL脚本目录：/sdn-api/sql/sdn.sql
-
-Redis相关：
-#master
+```
+###MySQL脚本目录
+```
+/sdn-api/sql/sdn.sql
+```
+###Redis相关：
+```
+master
 redis.master.host=192.168.6.10
 redis.master.port=6379
 redis.master.password=zxsoft
 
-#slave
+slave
 redis.slave.host=192.168.6.10
 redis.slave.port=6379
 redis.slave.password=zxsoft
-
-#上网记录索引缓存键
+```
+###上网记录索引缓存键
+```
 sdn.cache.internetinfo=sdn.cache.internetinfo
+```
