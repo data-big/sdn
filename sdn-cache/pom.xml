@@ -14,20 +14,65 @@
 	<packaging>jar</packaging>
 	<!-- 引入依赖 -->
 	<dependencies>
-		<!-- 自定义工具包 -->
+	<!-- Common -->
+		<dependency>
+			<groupId>zx.soft</groupId>
+			<artifactId>sdn-common</artifactId>
+			<version>1.0</version>
+			<!-- 排除重复依赖 -->
+			<exclusions>
+                    <!-- 日志 -->
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+                    </exclusion>
+                </exclusions> 
+		</dependency>
+		<!-- Util -->
 		<dependency>
 			<groupId>zx.soft</groupId>
 			<artifactId>sdn-util</artifactId>
 			<version>1.0</version>
-		</dependency>
-		<!-- Json -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
+			<!-- 排除重复依赖 -->
+			<exclusions>
+                    <!-- 日志 -->
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+                    </exclusion>
+                </exclusions> 
 		</dependency>
 		<!-- 日志 -->
 		<dependency>
@@ -49,21 +94,6 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-access</artifactId>
-		</dependency>
-		<!-- Jedis -->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-		</dependency>
-		<!-- HttpClient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		<!-- Jsoup -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
 		</dependency>
 		<!-- Junit -->
 		<dependency>

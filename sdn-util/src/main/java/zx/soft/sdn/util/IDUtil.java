@@ -15,6 +15,6 @@ public class IDUtil {
 	public static String generateUniqueID() {
 		String timestamp = String.valueOf(System.currentTimeMillis());
 		String redom = String.valueOf(Math.random()).substring(2);
-		return MD5.MD5Encode(timestamp + redom);
+		return MD5Util.MD5Encode(timestamp + redom);
 	}
 }

@@ -1,4 +1,4 @@
-package zx.soft.sdn.cache.driver;
+package zx.soft.sdn.common;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 进程驱动器，用于管理运行不同进程的
+ * 进程驱动器，用于管理运行不同进程
  * 
- * @author wanggang
+ * @author xuran
  *
  */
 public class ProgramDriver {

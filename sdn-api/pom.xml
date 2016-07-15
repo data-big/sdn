@@ -14,16 +14,79 @@
 	<packaging>jar</packaging>
 	<!-- 引入依赖 -->
 	<dependencies>
-		<!-- model -->
+		<!-- Common -->
 		<dependency>
 			<groupId>zx.soft</groupId>
-			<artifactId>sdn-model</artifactId>
+			<artifactId>sdn-common</artifactId>
 			<version>1.0</version>
+		<!-- 排除重复依赖 -->
+			<exclusions>
+                    <!-- 日志 -->
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+                    </exclusion>
+                </exclusions> 
 		</dependency>
-		<!-- util -->
+		<!-- Util -->
 		<dependency>
 			<groupId>zx.soft</groupId>
 			<artifactId>sdn-util</artifactId>
+			<version>1.0</version>
+			<!-- 排除重复依赖 -->
+			<exclusions>
+					<!-- Json -->
+                    <exclusion>  
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+                    </exclusion>
+                    <exclusion>  
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+                    </exclusion>
+                    <!-- 日志 -->
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+                    </exclusion>
+					<exclusion>  
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+                    </exclusion>
+                </exclusions> 
+		</dependency>
+		<!-- Model -->
+		<dependency>
+			<groupId>zx.soft</groupId>
+			<artifactId>sdn-model</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<!-- Spring -->

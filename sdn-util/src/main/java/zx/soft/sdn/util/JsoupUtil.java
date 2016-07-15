@@ -170,10 +170,10 @@ public class JsoupUtil {
 			//和上面的正好相反
 			doc.getElementsByIndexLessThan(10);
 			//遍历标签
-			for (Element link : content.getElementsByTag("a")) {
-				String linkHref = link.attr("href");
-				String linkText = link.text();
-			}
+			//			for (Element link : content.getElementsByTag("a")) {
+			//				String linkHref = link.attr("href");
+			//				String linkText = link.text();
+			//			}
 			/**************一些其他常用的方法**************/
 			//获取网页标题
 			doc.title();
