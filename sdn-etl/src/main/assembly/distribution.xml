@@ -13,6 +13,7 @@
 			<directory>src/main/resources</directory>
 			<includes>
 				<include>logback.xml</include>
+				<include>config.properties</include>
 			</includes>
 			<outputDirectory>/conf</outputDirectory>
 			<filtered>true</filtered>
