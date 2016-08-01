@@ -3,6 +3,7 @@ package zx.soft.sdn.api.service;
 import java.util.List;
 
 import zx.soft.sdn.model.DateCount;
+import zx.soft.sdn.model.ScatterCount;
 import zx.soft.sdn.model.TypeCount;
 
 /**
@@ -42,5 +43,14 @@ public interface StatisticsService {
 	 * @return 统计结果
 	 */
 	public List<TypeCount> countCardByStatus();
+
+	/**
+	 * 根据省份名称和时间区间统计各地市VPN用户分布情况
+	 * @param region 省份名称
+	 * @param start 开始时间
+	 * @param end 结束时间
+	 * @return 分布统计结果
+	 */
+	public ScatterCount countPart(String region, String start, String end);
 
 }

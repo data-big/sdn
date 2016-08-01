@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,9 +55,9 @@ public class HiveUtil {
 	public Connection getConnection() {
 		Connection connection = null;
 		try {
-			Class.forName(ConfigUtil.getProps("hive.properties").getProperty("hive.jdbc.driver"));
-			connection = DriverManager
-					.getConnection(ConfigUtil.getProps("hive.properties").getProperty("hive.jdbc.url"), "", "");
+			Properties config = ConfigUtil.getProps("hive.properties");
+			Class.forName(config.getProperty("hive.jdbc.driver"));
+			connection = DriverManager.getConnection(config.getProperty("hive.jdbc.url"), "", "");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error("Exception : {}", ExceptionUtil.exceptionToString(e));
