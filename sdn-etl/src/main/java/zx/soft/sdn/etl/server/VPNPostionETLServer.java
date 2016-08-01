@@ -42,7 +42,8 @@ public class VPNPostionETLServer {
 		@Override
 		public void run() {
 			ETLHandle etlHandle = new ETLHandle();
-			etlHandle.work(Business.VPNPOSTION);
+			//			etlHandle.work(Business.VPNPOSTION);
+			etlHandle.work(Business.POSTION);
 		}
 
 	}

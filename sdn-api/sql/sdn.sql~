@@ -14,8 +14,8 @@ CREATE TABLE `vpn_card` (
   `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   `insertDate` datetime NOT NULL COMMENT '入库时间：2016-01-01 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `vpn_card_realNumber_index` (`realNumber`) USING BTREE,
-  KEY `vpn_card_invalid_index` (`invalid`) USING BTREE
+  KEY `vpn_card_realNumber_index` (`realNumber`) USING BTREE COMMENT '用户真实号索引',
+  KEY `vpn_card_invalid_index` (`invalid`) USING BTREE COMMENT '失效状态索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -41,8 +41,8 @@ CREATE TABLE `vpn_user` (
   `modifyDate` datetime NOT NULL COMMENT '变更时间：2016-01-01 00:00:00',
   `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   PRIMARY KEY (`id`),
-  KEY `vpn_user_realNumber_index` (`realNumber`) USING BTREE,
-  KEY `vpn_user_invalid_index` (`invalid`) USING BTREE
+  KEY `vpn_user_realNumber_index` (`realNumber`) USING BTREE COMMENT '用户真实号索引',
+  KEY `vpn_user_invalid_index` (`invalid`) USING BTREE COMMENT '失效状态索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  

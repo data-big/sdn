@@ -20,7 +20,9 @@ import zx.soft.sdn.model.VPNUser;
 import zx.soft.sdn.util.ConfigUtil;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.FileUtil;
+import zx.soft.sdn.util.HBaseUtil;
 import zx.soft.sdn.util.HttpClientUtil;
+import zx.soft.sdn.util.IDUtil;
 import zx.soft.sdn.util.JsonUtil;
 
 /**
@@ -114,7 +116,7 @@ public class ETLHandle {
 					//提交数据
 					BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 					ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.MINUTES, queue);
-					executor.execute(new PostRunnable(saveAPI, json, "json"));
+					executor.execute(new PostRunnable(Business.VPNCARD, saveAPI, json, "json"));
 					logger.info("****RealNmuber={},InsertDate{}的VPN卡数据处理成功****", vpnCard.getRealNumber(),
 							vpnCard.getInsertDate());
 				}
@@ -165,7 +167,7 @@ public class ETLHandle {
 					//提交数据
 					BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 					ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.MINUTES, queue);
-					executor.execute(new PostRunnable(saveAPI, json, "json"));
+					executor.execute(new PostRunnable(Business.VPNUSER, saveAPI, json, "json"));
 					logger.info("****RealNmuber={},RegisterDate={}的VPN用户数据处理成功****", vpnUser.getRealNumber(),
 							vpnUser.getRegisterDate());
 				}
@@ -186,8 +188,7 @@ public class ETLHandle {
 	 * @param fileArray VPN用户地理位置数据文件数组
 	 */
 	private void vpnPostionHandle(File[] fileArray) {
-		//存储接口
-		String saveAPI = config.getProperty("opentsdb.vpnpostion.add.api");
+
 		//遍历文件
 		for (File file : fileArray) {
 			//读取文件
@@ -207,7 +208,9 @@ public class ETLHandle {
 					//提交数据
 					BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 					ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.MINUTES, queue);
-					executor.execute(new PostRunnable(saveAPI, json, "json"));
+					String api = ConfigUtil.getProps("config.properties")
+							.getProperty("mysql.basestaion.address.query.api");
+					executor.execute(new PostRunnable(Business.VPNPOSTION, api, json, "json"));
 					logger.info("****RealNmuber={},Time={}的地理位置数据处理成功****", vpnPostion.getRealNumber(),
 							vpnPostion.getTime());
 				}
@@ -220,7 +223,6 @@ public class ETLHandle {
 			}
 
 		}
-
 	}
 
 	/**
@@ -231,12 +233,23 @@ public class ETLHandle {
 	 */
 	class PostRunnable implements Runnable {
 
-		public PostRunnable(String api, String data, String dataType) {
+		/**
+		 * 构造方法
+		 * @param business 业务类型
+		 * @param api 接口
+		 * @param data 数据
+		 * @param dataType 数据类型
+		 */
+		public PostRunnable(Business business, String api, String data, String dataType) {
+			this.business = business;
 			this.api = api;
 			this.data = data;
 			this.dataType = dataType;
+
 		}
 
+		/**业务类型**/
+		private Business business;
 		/**接口**/
 		private String api;
 		/**数据**/
@@ -246,7 +259,21 @@ public class ETLHandle {
 
 		@Override
 		public void run() {
-			HttpClientUtil.doPost(api, data, dataType);
+			//存储地理位置信息
+			if (business == Business.VPNPOSTION) {
+				VPNPostion vpnPostion = JsonUtil.parseBean(data, VPNPostion.class);
+				String rowKey = IDUtil.generateUniqueID();
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "realNumber", vpnPostion.getRealNumber());
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "bizIP", vpnPostion.getBizIP());
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "sac", vpnPostion.getSac());
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "lac", vpnPostion.getLac());
+				String api = this.api + "/" + vpnPostion.getSac() + "/" + vpnPostion.getLac();
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "address", HttpClientUtil.doGet(api, null));
+				HBaseUtil.getInstance().put("sdn", rowKey, "vpnpostion", "time", vpnPostion.getTime());
+			} else {//存储卡和用户信息
+				HttpClientUtil.doPost(api, data, dataType);
+			}
+
 		}
 
 	}

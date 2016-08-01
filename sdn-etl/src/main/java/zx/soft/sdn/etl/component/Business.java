@@ -7,8 +7,8 @@ package zx.soft.sdn.etl.component;
  *
  */
 public enum Business {
-	//VPN卡，VPN用户，VPN用户地理位置
-	VPNCARD("vpncard"), VPNUSER("vpnuser"), VPNPOSTION("vpnpostion");
+	//VPN卡，VPN用户，VPN用户地理位置 , VPN用户地理位置
+	VPNCARD("vpncard"), VPNUSER("vpnuser"), VPNPOSTION("vpnpostion"), POSTION("postion");
 	private String value;
 
 	Business(String value) {

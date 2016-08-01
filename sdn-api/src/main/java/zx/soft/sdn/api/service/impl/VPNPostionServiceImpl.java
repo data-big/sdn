@@ -1,5 +1,8 @@
 package zx.soft.sdn.api.service.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +29,7 @@ import zx.soft.sdn.model.BaseStation;
 import zx.soft.sdn.model.VPNPostion;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.ExceptionUtil;
+import zx.soft.sdn.util.HiveUtil;
 
 /**
  * VPN用户地理位置信息业务层接口实现
@@ -91,8 +95,14 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 		return handleResult;
 	}
 
-	@Override
-	public List<VPNPostion> queryVPNPostions(String realNumber, String start, String end) {
+	/**
+	 * OpenTSDB旧方案
+	 * @param realNumber
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public List<VPNPostion> queryVPNPostionsByOpenTSDB(String realNumber, String start, String end) {
 		//时间补齐，实现天级和秒级双重查询。
 		if (start.length() == 10)
 			start += " 00:00:00";
@@ -183,6 +193,78 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 			logger.error("Exception : VPN用户[ realNumber={} ]的地理位置信息查询失败 {}", realNumber);
 			return new ArrayList<VPNPostion>();
 		}
+	}
+
+	@Override
+	public List<VPNPostion> queryVPNPostions(String realNumber, String start, String end) {
+		//时间补齐，实现天级和秒级双重查询。
+		if (start.length() == 10)
+			start += " 00:00:00";
+		if (end.length() == 10)
+			end += " 23:59:59";
+		HiveUtil hiveUtil = HiveUtil.getInstance();
+		Connection connection = hiveUtil.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<VPNPostion> list = new ArrayList<VPNPostion>();
+		if (null != connection) {
+			try {
+				preparedStatement = connection
+						.prepareStatement("select * from vpnpostion where realNumber=? and time>? and time < ?");
+				preparedStatement.setString(1, realNumber);
+				preparedStatement.setString(2, start);
+				preparedStatement.setString(3, end);
+				resultSet = preparedStatement.executeQuery();
+				while (resultSet.next()) {
+					VPNPostion vpnPostion = new VPNPostion();
+					vpnPostion.setRealNumber(resultSet.getString("realNumber"));
+					vpnPostion.setBizIP(resultSet.getString("bizIP"));
+					vpnPostion.setSac(resultSet.getString("sac"));
+					vpnPostion.setLac(resultSet.getString("lac"));
+					vpnPostion.setTime(resultSet.getString("time"));
+					//获取基站精确位置信息
+					BaseStation baseStation = null;
+					try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
+						baseStation = sqlSession.getMapper(BaseStationDao.class).getBySacAndLAC(vpnPostion.getSac(),
+								vpnPostion.getLac());
+						//如果SAC+LAC组合查询无数据，则选择CELL+LAC组合查询。****特宽业务要求****
+						if (null == baseStation) {
+							baseStation = sqlSession.getMapper(BaseStationDao.class)
+									.getByCellAndLAC(vpnPostion.getSac(), vpnPostion.getLac());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						logger.error("Exception : VPN用户[ realNumber={} ]的精确位置信息获取失败 {}", realNumber);
+					}
+					vpnPostion.setBaseStation(baseStation);
+					list.add(vpnPostion);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Exception : VPN用户[ realNumber={} ]的位置信息获取失败 {}", realNumber);
+			} finally {
+				hiveUtil.close(resultSet, preparedStatement, connection);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public String queryAddress(String sac, String lac) {
+		//获取基站精确位置信息
+		BaseStation baseStation = null;
+		try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
+			baseStation = sqlSession.getMapper(BaseStationDao.class).getBySacAndLAC(sac, lac);
+			//如果SAC+LAC组合查询无数据，则选择CELL+LAC组合查询。****特宽业务要求****
+			if (null == baseStation) {
+				baseStation = sqlSession.getMapper(BaseStationDao.class).getByCellAndLAC(sac, lac);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Exception : [ sac : {} lac : {} ]获取详细地址失败 {}", sac, lac, ExceptionUtil.exceptionToString(e));
+		}
+		return baseStation != null ? baseStation.getAddress() : null;
 	}
 
 }
