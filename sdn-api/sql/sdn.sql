@@ -47,7 +47,7 @@ CREATE TABLE `vpn_user` (
 
  
 -- ----------------------------
--- VPN用户地理位置信息表（该表仅做字段参考，存储采用OpenTSDB）
+-- VPN用户地理位置信息表（该表仅做字段参考，存储采用HBase）
 -- ----------------------------
 DROP TABLE IF EXISTS `vpn_position`;
 CREATE TABLE `vpn_position` (
@@ -56,6 +56,7 @@ CREATE TABLE `vpn_position` (
   `bizIP` varchar(16) NOT NULL COMMENT '业务IP：192.168.0.1',
   `sac` varchar(16) NOT NULL COMMENT '基站SAC信息或CELLID信息：参考数据34162',
   `lac` varchar(16) NOT NULL COMMENT '基站LAC信息：参考数据25840',
+  `address` varchar(16) NOT NULL COMMENT '详细地址',
   `time` datetime NOT NULL COMMENT '时间：2016-01-01 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

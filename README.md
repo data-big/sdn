@@ -37,7 +37,7 @@
 
 2. MYSQL：存储VPN卡数据和VPN用户数据
 
-3. OpenTSDB：存储VPN用户上网地理位置数据
+3. HBase：存储VPN用户上网地理位置数据
 
 4. Redis： 缓存VPN用户上网记录数据，供ElasticSearch建索引。
 
