@@ -24,7 +24,7 @@ public interface VPNUserDao {
 	 * @param VPNUser VPN用户信息
 	 * @return 成功或失败
 	 */
-	@Insert(value = "INSERT INTO vpn_user(id,realNumber,sponsorNumber,sponsorName,sponsorIDType,sponsorIDNumber,userNumber,userName,userIDType,userIDNumber,registerDate,cancelDate,registerAgent,modifyType,modifyDate,invalid) VALUES(#{id},#{realNumber},#{sponsorNumber},#{sponsorName},#{sponsorIDType},#{sponsorIDNumber},#{userNumber},#{userName},#{userIDType},#{userIDNumber},#{registerDate},#{cancelDate},#{registerAgent},#{modifyType},#{modifyDate},#{invalid})")
+	@Insert(value = "INSERT INTO vpn_user(id,realNumber,sponsorNumber,sponsorName,sponsorIDType,sponsorIDNumber,userNumber,userName,userIDType,userIDNumber,registerDate,cancelDate,registerAgent,modifyDate,invalid) VALUES(#{id},#{realNumber},#{sponsorNumber},#{sponsorName},#{sponsorIDType},#{sponsorIDNumber},#{userNumber},#{userName},#{userIDType},#{userIDNumber},#{registerDate},#{cancelDate},#{registerAgent},#{modifyDate},#{invalid})")
 	public boolean insertVPNUser(VPNUser vpnUser);
 
 	/**
@@ -82,8 +82,7 @@ public interface VPNUserDao {
 					//排除分页参数
 					if (!("page".equals(key))) {
 						//如果是整型字段，作精确查询。
-						if ("sponsorIDType".equals(key) || "userIDType".equals(key) || "modifyType".equals(key)
-								|| "invalid".equals(key)) {
+						if ("sponsorIDType".equals(key) || "userIDType".equals(key) || "invalid".equals(key)) {
 							sql.append(" and ").append(key).append("=").append("#{").append(key).append("}");
 						} else if ("startTime".equals(key)) {//开始时间
 							sql.append(" and ").append("registerDate").append(">=").append("#{").append(key)
@@ -98,7 +97,7 @@ public interface VPNUserDao {
 					}
 				}
 			}
-			sql.append(" ORDER BY registerDate");
+			sql.append(" ORDER BY registerDate DESC");
 			return sql.toString();
 		}
 

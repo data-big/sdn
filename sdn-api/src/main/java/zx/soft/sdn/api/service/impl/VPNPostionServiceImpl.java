@@ -29,7 +29,9 @@ import zx.soft.sdn.model.BaseStation;
 import zx.soft.sdn.model.VPNPostion;
 import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.ExceptionUtil;
+import zx.soft.sdn.util.HBaseUtil;
 import zx.soft.sdn.util.HiveUtil;
+import zx.soft.sdn.util.IDUtil;
 
 /**
  * VPN用户地理位置信息业务层接口实现
@@ -51,8 +53,12 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 	@Autowired
 	private VPNPostionDao vpnPostionDao;
 
-	@Override
-	public boolean putVPNPostion(VPNPostion vpnPostion) {
+	/**
+	 * OpenTSDB旧方案
+	 * @param vpnPostion
+	 * @return
+	 */
+	public boolean putVPNPostionByOpenTSDB(VPNPostion vpnPostion) {
 		//创建OpenTSDB Put接口请求参数
 		TSDBPutRequest tsdbPutRequest = new TSDBPutRequest();
 		//1.设置指标名称
@@ -196,6 +202,42 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 	}
 
 	@Override
+	public boolean putVPNPostion(VPNPostion vpnPostion) {
+		try {
+			String rowKey = IDUtil.generateUniqueID();
+			HBaseUtil hbase = HBaseUtil.getInstance();
+			hbase.put("sdn", rowKey, "vpnpostion", "realNumber", vpnPostion.getRealNumber());
+			hbase.put("sdn", rowKey, "vpnpostion", "bizIP", vpnPostion.getBizIP());
+			hbase.put("sdn", rowKey, "vpnpostion", "sac", vpnPostion.getSac());
+			hbase.put("sdn", rowKey, "vpnpostion", "lac", vpnPostion.getLac());
+			//获取基站精确位置信息
+			BaseStation baseStation = null;
+			try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
+				baseStation = sqlSession.getMapper(BaseStationDao.class).getBySacAndLAC(vpnPostion.getSac(),
+						vpnPostion.getLac());
+				//如果SAC+LAC组合查询无数据，则选择CELL+LAC组合查询。****特宽业务要求****
+				if (null == baseStation) {
+					baseStation = sqlSession.getMapper(BaseStationDao.class).getByCellAndLAC(vpnPostion.getSac(),
+							vpnPostion.getLac());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Exception : [ sac : {} lac : {} ]获取详细地址失败 {}", vpnPostion.getSac(), vpnPostion.getLac(),
+						ExceptionUtil.exceptionToString(e));
+			}
+			hbase.put("sdn", rowKey, "vpnpostion", "address", baseStation != null ? baseStation.getAddress() : null);
+			hbase.put("sdn", rowKey, "vpnpostion", "time", vpnPostion.getTime());
+			logger.info("****添加VPN用户[ realNumber={} ]地理位置信息成功****", vpnPostion.getRealNumber());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Exception : 添加VPN用户[ realNumber={} ]地理位置信息失败 {}", vpnPostion.getRealNumber(),
+					ExceptionUtil.exceptionToString(e));
+			return false;
+		}
+	}
+
+	@Override
 	public List<VPNPostion> queryVPNPostions(String realNumber, String start, String end) {
 		//时间补齐，实现天级和秒级双重查询。
 		if (start.length() == 10)
@@ -248,23 +290,6 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 			}
 		}
 		return list;
-	}
-
-	@Override
-	public String queryAddress(String sac, String lac) {
-		//获取基站精确位置信息
-		BaseStation baseStation = null;
-		try (SqlSession sqlSession = MybatisSessionFactory.openSession();) {
-			baseStation = sqlSession.getMapper(BaseStationDao.class).getBySacAndLAC(sac, lac);
-			//如果SAC+LAC组合查询无数据，则选择CELL+LAC组合查询。****特宽业务要求****
-			if (null == baseStation) {
-				baseStation = sqlSession.getMapper(BaseStationDao.class).getByCellAndLAC(sac, lac);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("Exception : [ sac : {} lac : {} ]获取详细地址失败 {}", sac, lac, ExceptionUtil.exceptionToString(e));
-		}
-		return baseStation != null ? baseStation.getAddress() : null;
 	}
 
 }

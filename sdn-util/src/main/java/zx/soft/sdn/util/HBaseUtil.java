@@ -1,6 +1,7 @@
 package zx.soft.sdn.util;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
@@ -14,9 +15,6 @@ import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import zx.soft.sdn.util.ConfigUtil;
-import zx.soft.sdn.util.ExceptionUtil;
 
 /**
  * HBase工具类
@@ -37,25 +35,19 @@ public class HBaseUtil {
 	private static HBaseUtil instance;
 
 	/**
-	 * HBase连接
+	 * HBase配置信息
 	 */
-	private Connection connection;
+	private static Configuration configuration;
 
 	/**
-	 * 私有构造方法
+	 *构造方法
 	 */
 	private HBaseUtil() {
-		Configuration configuration = null;
+		Properties config = ConfigUtil.getProps("hbase.properties");
 		configuration = HBaseConfiguration.create();
-		configuration.set("hbase.zookeeper.quorum",
-				ConfigUtil.getProps("hbase.properties").getProperty("hbase.cluster.host"));
+		configuration.set("hbase.zookeeper.quorum", config.getProperty("hbase.cluster.host"));
 		configuration.setInt("hbase.zookeeper.property.clientPort",
-				Integer.valueOf(ConfigUtil.getProps("hbase.properties").getProperty("hbase.cluster.port")));
-		try {
-			connection = ConnectionFactory.createConnection(configuration);
-		} catch (IOException e) {
-			logger.error("Exception : {}", ExceptionUtil.exceptionToString(e));
-		}
+				Integer.valueOf(config.getProperty("hbase.cluster.port")));
 	}
 
 	/**
@@ -85,16 +77,28 @@ public class HBaseUtil {
 		try {
 			Table table = null;
 			Put put = null;
+			Connection connection = null;
 			try {
-				table = connection.getTable(TableName.valueOf(tableName));
-				put = new Put(Bytes.toBytes(rowKey));
-				Cell cell = new KeyValue(Bytes.toBytes(rowKey), Bytes.toBytes(family), Bytes.toBytes(qualifier),
-						Bytes.toBytes(value));
+				connection = ConnectionFactory.createConnection(configuration);
+				table = connection.getTable(null == tableName ? null : TableName.valueOf(tableName));
+				put = new Put(null == rowKey ? null : Bytes.toBytes(rowKey));
+				Cell cell = new KeyValue(null == rowKey ? null : Bytes.toBytes(rowKey),
+						null == family ? null : Bytes.toBytes(family),
+						null == qualifier ? null : Bytes.toBytes(qualifier),
+						null == value ? null : Bytes.toBytes(value));
 				put.add(cell);
 				table.put(put);
 				return true;
 			} finally {
-				table.close();
+				put = null;
+				if (null != table) {
+					table.close();
+					table = null;
+				}
+				if (null != connection) {
+					connection.close();
+					connection = null;
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

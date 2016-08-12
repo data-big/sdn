@@ -34,8 +34,6 @@ public class VPNUser {
 	private String cancelDate;
 	/**开户代理商**/
 	private String registerAgent;
-	/**变更类型 1 实名信息变更 2 IP地址变更 3 销户**/
-	private Integer modifyType;
 	/**变更时间**/
 	private String modifyDate;
 	/**是否有效 0 有效 1 无效**/
@@ -47,7 +45,7 @@ public class VPNUser {
 
 	public VPNUser(String id, String realNumber, String sponsorNumber, String sponsorName, Integer sponsorIDType,
 			String sponsorIDNumber, String userNumber, String userName, Integer userIDType, String userIDNumber,
-			String registerDate, String cancelDate, String registerAgent, Integer modifyType, String modifyDate,
+			String registerDate, String cancelDate, String registerAgent, String modifyDate,
 			Integer invalid) {
 		super();
 		this.id = id;
@@ -63,7 +61,6 @@ public class VPNUser {
 		this.registerDate = registerDate;
 		this.cancelDate = cancelDate;
 		this.registerAgent = registerAgent;
-		this.modifyType = modifyType;
 		this.modifyDate = modifyDate;
 		this.invalid = invalid;
 	}
@@ -170,14 +167,6 @@ public class VPNUser {
 
 	public void setRegisterAgent(String registerAgent) {
 		this.registerAgent = registerAgent;
-	}
-
-	public Integer getModifyType() {
-		return modifyType;
-	}
-
-	public void setModifyType(Integer modifyType) {
-		this.modifyType = modifyType;
 	}
 
 	public String getModifyDate() {

@@ -81,7 +81,17 @@
 						<groupId>ch.qos.logback</groupId>
 						<artifactId>logback-access</artifactId>
                     </exclusion>
-                </exclusions> 
+				<!-- JDBC -->
+					<exclusion> 
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+                   </exclusion>
+				<!-- DBCP -->
+                   <exclusion>
+						<groupId>commons-dbcp</groupId>
+						<artifactId>commons-dbcp</artifactId>
+                   </exclusion>
+                </exclusions>
 		</dependency>
 		<!-- Model -->
 		<dependency>

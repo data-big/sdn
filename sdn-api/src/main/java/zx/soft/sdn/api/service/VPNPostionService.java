@@ -28,12 +28,5 @@ public interface VPNPostionService {
 	 */
 	public List<VPNPostion> queryVPNPostions(String realNumber, String start, String end);
 
-	/**
-	 * 根据SAC和LAC值在基站库查询详细地址
-	 * @param sac SAC值
-	 * @param lac LAC值
-	 * @return 详细地址
-	 */
-	public String queryAddress(String sac, String lac);
 
 }

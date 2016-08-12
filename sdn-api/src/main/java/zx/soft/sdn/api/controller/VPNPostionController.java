@@ -32,19 +32,7 @@ public class VPNPostionController {
 	private VPNPostionService vpnPostionService;
 
 	/**
-	 * 根据SAC和LAC值在基站库查询详细地址
-	 * @param sac SAC值
-	 * @param lac LAC值
-	 * @return 详细地址
-	 */
-	@RequestMapping(value = "/vpnpostion/address/{sac}/{lac}", method = RequestMethod.GET)
-	public @ResponseBody String getAddress(@PathVariable(value = "sac") String sac,
-			@PathVariable(value = "lac") String lac) {
-		return vpnPostionService.queryAddress(sac, lac);
-	}
-
-	/**
-	 * OpenTSDB旧方案 弃用
+	 * 
 	 * 添加VPN用户地理位置信息
 	 * @param vpnPostion VPN用户地理位置信息
 	 * @return 处理结果
@@ -68,5 +56,4 @@ public class VPNPostionController {
 			@PathVariable(value = "start") String start, @PathVariable(value = "end") String end) {
 		return vpnPostionService.queryVPNPostions(realNumber, start, end);
 	}
-
 }

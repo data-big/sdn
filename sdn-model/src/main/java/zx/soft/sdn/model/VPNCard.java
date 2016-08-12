@@ -24,17 +24,17 @@ public class VPNCard {
 	private String offsetStopIP;
 	/**偏移后特殊IP**/
 	private String offsetSpecialIP;
-	/**是否有效 0 有效 1无效**/
-	private Integer invalid;
 	/**入库时间 yyyy-MM-dd HH:mm:ss**/
 	private String insertDate;
+	/**是否有效 0 有效 1无效**/
+	private Integer invalid;
 
 	public VPNCard() {
 		super();
 	}
 
 	public VPNCard(String id, String realNumber, String bizIP, String stopIP, String specialIP, String offsetBizIP,
-			String offsetStopIP, String offsetSpecialIP, Integer invalid, String insertDate) {
+			String offsetStopIP, String offsetSpecialIP, String insertDate, Integer invalid) {
 		super();
 		this.id = id;
 		this.realNumber = realNumber;
@@ -44,8 +44,8 @@ public class VPNCard {
 		this.offsetBizIP = offsetBizIP;
 		this.offsetStopIP = offsetStopIP;
 		this.offsetSpecialIP = offsetSpecialIP;
-		this.invalid = invalid;
 		this.insertDate = insertDate;
+		this.invalid = invalid;
 	}
 
 	public String getId() {
@@ -112,20 +112,20 @@ public class VPNCard {
 		this.offsetSpecialIP = offsetSpecialIP;
 	}
 
-	public Integer getInvalid() {
-		return invalid;
-	}
-
-	public void setInvalid(Integer invalid) {
-		this.invalid = invalid;
-	}
-
 	public String getInsertDate() {
 		return insertDate;
 	}
 
 	public void setInsertDate(String insertDate) {
 		this.insertDate = insertDate;
+	}
+
+	public Integer getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(Integer invalid) {
+		this.invalid = invalid;
 	}
 
 }

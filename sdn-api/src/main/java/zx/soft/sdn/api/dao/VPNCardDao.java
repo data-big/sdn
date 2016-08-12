@@ -104,7 +104,7 @@ public interface VPNCardDao {
 					}
 				}
 			}
-			sql.append(" ORDER BY insertDate");
+			sql.append(" ORDER BY insertDate DESC");
 			return sql.toString();
 		}
 

@@ -11,8 +11,8 @@ CREATE TABLE `vpn_card` (
   `offsetBizIP` varchar(16) NOT NULL COMMENT '偏移后业务IP',
   `offsetStopIP` varchar(16) NOT NULL COMMENT '偏移后停机IP',
   `offsetSpecialIP` varchar(16) NOT NULL COMMENT '偏移后特殊IP',
-  `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   `insertDate` datetime NOT NULL COMMENT '入库时间：2016-01-01 00:00:00',
+  `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   PRIMARY KEY (`id`),
   KEY `vpn_card_realNumber_index` (`realNumber`) USING BTREE,
   KEY `vpn_card_invalid_index` (`invalid`) USING BTREE

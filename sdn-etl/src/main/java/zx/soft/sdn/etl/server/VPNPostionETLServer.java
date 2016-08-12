@@ -6,8 +6,7 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import zx.soft.sdn.etl.component.Business;
-import zx.soft.sdn.etl.handle.ETLHandle;
+import zx.soft.sdn.etl.handle.VPNPostionETLHandle;
 
 /**
  * VPN地理位置数据采集转换程序
@@ -41,9 +40,7 @@ public class VPNPostionETLServer {
 	static class ETLTask extends TimerTask {
 		@Override
 		public void run() {
-			ETLHandle etlHandle = new ETLHandle();
-			//			etlHandle.work(Business.VPNPOSTION);
-			etlHandle.work(Business.POSTION);
+			new VPNPostionETLHandle().main();
 		}
 
 	}
