@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import zx.soft.sdn.etl.dao.VPNPostionDao;
 import zx.soft.sdn.model.VPNPostion;
+import zx.soft.sdn.util.DateUtil;
 import zx.soft.sdn.util.HBaseUtil;
-import zx.soft.sdn.util.IDUtil;
 import zx.soft.sdn.util.JDBCUtil;
 
 /**
@@ -86,8 +86,9 @@ public class VPNPostionDaoImpl implements VPNPostionDao {
 				return false;
 			//创建HBase交互对象
 			hbase = HBaseUtil.getInstance();
-			//生成ID
-			rowKey = IDUtil.generateUniqueID();
+			//生成RowKey
+			rowKey = vpnPostion.getRealNumber()
+					+ DateUtil.yyyyMMddHHmmss.format(DateUtil.simpleFormat.parse(vpnPostion.getTime()));
 			//写入HBase
 			hbase.put("sdn", rowKey, "vpnpostion", "realNumber", vpnPostion.getRealNumber());
 			hbase.put("sdn", rowKey, "vpnpostion", "bizIP", vpnPostion.getBizIP());

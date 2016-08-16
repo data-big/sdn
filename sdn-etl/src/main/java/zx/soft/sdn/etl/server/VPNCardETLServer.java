@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import zx.soft.sdn.etl.handle.VPNCardETLHandle;
+import zx.soft.sdn.util.DateUtil;
 
 /**
  * VPN卡数据采集转换程序
@@ -41,7 +42,7 @@ public class VPNCardETLServer {
 		//如果第一次执行定时任务的时间小于当前的时间  
 		//此时要在第一次执行定时任务的时间加一天，以便此任务在下个时间点执行。如果不加一天，任务会立即执行。  
 		if (date.before(new Date())) {
-			//			date = DateUtil.addDay(date, 1);
+			date = DateUtil.addDay(date, 1);
 		}
 		Timer timer = new Timer();
 		//安排指定的任务在指定的时间开始进行重复的固定延迟执行。  
