@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "http://mybatis.org/dtd/mybatis-3-config.dtd" "mybatis-3-config.dtd" >
+<!-- 基站数据源 -->
 <configuration>
 	<!-- 连接信息 -->
 	<properties resource="db.properties" />
