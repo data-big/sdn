@@ -1,9 +1,6 @@
 package zx.soft.sdn.api.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,8 @@ import zx.soft.sdn.api.service.StatisticsService;
 import zx.soft.sdn.model.DateCount;
 import zx.soft.sdn.model.ScatterCount;
 import zx.soft.sdn.model.TypeCount;
+import zx.soft.sdn.util.JsonUtil;
+import zx.soft.sdn.util.RedisUtil;
 
 /**
  * 数据统计控制器
@@ -78,50 +77,31 @@ public class StatisticsController {
 	}
 
 	/**
-	 * DEMO
-	 * 根据时间区间查询全国上网用户分布
-	 * @param start yyyy-MM-dd
-	 * @param end yyyy-MM-dd
-	 * @return 统计结果
-	 */
-	@RequestMapping(value = "/statistics/vpnpostion/{start}/{end}", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> totalCountVPNPostion(@PathVariable(value = "start") String start,
-			@PathVariable(value = "end") String end) {
-		Map<String, Object> result = new HashMap<String, Object>();
-		List<Map<String, Object>> regionList = new ArrayList<Map<String, Object>>();
-		Map<String, Object> region1 = new HashMap<String, Object>();
-		region1.put("name", "北京");
-		region1.put("value", 3600);
-		Map<String, Object> region2 = new HashMap<String, Object>();
-		region2.put("name", "安徽");
-		region2.put("value", 4000);
-		Map<String, Object> region3 = new HashMap<String, Object>();
-		region3.put("name", "四川");
-		region3.put("value", 200);
-		Map<String, Object> region4 = new HashMap<String, Object>();
-		region4.put("name", "香港");
-		region4.put("value", 24000);
-		regionList.add(region1);
-		regionList.add(region2);
-		regionList.add(region3);
-		regionList.add(region4);
-		result.put("maxCount", 24000);
-		result.put("minCount", 200);
-		result.put("region", regionList);
-		return result;
-	}
-
-	/**
-	 * DEMO
+	 * 
 	 * 根据省份和时间区间查询上网用户分布
 	 * @param region 省份名称
 	 * @param start yyyy-MM-dd
 	 * @param end yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	@RequestMapping(value = "/statistics/vpnpostion/{region}/{start}/{end}", method = RequestMethod.GET)
+	@RequestMapping(value = "/statistics/vpnpostion/{region}/{timeType}", method = RequestMethod.GET)
 	public @ResponseBody ScatterCount partCountVPNPostion(@PathVariable(value = "region") String region,
-			@PathVariable(value = "start") String start, @PathVariable(value = "end") String end) {
-		return statisticsService.countPart(region, start, end);
+			@PathVariable(value = "timeType") String timeType) {
+		ScatterCount result = null;
+		switch (timeType) {
+		case "hour":
+			result = JsonUtil.parseBean(RedisUtil.getInstance().get("sdn.user.part.hour"), ScatterCount.class);
+			break;
+		case "yesterday":
+			result = JsonUtil.parseBean(RedisUtil.getInstance().get("sdn.user.part.yesterday"), ScatterCount.class);
+			break;
+		case "week":
+			result = JsonUtil.parseBean(RedisUtil.getInstance().get("sdn.user.part.week"), ScatterCount.class);
+			break;
+		case "month":
+			result = JsonUtil.parseBean(RedisUtil.getInstance().get("sdn.user.part.month"), ScatterCount.class);
+			break;
+		}
+		return null == result ? new ScatterCount() : result;
 	}
 }

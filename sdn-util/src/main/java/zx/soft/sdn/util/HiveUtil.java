@@ -57,7 +57,8 @@ public class HiveUtil {
 		try {
 			Properties config = ConfigUtil.getProps("hive.properties");
 			Class.forName(config.getProperty("hive.jdbc.driver"));
-			connection = DriverManager.getConnection(config.getProperty("hive.jdbc.url"), "", "");
+			connection = DriverManager.getConnection(config.getProperty("hive.jdbc.url"),
+					config.getProperty("hive.jdbc.username"), config.getProperty("hive.jdbc.password"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error("Exception : {}", ExceptionUtil.exceptionToString(e));

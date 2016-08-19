@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import zx.soft.sdn.etl.handle.VPNPostionETLHandle;
+import zx.soft.sdn.util.ExceptionUtil;
 
 /**
  * VPN地理位置数据采集转换程序
@@ -38,9 +39,22 @@ public class VPNPostionETLServer {
 	 *
 	 */
 	static class ETLTask extends TimerTask {
+
+		//任务是否执行结束
+		private static boolean taskOver = true;
+
 		@Override
 		public void run() {
-			new VPNPostionETLHandle().main();
+			if (taskOver) {
+				taskOver = false;
+				try {
+					new VPNPostionETLHandle().main();
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.error("Exception : {}", ExceptionUtil.exceptionToString(e));
+				}
+				taskOver = true;
+			}
 		}
 
 	}

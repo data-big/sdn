@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import zx.soft.sdn.etl.handle.VPNCardETLHandle;
 import zx.soft.sdn.util.DateUtil;
+import zx.soft.sdn.util.ExceptionUtil;
 
 /**
  * VPN卡数据采集转换程序
@@ -57,9 +58,23 @@ public class VPNCardETLServer {
 	 *
 	 */
 	static class ETLTask extends TimerTask {
+
+		//任务是否执行结束
+		private static boolean taskOver = true;
+
 		@Override
 		public void run() {
-			new VPNCardETLHandle().main();
+			if (taskOver) {
+				taskOver = false;
+				try {
+					new VPNCardETLHandle().main();
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.error("Exception : {}", ExceptionUtil.exceptionToString(e));
+				}
+				taskOver = true;
+			}
+
 		}
 	}
 }
