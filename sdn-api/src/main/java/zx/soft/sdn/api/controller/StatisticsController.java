@@ -69,11 +69,14 @@ public class StatisticsController {
 
 	/**
 	 * 根据VPN卡状态分组统计VPN卡总量
+	 * @param start 开始时间 yyyy-MM-dd
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	@RequestMapping(value = "/statistics/vpncard/status", method = RequestMethod.GET)
-	public @ResponseBody List<TypeCount> countCardByStatus() {
-		return statisticsService.countCardByStatus();
+	@RequestMapping(value = "/statistics/vpncard/status/{start}/{end}", method = RequestMethod.GET)
+	public @ResponseBody List<TypeCount> countCardByStatus(@PathVariable(value = "start") String start,
+			@PathVariable(value = "end") String end) {
+		return statisticsService.countCardByStatus(start, end);
 	}
 
 	/**

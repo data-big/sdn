@@ -56,8 +56,8 @@ public class StatisticsServiceImpl implements StatisticsService {
 	}
 
 	@Override
-	public List<TypeCount> countCardByStatus() {
-		return statisticsDao.countCardByStatus();
+	public List<TypeCount> countCardByStatus(String start, String end) {
+		return statisticsDao.countCardByStatus(start, end);
 	}
 
 	@Override

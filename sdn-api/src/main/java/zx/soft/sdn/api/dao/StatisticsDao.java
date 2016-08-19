@@ -45,9 +45,11 @@ public interface StatisticsDao {
 
 	/**
 	 * 根据VPN卡状态分组统计VPN卡总量
+	 * @param start 开始时间 yyyy-MM-dd
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	@Select(value = "SELECT invalid AS `name`, COUNT(1) AS `value` FROM vpn_card GROUP BY invalid")
-	public List<TypeCount> countCardByStatus();
+	@Select(value = "SELECT invalid AS `name`, COUNT(1) AS `value` FROM vpn_card WHERE DATE_FORMAT(insertDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} GROUP BY invalid")
+	public List<TypeCount> countCardByStatus(@Param("start") String start, @Param("end") String end);
 
 }

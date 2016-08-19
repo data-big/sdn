@@ -1,5 +1,6 @@
 package zx.soft.sdn.cache.server;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,24 +56,27 @@ public class CacheServer {
 					end = array[1];
 					CountHandle.countPartByAnHui("hour", start, end);
 					logger.info("****一小时前的用户分布情况统计成功****");
-					//统计昨天的用户分布情况
-					array = DateUtil.getYesterDay().split(",");
-					start = array[0];
-					end = array[1];
-					CountHandle.countPartByAnHui("yesterday", start, end);
-					logger.info("****昨天的用户分布情况统计成功****");
-					//统计上周的用户分布情况
-					array = DateUtil.getLastWeek().split(",");
-					start = array[0];
-					end = array[1];
-					CountHandle.countPartByAnHui("week", start, end);
-					logger.info("****上周的用户分布情况统计成功****");
-					//统计上个月的用户分布情况
-					array = DateUtil.getLastMonth().split(",");
-					start = array[0];
-					end = array[1];
-					CountHandle.countPartByAnHui("month", start, end);
-					logger.info("****上个月的用户分布情况统计成功****");
+					//每天凌晨一点前执行
+					if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 2) {
+						//统计昨天的用户分布情况
+						array = DateUtil.getYesterDay().split(",");
+						start = array[0];
+						end = array[1];
+						CountHandle.countPartByAnHui("yesterday", start, end);
+						logger.info("****昨天的用户分布情况统计成功****");
+						//统计上周的用户分布情况
+						array = DateUtil.getLastWeek().split(",");
+						start = array[0];
+						end = array[1];
+						CountHandle.countPartByAnHui("week", start, end);
+						logger.info("****上周的用户分布情况统计成功****");
+						//统计上个月的用户分布情况
+						array = DateUtil.getLastMonth().split(",");
+						start = array[0];
+						end = array[1];
+						CountHandle.countPartByAnHui("month", start, end);
+						logger.info("****上个月的用户分布情况统计成功****");
+					}
 					taskOver = true;
 				} catch (Exception e) {
 					e.printStackTrace();

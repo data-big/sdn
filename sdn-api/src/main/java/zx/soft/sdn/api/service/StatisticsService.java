@@ -40,9 +40,10 @@ public interface StatisticsService {
 
 	/**
 	 * 根据VPN卡状态分组统计VPN卡总量
+	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	public List<TypeCount> countCardByStatus();
+	public List<TypeCount> countCardByStatus(String start, String end);
 
 	/**
 	 * 根据省份名称和时间区间统计各地市VPN用户分布情况
