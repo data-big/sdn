@@ -3,16 +3,12 @@ package zx.soft.sdn.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.service.VPNPostionService;
 import zx.soft.sdn.model.VPNPostion;
 
@@ -30,19 +26,6 @@ public class VPNPostionController {
 	 */
 	@Autowired
 	private VPNPostionService vpnPostionService;
-
-	/**
-	 * 
-	 * 添加VPN用户地理位置信息
-	 * @param vpnPostion VPN用户地理位置信息
-	 * @return 处理结果
-	 */
-	@RequestMapping(value = "/vpnpostion", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody HandleResult postVPNPostion(@RequestBody VPNPostion vpnPostion) {
-		return vpnPostionService.putVPNPostion(vpnPostion) ? new HandleResult(0, vpnPostion.getRealNumber())
-				: new HandleResult(1, vpnPostion.getRealNumber());
-	}
 
 	/**
 	 * 根据真实号和时间区间查询用户地理位置信息

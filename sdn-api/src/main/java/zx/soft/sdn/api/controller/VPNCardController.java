@@ -5,23 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import zx.soft.sdn.api.component.HandleResult;
 import zx.soft.sdn.api.component.Page;
 import zx.soft.sdn.api.component.SystemConstant;
 import zx.soft.sdn.api.domain.VPNCardVO;
 import zx.soft.sdn.api.service.VPNCardService;
 import zx.soft.sdn.model.VPNCard;
 import zx.soft.sdn.util.ConvertUtil;
-import zx.soft.sdn.util.IDUtil;
 import zx.soft.sdn.util.JsonUtil;
 
 /**
@@ -38,27 +33,6 @@ public class VPNCardController {
 	 */
 	@Autowired
 	private VPNCardService vpnCardService;
-
-	/**
-	 * 添加VPN卡信息
-	 * @param vpnCard VPN卡信息
-	 * @return 处理结果
-	 */
-	@RequestMapping(value = "/vpncard", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody HandleResult postVPNCard(@RequestBody VPNCard vpnCard) {
-		vpnCard.setId(IDUtil.generateUniqueID());
-		vpnCard.setInvalid(0);
-		boolean serviceHandleResult = false;
-		try {
-			vpnCardService.batchUpdateInsert(vpnCard);
-			serviceHandleResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return serviceHandleResult ? new HandleResult(0, vpnCard.getId())
-				: new HandleResult(1, "add realNumber=" + vpnCard.getRealNumber() + " 's VPNCard is fail");
-	}
 
 	/**
 	 * 根据业务IP查询用户真实号

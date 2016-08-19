@@ -195,7 +195,6 @@ sdn-api/bin/ctl.sh start jettyServer&
     "registerDate": "2016-06-08 15:00:00.0",
     "cancelDate": "2016-07-07 15:00:00.0",
     "registerAgent": "王五1",
-    "modifyType": 1,
     "modifyDate": "2016-06-08 15:00:00.0",
     "invalid": 0
 
@@ -224,7 +223,6 @@ sdn-api/bin/ctl.sh start jettyServer&
         "registerDate": "2016-06-08 15:00:00.0",
         "cancelDate": "2016-07-07 15:00:00.0",
         "registerAgent": "王五1",
-        "modifyType": 1,
         "modifyDate": "2016-06-08 15:00:00.0",
         "invalid": 0
     },
@@ -242,7 +240,6 @@ sdn-api/bin/ctl.sh start jettyServer&
         "registerDate": "2016-06-08 15:00:00.0",
         "cancelDate": "2016-07-07 15:00:00.0",
         "registerAgent": "王五2",
-        "modifyType": 1,
         "modifyDate": "2016-06-08 15:00:00.0",
         "invalid": 0
     },
@@ -260,7 +257,6 @@ sdn-api/bin/ctl.sh start jettyServer&
         "registerDate": "2016-06-08 15:00:00.0",
         "cancelDate": "2016-07-07 15:00:00.0",
         "registerAgent": "王五3",
-        "modifyType": 1,
         "modifyDate": "2016-06-08 15:00:00.0",
         "invalid": 0
     }
@@ -291,7 +287,6 @@ sdn-api/bin/ctl.sh start jettyServer&
             "registerDate": "2016-05-18 09:49:36.0",
             "cancelDate": "2016-05-25 09:49:43.0",
             "registerAgent": "1",
-            "modifyType": 1,
             "modifyDate": "2016-05-19 09:49:57.0",
             "invalid": 0
         },
@@ -309,7 +304,6 @@ sdn-api/bin/ctl.sh start jettyServer&
             "registerDate": "2016-05-19 00:00:00.0",
             "cancelDate": "2016-05-26 09:49:43.0",
             "registerAgent": "1",
-            "modifyType": 1,
             "modifyDate": "2016-05-19 09:49:57.0",
             "invalid": 0
         }
@@ -351,7 +345,6 @@ sdn-api/bin/ctl.sh start jettyServer&
             "registerDate": "2016-06-08 15:00:00.0",
             "cancelDate": "2016-07-07 15:00:00.0",
             "registerAgent": "王五25",
-            "modifyType": 1,
             "modifyDate": "2016-06-08 15:00:00.0",
             "invalid": 0
         },
@@ -369,7 +362,6 @@ sdn-api/bin/ctl.sh start jettyServer&
             "registerDate": "2016-06-08 15:00:00.0",
             "cancelDate": "2016-07-07 15:00:00.0",
             "registerAgent": "王五3",
-            "modifyType": 1,
             "modifyDate": "2016-06-08 15:00:00.0",
             "invalid": 1
         }
@@ -390,19 +382,7 @@ sdn-api/bin/ctl.sh start jettyServer&
 
 }
 ```
-###9.添加VPN用户地理位置信息
-```
-接口：http://192.168.6.10:8900/sdn/vpnpostion
-类型：POST
-数据类型：Json
-CURL请求示例：
-curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://192.168.6.10:8900/sdn/vpnpostion --data '{"realNumber":"13912345678","bizIP":"192.168.8.1","sac":"29432","lac":"21760","time":"2016-06-20 10:34:06"}'
-响应：
-{"errorCode":0,"errorMessage":"13912345678"}
-errorCode：0表示处理成功，其它数字标识处理失败。
-errorMessage：一般未处理成功后的数据库主键ID信息。
-```
-###10.根据用户真实号和时间区间查询VPN用户地理位置信息接口
+###9.根据用户真实号和时间区间查询VPN用户地理位置信息接口
 ```
 接口：http://192.168.6.10:8900/sdn/vpnpostion/{realNumuber}/{start}/{end}
 类型：GET
@@ -462,7 +442,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 ]
 ```
-###11.根据时间分组并按照时间区间统计每日VPN用户总量和增量
+###10.根据时间分组并按照时间区间统计每日VPN用户总量和增量
 ```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnuser/{start}/{end}
 类型：GET
@@ -488,7 +468,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 ]
 ```
-###12.根据用户证件类型分组并按照时间区间统计VPN用户总量
+###11.根据用户证件类型分组并按照时间区间统计VPN用户总量
 ```
 接口：http://192.168.6.10:8900/sdn/statistics/vpnuser/idtype/{start}/{end}
 类型：GET
@@ -504,7 +484,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 ]
 ```
-###13.根据时间分组并按照时间区间统计每日VPN卡总量和增量
+###12.根据时间分组并按照时间区间统计每日VPN卡总量和增量
 ```
 接口：http://192.168.6.10:8900/sdn/statistics/vpncard/{start}/{end}
 类型:GET
@@ -530,7 +510,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 ]
 ```
-###14.根据VPN卡状态分组统计VPN卡总量
+###13.根据VPN卡状态分组统计VPN卡总量
 ```
 接口：http://192.168.6.10:8900/sdn/statistics/vpncard/status
 类型:GET
@@ -549,44 +529,12 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 ]
 ```
-###15.全国上网用户分布接口
+###14.省范围查询上网用户分布接口
 ```
-接口：http://192.168.6.10:8900/sdn/statistics/vpnpostion/{start}/{end}
+接口：http://192.168.6.10:8900/sdn/statistics/vpnpostion/{region}/{timeType}
 类型：GET
-参数：{start}：开始时间，{end}：结束时间
-例子：http://192.168.6.10:8900/sdn/statistics/vpnpostion/2016-01-01 00:00:00/2016-01-01 23:59:00
-响应：
-{
-
-    "minCount": 200,
-    "region": [
-        {
-            "name": "北京",
-            "value": 3600
-        },
-        {
-            "name": "安徽",
-            "value": 4000
-        },
-        {
-            "name": "四川",
-            "value": 200
-        },
-        {
-            "name": "香港",
-            "value": 24000
-        }
-    ],
-    "maxCount": 24000
-
-}
-```
-###16.省范围查询上网用户分布接口
-```
-接口：http://192.168.6.10:8900/sdn/statistics/vpnpostion/{region}/{start}/{end}
-类型：GET
-参数：{region}：省份名称，{start}：开始时间，{end}：结束时间
-例子：http://192.168.6.10:8900/sdn/statistics/vpnpostion/安徽/2016-01-01 00:00:00/2016-01-01 23:59:00
+参数：{region}：省份名称，{timeType}：hour,yesterday,week,month
+例子：http://192.168.6.10:8900/sdn/statistics/vpnpostion/安徽/hour
 响应：
 {
 
@@ -621,31 +569,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 
 }
 ```
-###17.VPN卡信息存入MYSQL接口
-```
-接口：http://192.168.6.10:8900/sdn/vpncard
-类型：POST
-数据类型：Json
-CURL请求示例：
-curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://192.168.6.10:8900/sdn/vpncard --data '{"realNumber":"13912345678","bizIP":"192.168.8.1","stopIP":"192.168.8.2","specialIP":"192.168.8.3","offsetBizIP":"192.168.8.4","offsetStopIP":"192.168.8.5","offsetSpecialIP":"192.168.8.6","insertDate":"2016-05-25 16:55:50.0"}'
-响应：
-{"errorCode":0,"errorMessage":"12345678"}
-errorCode：0表示处理成功，其它数字标识处理失败。
-errorMessage：一般未处理成功后的数据库主键ID信息。
-```
-###18.VPN用户信息存入MYSQL接口
-```
-接口：http://192.168.6.10:8900/sdn/vpnuser
-类型：POST
-数据类型：Json
-CURL请求示例：
-curl -X POST --header 'Content-Type:application/json' --header 'Accept:application/json' http://192.168.6.10:8900/sdn/vpnuser --data '{"realNumber":"13912345678","sponsorNumber":"13500001111","sponsorName":"张三","sponsorIDType":1,"sponsorIDNumber":"342622199900001111","userNumber":"13522223333","userName":"李四","userIDType":1,"userIDNumber":"342622198800001111","registerDate":"2016-05-19 09:49:36.0","cancelDate":"2016-05-26 09:49:43.0","registerAgent":"1","modifyType":1,"modifyDate":"2016-05-19 09:49:57.0"}'
-响应：
-{"errorCode":0,"errorMessage":"12345678"}
-errorCode：0表示处理成功，其它数字标识处理失败。
-errorMessage：一般未处理成功后的数据库主键ID信息。
-```
-###19.根据VPN卡业务IP查询用户真实号接口
+###15.根据VPN卡业务IP查询用户真实号接口
 ```
 接口：http://192.168.6.10:8900/sdn/vpncard/realnumber/{bizIP}
 类型：GET
@@ -653,7 +577,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 例子：http://192.168.6.10:8900/sdn/vpncard/realnumber/192.168.8.1
 响应：{"realNumber": "13912345678"}
 ```
-###20.根据用户真实号查询VPN卡信息接口
+###16.根据用户真实号查询VPN卡信息接口
 ```
 接口：http://192.168.6.10:8900/sdn/vpncard/{realNumber}
 类型：GET
@@ -661,7 +585,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 例子：http://192.168.6.10:8900/sdn/vpncard/13912345678
 响应：{"id":"6e6e3bfddd5a00b010f8ddd9f47ee694","realNumber":"13912345678","bizIP":"192.168.8.1","stopIP":"192.168.8.2","specialIP":"192.168.8.3","offsetBizIP":"192.168.8.4","offsetStopIP":"192.168.8.5","offsetSpecialIP":"192.168.8.6","invalid":0,"insertDate":"2016-05-25 16:55:50.0"}
 ```
-###21.根据用户真实号查询VPN用户信息接口
+###17.根据用户真实号查询VPN用户信息接口
 ```
 接口：http://192.168.6.10:8900/sdn/vpnuser/{realNumber}
 类型：GET
@@ -670,7 +594,7 @@ errorMessage：一般未处理成功后的数据库主键ID信息。
 响应：
 {"id":"267c55434b31cd4f12f911915086a056","realNumber":"13912345678","sponsorNumber":"13500001111","sponsorName":"张三","sponsorIDType":1,"sponsorIDNumber":"342622199900001111","userNumber":"13522223333","userName":"李四","userIDType":1,"userIDNumber":"342622198800001111","registerDate":"2016-05-19 09:49:36.0","cancelDate":"2016-05-26 09:49:43.0","registerAgent":"1","modifyType":1,"modifyDate":"2016-05-19 09:49:57.0","invalid":0}
 ```
-###22.上网记录索引信息缓存Redis接口
+###18.上网记录索引信息缓存Redis接口
 ```
 接口：http://192.168.6.10:8900/sdn/cache/index
 类型：POST
