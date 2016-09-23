@@ -56,8 +56,8 @@ public class CacheServer {
 					end = array[1];
 					CountHandle.countPartByAnHui("hour", start, end);
 					logger.info("****一小时前的用户分布情况统计成功****");
-					//每天凌晨一点前执行
-					if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 2) {
+					//每天凌晨执行
+					if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 1) {
 						//统计昨天的用户分布情况
 						array = DateUtil.getYesterDay().split(",");
 						start = array[0];

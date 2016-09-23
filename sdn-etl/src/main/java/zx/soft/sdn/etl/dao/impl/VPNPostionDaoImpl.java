@@ -95,6 +95,7 @@ public class VPNPostionDaoImpl implements VPNPostionDao {
 			hbase.put("sdn", rowKey, "vpnpostion", "sac", vpnPostion.getSac());
 			hbase.put("sdn", rowKey, "vpnpostion", "lac", vpnPostion.getLac());
 			hbase.put("sdn", rowKey, "vpnpostion", "address", address);
+			hbase.put("sdn", rowKey, "vpnpostion", "flow", vpnPostion.getFlow());
 			hbase.put("sdn", rowKey, "vpnpostion", "time", vpnPostion.getTime());
 			return true;
 		} catch (Exception e) {

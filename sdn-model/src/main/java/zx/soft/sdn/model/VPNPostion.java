@@ -18,11 +18,25 @@ public class VPNPostion {
 	private String lac;
 	/**时间 yyyy-MM-dd HH:mm:ss**/
 	private String time;
+	/**流量值**/
+	private String flow;
 	/**基站位置信息**/
 	private BaseStation baseStation;
 
 	public VPNPostion() {
 		super();
+	}
+
+	public VPNPostion(String realNumber, String bizIP, String sac, String lac, String time, String flow,
+			BaseStation baseStation) {
+		super();
+		this.realNumber = realNumber;
+		this.bizIP = bizIP;
+		this.sac = sac;
+		this.lac = lac;
+		this.time = time;
+		this.flow = flow;
+		this.baseStation = baseStation;
 	}
 
 	public String getRealNumber() {
@@ -63,6 +77,14 @@ public class VPNPostion {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getFlow() {
+		return flow;
+	}
+
+	public void setFlow(String flow) {
+		this.flow = flow;
 	}
 
 	public BaseStation getBaseStation() {

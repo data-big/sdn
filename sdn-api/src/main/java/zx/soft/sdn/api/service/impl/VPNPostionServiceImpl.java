@@ -90,7 +90,7 @@ public class VPNPostionServiceImpl implements VPNPostionService {
 		//查询HBase
 		HBaseUtil hbase = HBaseUtil.getInstance();
 		List<Map<String, Object>> mapList = hbase.scan("sdn", "vpnpostion",
-				new String[] { "realNumber", "bizIP", "sac", "lac", "time" }, start, end);
+				new String[] { "realNumber", "bizIP", "sac", "lac", "flow", "time" }, start, end);
 		//遍历查询结果
 		for (Map<String, Object> map : mapList) {
 			//转换对象

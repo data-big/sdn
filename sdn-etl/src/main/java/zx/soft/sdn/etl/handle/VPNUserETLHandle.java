@@ -15,6 +15,7 @@ import zx.soft.sdn.etl.dao.impl.VPNUserDaoImpl;
 import zx.soft.sdn.model.VPNUser;
 import zx.soft.sdn.util.ConfigUtil;
 import zx.soft.sdn.util.DateUtil;
+import zx.soft.sdn.util.FastDFSUtil;
 import zx.soft.sdn.util.FileUtil;
 
 /**
@@ -92,23 +93,30 @@ public class VPNUserETLHandle {
 							data = lineText.split(",");
 							vpnUser = new VPNUser();
 							vpnUser.setRealNumber(data[0]);
-							vpnUser.setSponsorNumber(data[1]);
-							vpnUser.setSponsorName(data[2]);
-							vpnUser.setSponsorIDType(("".equals(data[3].trim()) || "null".equals(data[3])) ? null
-									: Integer.valueOf(data[3]));
-							vpnUser.setSponsorIDNumber(data[4]);
-							vpnUser.setUserNumber(data[5]);
-							vpnUser.setUserName(data[6]);
-							vpnUser.setUserIDType(("".equals(data[7].trim()) || "null".equals(data[7])) ? null
-									: Integer.valueOf(data[7]));
-							vpnUser.setUserIDNumber(data[8]);
+							vpnUser.setIccid(data[1]);
+							vpnUser.setSponsorNumber(data[2]);
+							vpnUser.setSponsorName(data[3]);
+							vpnUser.setSponsorIDType(("".equals(data[4].trim()) || "null".equals(data[4])) ? null
+									: Integer.valueOf(data[4]));
+							vpnUser.setSponsorIDNumber(data[5]);
+							vpnUser.setUserNumber(data[6]);
+							vpnUser.setUserName(data[7]);
+							vpnUser.setUserIDType(("".equals(data[8].trim()) || "null".equals(data[8])) ? null
+									: Integer.valueOf(data[8]));
+							vpnUser.setUserIDNumber(data[9]);
 							vpnUser.setRegisterDate(
-									("".equals(data[9].trim()) || "null".equals(data[9])) ? null : data[9]);
-							vpnUser.setCancelDate(
 									("".equals(data[10].trim()) || "null".equals(data[10])) ? null : data[10]);
-							vpnUser.setRegisterAgent(data[11]);
+							vpnUser.setCancelDate(
+									("".equals(data[11].trim()) || "null".equals(data[11])) ? null : data[11]);
+							vpnUser.setRegisterAgent(data[12]);
 							vpnUser.setModifyDate(
-									("".equals(data[12].trim()) || "null".equals(data[12])) ? null : data[12]);
+									("".equals(data[13].trim()) || "null".equals(data[13])) ? null : data[13]);
+							vpnUser.setImageOne(FastDFSUtil.getInstance().upload(FileUtil.getRemoteFileBytes(data[14]),
+									"kuandu.jpg"));
+							vpnUser.setImageTwo(FastDFSUtil.getInstance().upload(FileUtil.getRemoteFileBytes(data[15]),
+									"kuandu.jpg"));
+							vpnUser.setImageThree(FastDFSUtil.getInstance()
+									.upload(FileUtil.getRemoteFileBytes(data[16]), "kuandu.jpg"));
 							//写入MySQL
 							if (vpnUserDao.batchUpdateInsert(vpnUser)) {
 								logger.info("****添加数据文件{}第{}行VPN用户数据到MySQL成功****", file.getName(), lineNumber);

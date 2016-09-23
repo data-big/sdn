@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS `vpn_user`;
 CREATE TABLE `vpn_user` (
   `id` varchar(32) NOT NULL COMMENT '主键',
   `realNumber` bigint(12) NOT NULL COMMENT '真实号',
+  `iccid` varchar(20) NOT NULL COMMENT 'VPN卡串号',
   `sponsorNumber` varchar(16) NOT NULL COMMENT '担保人手机号',
   `sponsorName` varchar(64) NOT NULL COMMENT '担保人姓名',
   `sponsorIDType` tinyint(2) NOT NULL COMMENT '担保人证件类型：参考数据1，2，3...',
@@ -37,8 +38,10 @@ CREATE TABLE `vpn_user` (
   `registerDate` datetime NOT NULL COMMENT '开户时间：2016-01-01 00:00:00',
   `cancelDate` datetime NOT NULL COMMENT '销户时间：2016-01-01 00:00:00',
   `registerAgent` varchar(64) DEFAULT NULL COMMENT '开户代理商',
-  `modifyType` tinyint(2) NOT NULL COMMENT '变更类型：1.实名信息变更 2.IP地址变更 3.销户',
   `modifyDate` datetime NOT NULL COMMENT '变更时间：2016-01-01 00:00:00',
+  `imageOne` varchar(255) NOT NULL COMMENT '身份认证照片一',
+  `imageTwo` varchar(255) NOT NULL COMMENT '身份认证照片二',
+  `imageThree` varchar(255) NOT NULL COMMENT '身份认证照片三',
   `invalid` bit(1) NOT NULL DEFAULT b'0' COMMENT '状态：0（有效）1（过期）',
   PRIMARY KEY (`id`),
   KEY `vpn_user_realNumber_index` (`realNumber`) USING BTREE,
@@ -57,6 +60,7 @@ CREATE TABLE `vpn_position` (
   `sac` varchar(16) NOT NULL COMMENT '基站SAC信息或CELLID信息：参考数据34162',
   `lac` varchar(16) NOT NULL COMMENT '基站LAC信息：参考数据25840',
   `address` varchar(16) NOT NULL COMMENT '详细地址',
+  `flow` bigint(20) NOT NULL COMMENT '流量值',
   `time` datetime NOT NULL COMMENT '时间：2016-01-01 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

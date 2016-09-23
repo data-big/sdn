@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 文件工具类
@@ -86,6 +91,47 @@ public class FileUtil {
 	 */
 	public static String getFileDirectory(File file) {
 		return file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("/")) + "/";
+	}
+
+	/**
+	 * 获取远程文件字节码
+	 * @param url 远程文件URL
+	 * @return 字节码数组
+	 */
+
+	public static byte[] getRemoteFileBytes(String url) {
+		try {
+			// 构造URL  
+			URL targetURL = new URL(url);
+			// 打开连接  
+			URLConnection connection = targetURL.openConnection();
+			//设置请求超时为10s  
+			connection.setConnectTimeout(10 * 1000);
+			//数据缓冲
+			byte[] buffer = new byte[1024];
+			//数据临时存储
+			List<Byte> temp = new ArrayList<Byte>();
+			byte[] imageByte = null;
+			//读写
+			try (InputStream in = connection.getInputStream();) {
+				//设置下载等待时间
+				Thread.sleep(5000);
+				//处理输入流
+				while (in.read(buffer) != -1) {
+					for (int i = 0; i < buffer.length; i++) {
+						temp.add(buffer[i]);
+					}
+					imageByte = new byte[temp.size()];
+					for (int i = 0; i < temp.size(); i++) {
+						imageByte[i] = temp.get(i);
+					}
+				}
+				return imageByte;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

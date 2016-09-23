@@ -16,6 +16,7 @@
 				<include>ftp.properties</include>
 				<include>hbase.properties</include>
 				<include>db.properties</include>
+				<include>fastdfs.properties</include>
 			</includes>
 			<outputDirectory>/conf</outputDirectory>
 			<filtered>true</filtered>

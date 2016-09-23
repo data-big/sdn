@@ -12,6 +12,8 @@ public class VPNUser {
 	private String id;
 	/**真实号**/
 	private String realNumber;
+	/**ICCID**/
+	private String iccid;
 	/**担保人手机号**/
 	private String sponsorNumber;
 	/**担保人姓名**/
@@ -36,6 +38,12 @@ public class VPNUser {
 	private String registerAgent;
 	/**变更时间**/
 	private String modifyDate;
+	/**身份认证照片一**/
+	private String imageOne;
+	/**身份认证照片二**/
+	private String imageTwo;
+	/**身份认证照片三**/
+	private String imageThree;
 	/**是否有效 0 有效 1 无效**/
 	private Integer invalid;
 
@@ -43,13 +51,14 @@ public class VPNUser {
 		super();
 	}
 
-	public VPNUser(String id, String realNumber, String sponsorNumber, String sponsorName, Integer sponsorIDType,
-			String sponsorIDNumber, String userNumber, String userName, Integer userIDType, String userIDNumber,
-			String registerDate, String cancelDate, String registerAgent, String modifyDate,
-			Integer invalid) {
+	public VPNUser(String id, String realNumber, String iccid, String sponsorNumber, String sponsorName,
+			Integer sponsorIDType, String sponsorIDNumber, String userNumber, String userName, Integer userIDType,
+			String userIDNumber, String registerDate, String cancelDate, String registerAgent, String modifyDate,
+			String imageOne, String imageTwo, String imageThree, Integer invalid) {
 		super();
 		this.id = id;
 		this.realNumber = realNumber;
+		this.iccid = iccid;
 		this.sponsorNumber = sponsorNumber;
 		this.sponsorName = sponsorName;
 		this.sponsorIDType = sponsorIDType;
@@ -62,6 +71,9 @@ public class VPNUser {
 		this.cancelDate = cancelDate;
 		this.registerAgent = registerAgent;
 		this.modifyDate = modifyDate;
+		this.imageOne = imageOne;
+		this.imageTwo = imageTwo;
+		this.imageThree = imageThree;
 		this.invalid = invalid;
 	}
 
@@ -79,6 +91,14 @@ public class VPNUser {
 
 	public void setRealNumber(String realNumber) {
 		this.realNumber = realNumber;
+	}
+
+	public String getIccid() {
+		return iccid;
+	}
+
+	public void setIccid(String iccid) {
+		this.iccid = iccid;
 	}
 
 	public String getSponsorNumber() {
@@ -175,6 +195,30 @@ public class VPNUser {
 
 	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+
+	public String getImageOne() {
+		return imageOne;
+	}
+
+	public void setImageOne(String imageOne) {
+		this.imageOne = imageOne;
+	}
+
+	public String getImageTwo() {
+		return imageTwo;
+	}
+
+	public void setImageTwo(String imageTwo) {
+		this.imageTwo = imageTwo;
+	}
+
+	public String getImageThree() {
+		return imageThree;
+	}
+
+	public void setImageThree(String imageThree) {
+		this.imageThree = imageThree;
 	}
 
 	public Integer getInvalid() {

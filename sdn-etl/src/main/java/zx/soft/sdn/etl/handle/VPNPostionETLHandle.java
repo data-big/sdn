@@ -95,7 +95,8 @@ public class VPNPostionETLHandle {
 							vpnPostion.setBizIP(data[1]);
 							vpnPostion.setSac(data[2]);
 							vpnPostion.setLac(data[3]);
-							vpnPostion.setTime(data[4]);
+							vpnPostion.setFlow(data[4]);
+							vpnPostion.setTime(data[5]);
 							//写入HBase
 							if (vpnPostionDao.insertVPNPostion(vpnPostion)) {
 								logger.info("****添加数据文件{}第{}行VPN用户地理位置数据到HBase成功****", file.getName(), lineNumber);

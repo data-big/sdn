@@ -36,24 +36,28 @@ public class VPNUserDaoImpl implements VPNUserDao {
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO vpn_user(id,realNumber,sponsorNumber,sponsorName,sponsorIDType,sponsorIDNumber,userNumber,userName,userIDType,userIDNumber,registerDate,cancelDate,registerAgent,modifyDate,invalid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO vpn_user(id,realNumber,iccid,sponsorNumber,sponsorName,sponsorIDType,sponsorIDNumber,userNumber,userName,userIDType,userIDNumber,registerDate,cancelDate,registerAgent,modifyDate,imageOne,imageTwo,imageThree,invalid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			preparedStatement.setString(1, IDUtil.generateUniqueID());
 			preparedStatement.setString(2, vpnUser.getRealNumber());
-			preparedStatement.setString(3, vpnUser.getSponsorNumber());
-			preparedStatement.setString(4, vpnUser.getSponsorName());
-			preparedStatement.setString(5,
+			preparedStatement.setString(3, vpnUser.getIccid());
+			preparedStatement.setString(4, vpnUser.getSponsorNumber());
+			preparedStatement.setString(5, vpnUser.getSponsorName());
+			preparedStatement.setString(6,
 					(null != vpnUser.getSponsorIDType()) ? vpnUser.getSponsorIDType().toString() : null);
-			preparedStatement.setString(6, vpnUser.getSponsorIDNumber());
-			preparedStatement.setString(7, vpnUser.getUserNumber());
-			preparedStatement.setString(8, vpnUser.getUserName());
-			preparedStatement.setString(9,
+			preparedStatement.setString(7, vpnUser.getSponsorIDNumber());
+			preparedStatement.setString(8, vpnUser.getUserNumber());
+			preparedStatement.setString(9, vpnUser.getUserName());
+			preparedStatement.setString(10,
 					(null != vpnUser.getUserIDType()) ? vpnUser.getUserIDType().toString() : null);
-			preparedStatement.setString(10, vpnUser.getUserIDNumber());
-			preparedStatement.setString(11, vpnUser.getRegisterDate());
-			preparedStatement.setString(12, vpnUser.getCancelDate());
-			preparedStatement.setString(13, vpnUser.getRegisterAgent());
-			preparedStatement.setString(14, vpnUser.getModifyDate());
-			preparedStatement.setInt(15, 0);
+			preparedStatement.setString(11, vpnUser.getUserIDNumber());
+			preparedStatement.setString(12, vpnUser.getRegisterDate());
+			preparedStatement.setString(13, vpnUser.getCancelDate());
+			preparedStatement.setString(14, vpnUser.getRegisterAgent());
+			preparedStatement.setString(15, vpnUser.getModifyDate());
+			preparedStatement.setString(16, vpnUser.getImageOne());
+			preparedStatement.setString(17, vpnUser.getImageTwo());
+			preparedStatement.setString(18, vpnUser.getImageThree());
+			preparedStatement.setInt(19, 0);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			//提交事务
