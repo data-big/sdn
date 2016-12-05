@@ -141,8 +141,8 @@ public class VPNUserETLHandle {
 						file.delete();
 					} else {
 						//转移
-						FileUtil.move(file, FileUtil.getFileDirectory(file) + "finish/"
-								+ DateUtil.yyyyMMddFormat.format(new Date()) + "/");
+						FileUtil.move(file, FileUtil.getFileDirectory(file) + "finish" + File.separator
+								+ DateUtil.yyyyMMddFormat.format(new Date()) + File.separator);
 					}
 					logger.info("****VPN用户数据文件{}处理成功****", file.getName());
 				} catch (Exception e) {

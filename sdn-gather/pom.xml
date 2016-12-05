@@ -8,8 +8,8 @@
 		<version>1.0</version>
 	</parent>
 	<!-- 模块标识 -->
-	<artifactId>sdn-cache</artifactId>
-	<name>sdn-cache</name>
+	<artifactId>sdn-gather</artifactId>
+	<name>sdn-gather</name>
 	<!-- 打包类型 -->
 	<packaging>jar</packaging>
 	<!-- 引入依赖 -->
@@ -27,6 +27,10 @@
 			<version>1.0</version>
 			<!-- 排除重复依赖 -->
 			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
 				<!-- 日志 -->
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -56,6 +60,20 @@
 			<artifactId>sdn-model</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<!-- Guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<!-- Flume -->
+		<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-configuration</artifactId>
+		</dependency>
 		<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -79,10 +97,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-			</plugin>
-			<!-- 自定义打包插件 -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
 			</plugin>
 			<!-- 测试插件 -->
 			<plugin>

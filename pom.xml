@@ -16,6 +16,7 @@
 		<module>sdn-cache</module>
 		<module>sdn-api</module>
 		<module>sdn-etl</module>
+		<module>sdn-gather</module>
 	</modules>
 	<!-- 设置依赖版本号 -->
 	<properties>
@@ -171,6 +172,75 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>12.0.1</version>
+			</dependency>
+			<!-- Flume -->
+			<dependency>
+				<groupId>org.apache.flume</groupId>
+				<artifactId>flume-ng-core</artifactId>
+				<version>1.6.0</version>
+				<!-- 排除重复依赖 -->
+				<exclusions>
+					<!-- Guava -->
+					<exclusion>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+					</exclusion>
+					<!-- 日志 -->
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.flume</groupId>
+				<artifactId>flume-ng-configuration</artifactId>
+				<version>1.6.0</version>
+				<!-- 排除重复依赖 -->
+				<!-- Guava -->
+				<exclusions>
+					<exclusion>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+					</exclusion>
+					<!-- 日志 -->
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-access</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- Hadoop -->
 			<dependency>

@@ -27,7 +27,7 @@ public class CacheServer {
 	public static void main(String[] args) throws Exception {
 		//一小时统计一次用户分布情况
 		Timer timer = new Timer();
-		timer.schedule(new CacheTask(), 0, 3600 * 1000);
+		timer.schedule(new CacheTask(), 0, 36000 * 1000);
 		logger.info("CacheServer is runing ...............");
 	}
 

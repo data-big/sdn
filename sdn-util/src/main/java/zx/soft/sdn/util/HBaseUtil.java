@@ -44,7 +44,7 @@ public class HBaseUtil {
 	/**
 	 * HBase配置信息
 	 */
-	private static Configuration configuration;
+	private Configuration configuration;
 
 	/**
 	 *构造方法
