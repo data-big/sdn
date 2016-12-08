@@ -50,6 +50,10 @@ public class HBaseUtil {
 	 *构造方法
 	 */
 	private HBaseUtil() {
+		//HBase客户端依赖于ZooKeeper，
+		//ZooKeeper客户端默认开启SASL认证，在未配置认证规则的情况下会抛出警告，
+		//我们可以直接禁用SASL认证功能，屏蔽警告。
+		System.setProperty("zookeeper.sasl.client", "false");
 		Properties config = ConfigUtil.getProps("hbase.properties");
 		configuration = HBaseConfiguration.create();
 		configuration.set("hbase.zookeeper.quorum", config.getProperty("hbase.cluster.host"));

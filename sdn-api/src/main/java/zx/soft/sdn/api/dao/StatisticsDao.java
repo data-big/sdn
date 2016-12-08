@@ -22,7 +22,7 @@ public interface StatisticsDao {
 	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	@Select(value = "SELECT DATE_FORMAT(registerDate, '%Y-%m-%d') AS date,COUNT(1) AS total,IFNULL(COUNT(1) - (SELECT COUNT(1) FROM vpn_user WHERE invalid = 0 AND DATE_FORMAT(registerDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} AND DATE_FORMAT(registerDate, '%Y-%m-%d') = DATE_SUB(date, INTERVAL 1 DAY) GROUP BY DATE_FORMAT(registerDate, '%Y-%m-%d')),0) AS increment FROM vpn_user WHERE invalid = 0 AND DATE_FORMAT(registerDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} GROUP BY DATE_FORMAT(registerDate, '%Y-%m-%d') ORDER BY DATE_FORMAT(registerDate, '%Y-%m-%d') DESC")
+	@Select(value = "SELECT DATE_FORMAT(registerDate, '%Y-%m-%d') AS date,(SELECT COUNT(1) FROM vpn_user WHERE invalid = 0 AND DATE_FORMAT(registerDate, '%Y-%m-%d') <= date) AS total, COUNT(1) AS increment FROM vpn_user WHERE invalid = 0 AND DATE_FORMAT(registerDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} GROUP BY DATE_FORMAT(registerDate, '%Y-%m-%d') ORDER BY DATE_FORMAT(registerDate, '%Y-%m-%d') DESC")
 	public List<DateCount> countUser(@Param("start") String start, @Param("end") String end);
 
 	/**
@@ -40,7 +40,7 @@ public interface StatisticsDao {
 	 * @param end 结束时间 yyyy-MM-dd
 	 * @return 统计结果
 	 */
-	@Select(value = "SELECT DATE_FORMAT(insertDate, '%Y-%m-%d') AS date,COUNT(1) AS total,IFNULL(COUNT(1) - (SELECT COUNT(1) FROM vpn_card WHERE invalid = 0 AND DATE_FORMAT(insertDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} AND DATE_FORMAT(insertDate, '%Y-%m-%d') = DATE_SUB(date, INTERVAL 1 DAY) GROUP BY DATE_FORMAT(insertDate, '%Y-%m-%d')),0) AS increment FROM vpn_card WHERE invalid = 0 AND DATE_FORMAT(insertDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} GROUP BY DATE_FORMAT(insertDate, '%Y-%m-%d') ORDER BY DATE_FORMAT(insertDate, '%Y-%m-%d') DESC")
+	@Select(value = "SELECT DATE_FORMAT(insertDate, '%Y-%m-%d') AS date,(SELECT COUNT(1) FROM vpn_card WHERE invalid = 0 AND DATE_FORMAT(insertDate, '%Y-%m-%d') <= date) AS total,COUNT(1) AS increment FROM vpn_card WHERE invalid = 0 AND DATE_FORMAT(insertDate, '%Y-%m-%d') BETWEEN #{start} AND #{end} GROUP BY DATE_FORMAT(insertDate, '%Y-%m-%d') ORDER BY DATE_FORMAT(insertDate, '%Y-%m-%d') DESC")
 	public List<DateCount> countCard(@Param("start") String start, @Param("end") String end);
 
 	/**

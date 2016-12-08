@@ -28,7 +28,7 @@ public class VPNPostionETLServer {
 	public static void main(String[] args) throws Exception {
 		//一小时处理一次
 		Timer timer = new Timer();
-		timer.schedule(new ETLTask(), 0, 3600 * 1000);
+		timer.schedule(new ETLTask(), 0, 180 * 1000);
 		logger.info("VPNPostionETLServer is runing ...............");
 	}
 

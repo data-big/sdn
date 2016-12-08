@@ -1,7 +1,6 @@
 package zx.soft.sdn.util;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +42,6 @@ public class DateUtil {
 	/**
 	 * 获取上个小时的时间区间
 	 * @return yyyy-MM-dd HH:mm:ss
-	 * @throws ParseException 
 	 */
 	public static String getLastHour() {
 		Calendar calendar = Calendar.getInstance();
@@ -66,7 +64,6 @@ public class DateUtil {
 	/**
 	 * 获取上周的时间区间
 	 * @return yyyy-MM-dd HH:mm:ss,yyyy-MM-dd HH:mm:ss
-	 * @throws ParseException 
 	 */
 	@SuppressWarnings("static-access")
 	public static String getLastWeek() {
@@ -92,13 +89,6 @@ public class DateUtil {
 		calendar.add(Calendar.DATE, -1);
 		String dateEnd = yyyyMMddFormat.format(calendar.getTime());
 		return dateStart + " 00:00:00," + dateEnd + " 23:59:59";
-	}
-
-	public static void main(String[] args) {
-		System.out.println(getLastHour());
-		System.out.println(getYesterDay());
-		System.out.println(getLastWeek());
-		System.out.println(getLastMonth());
 	}
 
 }
