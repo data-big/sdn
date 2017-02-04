@@ -22,7 +22,7 @@ public class JsoupUtil {
 	/**
 	 * 日志
 	 */
-	private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(JsoupUtil.class);
 
 	/**
 	 * 将String转换成Document

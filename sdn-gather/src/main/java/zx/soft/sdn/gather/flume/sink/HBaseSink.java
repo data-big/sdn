@@ -1,4 +1,4 @@
-package zx.soft.sdn.gather.flume.skin;
+package zx.soft.sdn.gather.flume.sink;
 
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
@@ -16,12 +16,12 @@ import org.slf4j.LoggerFactory;
  * @author xuran
  *
  */
-public class HBaseSkin extends AbstractSink implements Configurable {
+public class HBaseSink extends AbstractSink implements Configurable {
 
 	/**
 	 * 日志
 	 */
-	private static Logger logger = LoggerFactory.getLogger(HBaseSkin.class);
+	private static Logger logger = LoggerFactory.getLogger(HBaseSink.class);
 
 	@Override
 	public Status process() throws EventDeliveryException {

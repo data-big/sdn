@@ -1,4 +1,4 @@
-package zx.soft.sdn.gather.flume.skin;
+package zx.soft.sdn.gather.flume.sink;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 

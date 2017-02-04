@@ -88,8 +88,8 @@ public interface VPNUserDao {
 							sql.append(" and ").append("registerDate").append(">=").append("#{").append(key)
 									.append("}");
 						} else if ("endTime".equals(key)) {//结束时间
-							sql.append(" and ").append("registerDate").append("<=").append("#{").append(key)
-									.append("}");
+							sql.append(" and ").append("registerDate").append("<=date_add(").append("#{").append(key)
+									.append("},interval 1 day)");
 						} else {
 							sql.append(" and ").append(key).append(" like ").append("'%")
 									.append(param.get(key).toString().replace("'", "")).append("%'");

@@ -1,4 +1,4 @@
-package zx.soft.sdn.gather.flume.skin;
+package zx.soft.sdn.gather.flume.sink;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
